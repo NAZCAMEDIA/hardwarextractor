@@ -13,42 +13,85 @@ class HardwareXtractorApp(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.title("HardwareXtractor")
-        self.geometry("900x600")
+        self.geometry("960x640")
+        self.minsize(840, 560)
+        self.configure(bg="#f7f4ef")
 
         self.cache = SQLiteCache("./data/cache.sqlite")
         self.config = AppConfig(enable_tier2=True)
         self.orchestrator = Orchestrator(cache=self.cache, config=self.config)
 
         self.input_var = tk.StringVar()
-        self.status_var = tk.StringVar(value="Ready")
+        self.status_var = tk.StringVar(value="Listo")
         self.log_var = tk.StringVar(value="")
         self.banner_var = tk.StringVar(value="")
 
         self._build_ui()
 
     def _build_ui(self) -> None:
-        frame = ttk.Frame(self)
-        frame.pack(fill=tk.BOTH, expand=True, padx=12, pady=12)
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("TFrame", background="#f7f4ef")
+        style.configure("TLabel", background="#f7f4ef", foreground="#2c2a29", font=("Helvetica Neue", 12))
+        style.configure("Header.TLabel", font=("Helvetica Neue", 20, "bold"), foreground="#1f1d1c")
+        style.configure("Sub.TLabel", font=("Helvetica Neue", 12), foreground="#6b6561")
+        style.configure("TButton", font=("Helvetica Neue", 12), padding=8)
+        style.configure("Primary.TButton", font=("Helvetica Neue", 12, "bold"), background="#1f6feb", foreground="#ffffff")
+        style.map("Primary.TButton", background=[("active", "#1554b0")])
 
-        input_row = ttk.Frame(frame)
-        input_row.pack(fill=tk.X)
+        container = ttk.Frame(self)
+        container.pack(fill=tk.BOTH, expand=True, padx=18, pady=18)
 
-        ttk.Label(input_row, text="Input componente:").pack(side=tk.LEFT)
-        ttk.Entry(input_row, textvariable=self.input_var, width=60).pack(side=tk.LEFT, padx=8)
-        ttk.Button(input_row, text="Procesar", command=self._process).pack(side=tk.LEFT)
+        header = ttk.Frame(container)
+        header.pack(fill=tk.X)
+        ttk.Label(header, text="HardwareXtractor", style="Header.TLabel").pack(anchor=tk.W)
+        ttk.Label(
+            header,
+            text="Completa fichas técnicas con trazabilidad y sin inventar datos.",
+            style="Sub.TLabel",
+        ).pack(anchor=tk.W, pady=(2, 12))
 
-        ttk.Label(frame, textvariable=self.status_var).pack(anchor=tk.W, pady=6)
-        ttk.Label(frame, textvariable=self.log_var, foreground="#555").pack(anchor=tk.W)
-        ttk.Label(frame, textvariable=self.banner_var, foreground="#b45309").pack(anchor=tk.W)
+        input_card = ttk.Frame(container)
+        input_card.pack(fill=tk.X, pady=(0, 12))
 
-        self.output = tk.Text(frame, height=20)
-        self.output.pack(fill=tk.BOTH, expand=True, pady=8)
+        ttk.Label(input_card, text="Componente", style="Sub.TLabel").pack(anchor=tk.W)
+        input_row = ttk.Frame(input_card)
+        input_row.pack(fill=tk.X, pady=(6, 0))
 
-        self.candidate_list = tk.Listbox(frame, height=5)
-        self.candidate_list.pack(fill=tk.X)
-        ttk.Button(frame, text="Seleccionar candidato", command=self._select_candidate).pack(anchor=tk.E)
+        entry = ttk.Entry(input_row, textvariable=self.input_var, font=("Helvetica Neue", 13))
+        entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        ttk.Button(input_row, text="Procesar", style="Primary.TButton", command=self._process).pack(side=tk.LEFT, padx=8)
 
-        ttk.Button(frame, text="Exportar CSV", command=self._export).pack(anchor=tk.E)
+        status_row = ttk.Frame(container)
+        status_row.pack(fill=tk.X, pady=(4, 8))
+        ttk.Label(status_row, textvariable=self.status_var, style="Sub.TLabel").pack(side=tk.LEFT)
+        ttk.Label(status_row, textvariable=self.log_var, style="Sub.TLabel").pack(side=tk.LEFT, padx=12)
+
+        banner = ttk.Label(container, textvariable=self.banner_var, style="Sub.TLabel", foreground="#b45309")
+        banner.pack(anchor=tk.W, pady=(0, 8))
+
+        body = ttk.Frame(container)
+        body.pack(fill=tk.BOTH, expand=True)
+
+        left = ttk.Frame(body)
+        left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
+
+        ttk.Label(left, text="Ficha actual", style="Sub.TLabel").pack(anchor=tk.W)
+        self.output = tk.Text(left, height=18, wrap=tk.WORD, font=("Menlo", 11))
+        self.output.configure(bg="#ffffff", relief=tk.FLAT)
+        self.output.pack(fill=tk.BOTH, expand=True, pady=(6, 0))
+
+        right = ttk.Frame(body)
+        right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=False)
+
+        ttk.Label(right, text="Candidatos", style="Sub.TLabel").pack(anchor=tk.W)
+        self.candidate_list = tk.Listbox(right, height=10, font=("Helvetica Neue", 12))
+        self.candidate_list.pack(fill=tk.BOTH, expand=False, pady=(6, 8))
+        ttk.Button(right, text="Seleccionar", command=self._select_candidate).pack(fill=tk.X)
+
+        footer = ttk.Frame(container)
+        footer.pack(fill=tk.X, pady=(10, 0))
+        ttk.Button(footer, text="Exportar CSV", command=self._export).pack(side=tk.RIGHT)
 
     def _process(self) -> None:
         input_value = self.input_var.get()

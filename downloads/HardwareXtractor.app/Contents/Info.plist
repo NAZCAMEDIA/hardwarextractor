@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>HardwareXtractor</string>
+	<key>CFBundleExecutable</key>
+	<string>HardwareXtractor</string>
+	<key>CFBundleIconFile</key>
+	<string>icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.nazcamedia.hardwarextractor</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>HardwareXtractor</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+</dict>
+</plist>

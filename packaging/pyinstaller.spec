@@ -33,4 +33,12 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
+    icon="/Users/carlosjperez/Documents/GitHub/hardwarextractor/icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns",
+)
+
+app = BUNDLE(
+    exe,
+    name="HardwareXtractor.app",
+    icon="/Users/carlosjperez/Documents/GitHub/hardwarextractor/icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns",
+    bundle_identifier="com.nazcamedia.hardwarextractor",
 )
