@@ -14,8 +14,9 @@ Herramienta local para rellenar fichas técnicas de equipos informáticos en min
 - Exporta a CSV para integraciones o carga masiva.
 
 ## Descarga (macOS)
-- DMG listo para instalar: `dist/HardwareXtractor.dmg`
-- Ejecutable directo: `dist/HardwareXtractor`
+Carpeta estándar de descargas:
+- DMG: `downloads/HardwareXtractor.dmg`
+- Ejecutable directo: `downloads/HardwareXtractor`
 
 ## Cómo usar
 1) Abre la app.
@@ -27,9 +28,6 @@ Herramienta local para rellenar fichas técnicas de equipos informáticos en min
 - No se inventan datos: si no hay fuente confiable, se muestra como UNKNOWN/NA.
 - Cada valor incluye su origen (URL y tipo de fuente).
 - Las fuentes oficiales tienen prioridad sobre referencias.
-
-## Soporte y documentación
-La especificación completa del proyecto está en `docs/`.
 
 ## Licencia
 MIT. Ver `LICENSE`.
