@@ -1,0 +1,152 @@
+[
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-12700K",
+    "part_number": "BX8071512700K",
+    "score": 0.98,
+    "source_url": "https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i712700k-processor-25m-cache-up-to-5-00-ghz.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 5600X",
+    "part_number": "100-100000065BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-5600x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast 16GB DDR4",
+    "part_number": "KF432C16BB/16",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr4-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "Crucial 16GB DDR4",
+    "part_number": "CT16G4DFRA32A",
+    "score": 0.96,
+    "source_url": "https://www.crucial.com/memory/ddr4/ct16g4dfra32a",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "970 EVO Plus 1TB",
+    "part_number": "MZ-V7S1T0",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Blue 1TB",
+    "part_number": "WD10EZEX",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Barracuda 2TB",
+    "part_number": "ST2000DM008",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX B550-F GAMING",
+    "part_number": "ROG-STRIX-B550-F",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-b550-f-gaming/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG B550 TOMAHAWK",
+    "part_number": "MAG-B550-TOMAHAWK",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B550 AORUS ELITE",
+    "part_number": "B550-AORUS-ELITE",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/B550-AORUS-ELITE-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B550 Steel Legend",
+    "part_number": "B550-STEEL-LEGEND",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/B550%20Steel%20Legend/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4070",
+    "part_number": "RTX-4070",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7800 XT",
+    "part_number": "RX-7800-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7800-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "Intel",
+    "model": "Arc A770",
+    "part_number": "ARC-A770",
+    "score": 0.96,
+    "source_url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/a-series/arc-a770.html",
+    "source_name": "Intel",
+    "spider_name": "intel_arc_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "ASUS",
+    "model": "TUF RTX 4070",
+    "part_number": "TUF-RTX-4070",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070/",
+    "source_name": "ASUS",
+    "spider_name": "asus_gpu_aib_spider"
+  }
+]

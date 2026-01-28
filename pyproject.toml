@@ -1,0 +1,33 @@
+[project]
+name = "hardwarextractor"
+version = "0.1.0"
+description = "EQUIPOS INFORMATICOS — AutoRelleno de Ficha Tecnica"
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "Proprietary"}
+
+dependencies = [
+  "scrapy>=2.11.0",
+  "parsel>=1.9.1",
+  "requests>=2.32.0"
+]
+
+[project.optional-dependencies]
+ui = []
+
+[tool.pytest.ini_options]
+addopts = "-q --cov=hardwarextractor --cov-report=term-missing --cov-fail-under=80"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+omit = [
+  "hardwarextractor/ui/*"
+]
+
+[tool.coverage.report]
+show_missing = true
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

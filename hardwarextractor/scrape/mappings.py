@@ -1,0 +1,101 @@
+from __future__ import annotations
+
+LABEL_MAP_CPU = {
+    "base clock": "cpu.base_clock_mhz",
+    "performance-core base frequency": "cpu.base_clock_mhz",
+    "efficient-core base frequency": "cpu.base_clock_mhz",
+    "processor base frequency": "cpu.base_clock_mhz",
+    "max turbo frequency": "cpu.boost_clock_mhz",
+    "max. boost clock": "cpu.boost_clock_mhz",
+    "max boost clock": "cpu.boost_clock_mhz",
+    "cores": "cpu.cores_physical",
+    "total cores": "cpu.cores_physical",
+    "# of cpu cores": "cpu.cores_physical",
+    "threads": "cpu.threads_logical",
+    "total threads": "cpu.threads_logical",
+    "# of threads": "cpu.threads_logical",
+    "l1 cache": "cpu.cache_l1_kb",
+    "l2 cache": "cpu.cache_l2_kb",
+    "l3 cache": "cpu.cache_l3_kb",
+    "cache": "cpu.cache_l3_kb",
+    "total l2 cache": "cpu.cache_l2_kb",
+    "memory types": "cpu.memory_type_supported",
+    "system memory type": "cpu.memory_type_supported",
+    "max memory": "cpu.max_memory_gb",
+    "max memory size dependent on memory type": "cpu.max_memory_gb",
+    "max memory size": "cpu.max_memory_gb",
+    "memory channels": "cpu.memory_channels_max",
+    "max of memory channels": "cpu.memory_channels_max",
+    "max memory speed": "cpu.max_memory_speed_mt_s",
+    "max memory speed mt s": "cpu.max_memory_speed_mt_s",
+    "max memory bandwidth": "cpu.memory_bandwidth_gbs",
+    "memory bandwidth": "cpu.memory_bandwidth_gbs",
+    "pcie version": "cpu.pcie.version_max",
+    "pci express revision": "cpu.pcie.version_max",
+    "pcie lanes": "cpu.pcie.lanes_max",
+    "max of pci express lanes": "cpu.pcie.lanes_max",
+    "native pcie lanes total usable": "cpu.pcie.lanes_max",
+    "native pcie lanes": "cpu.pcie.lanes_max",
+    "dmi": "cpu.interconnect.type",
+    "dmi version": "cpu.interconnect.type",
+    "bus speed": "cpu.interconnect.speed",
+    "system bus speed": "cpu.interconnect.speed",
+}
+
+LABEL_MAP_RAM = {
+    "memory type": "ram.type",
+    "voltage": "ram.voltage_v",
+    "pins": "ram.pins",
+    "speed": "ram.speed_effective_mt_s",
+    "max memory speed": "ram.speed_effective_mt_s",
+    "speed mhz": "ram.clock_real_mhz",
+    "latency": "ram.latency_cl",
+    "capacity": "ram.capacity_gb",
+    "module size": "ram.capacity_gb",
+    "form factor": "ram.form_factor",
+}
+
+LABEL_MAP_GPU = {
+    "bus interface": "gpu.pcie.version",
+    "pci express gen": "gpu.pcie.version",
+    "pcie lanes": "gpu.pcie.lanes",
+    "memory size": "gpu.vram_gb",
+    "standard memory config": "gpu.vram_gb",
+    "memory bus": "gpu.mem.bus_width_bits",
+    "memory interface width": "gpu.mem.bus_width_bits",
+    "memory speed": "gpu.mem.speed_gbps",
+    "memory bandwidth": "gpu.mem.bandwidth_gbps",
+    "base clock ghz": "gpu.base_clock_mhz",
+    "boost clock": "gpu.boost_clock_mhz",
+    "vram": "gpu.vram_gb",
+}
+
+LABEL_MAP_MAINBOARD = {
+    "socket": "mb.socket",
+    "cpu socket": "mb.socket",
+    "chipset": "mb.chipset",
+    "max memory": "mb.max_memory_gb",
+    "max memory gb": "mb.max_memory_gb",
+    "memory": "mb.max_memory_gb",
+    "memory speed": "mb.max_memory_speed_mt_s",
+    "sata": "mb.storage.sata.version_max",
+    "sata 6gb s ports": "mb.storage.sata.version_max",
+    "usb": "mb.usb.version_max",
+    "usb ports": "mb.usb.version_max",
+    "lan": "mb.lan.controller",
+    "lan speed": "mb.lan.speed_mbps",
+    "ethernet": "mb.lan.controller",
+    "ethernet speed": "mb.lan.speed_mbps",
+}
+
+LABEL_MAP_DISK = {
+    "interface": "disk.interface",
+    "rpm": "disk.rpm",
+    "cache": "disk.cache_mb",
+    "type": "disk.type",
+}
+
+LABEL_MAP_REFERENCE = {
+    **LABEL_MAP_CPU,
+    **LABEL_MAP_GPU,
+}
