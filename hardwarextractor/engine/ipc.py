@@ -98,7 +98,7 @@ class IPCMessage:
         return cls(MessageType.LOG, message)
 
     @classmethod
-    def progress(cls, percent: int) -> IPCMessage:
+    def make_progress(cls, percent: int) -> IPCMessage:
         return cls(MessageType.PROGRESS, percent, progress=percent)
 
     @classmethod
@@ -110,7 +110,7 @@ class IPCMessage:
         return cls(MessageType.RESULT, component)
 
     @classmethod
-    def error(cls, message: str, recoverable: bool = True) -> IPCMessage:
+    def make_error(cls, message: str, recoverable: bool = True) -> IPCMessage:
         return cls(
             MessageType.ERROR,
             message,
@@ -169,7 +169,7 @@ class IPCProtocol:
 
     def send_error(self, message: str, recoverable: bool = True) -> None:
         """Send an error message."""
-        self.send(IPCMessage.error(message, recoverable))
+        self.send(IPCMessage.make_error(message, recoverable))
 
     def send_candidates(self, candidates: list) -> None:
         """Send candidate list for selection."""
@@ -195,7 +195,7 @@ class IPCProtocol:
                 return None
             return IPCMessage.from_json(line.strip())
         except (json.JSONDecodeError, KeyError) as e:
-            return IPCMessage.error(f"Invalid command: {e}")
+            return IPCMessage.make_error(f"Invalid command: {e}")
 
     def receive_command(self) -> tuple[str, dict]:
         """Receive and parse a command.
