@@ -30,6 +30,7 @@ from hardwarextractor.engine.ficha_manager import FichaManager
 from hardwarextractor.export.factory import ExporterFactory
 from hardwarextractor.models.schemas import (
     COMPONENT_SECTIONS,
+    ComponentType,
     DataOrigin,
     get_data_origin,
     SourceTier,
@@ -167,6 +168,86 @@ SPEC_TRANSLATIONS = {
     "disk.cache_mb": "Búfer (MB)",
 }
 
+# Reference links organized by component type
+REFERENCE_LINKS = {
+    ComponentType.CPU: {
+        "Oficiales": [
+            ("Intel ARK", "https://ark.intel.com/content/www/es/es/ark.html"),
+            ("AMD Processors", "https://www.amd.com/en/products/processors/desktops.html"),
+        ],
+        "Referencias técnicas": [
+            ("TechPowerUp CPU", "https://www.techpowerup.com/cpu-specs/"),
+            ("WikiChip", "https://en.wikichip.org/wiki/WikiChip"),
+            ("CPU-World", "https://www.cpu-world.com/"),
+        ],
+        "Benchmarks": [
+            ("PassMark CPU", "https://www.cpubenchmark.net/cpu_list.php"),
+            ("UserBenchmark CPU", "https://cpu.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker CPU", "https://pcpartpicker.com/products/cpu/"),
+        ],
+    },
+    ComponentType.GPU: {
+        "Oficiales": [
+            ("NVIDIA GeForce", "https://www.nvidia.com/en-us/geforce/graphics-cards/"),
+            ("AMD Radeon", "https://www.amd.com/en/products/graphics/desktops.html"),
+            ("Intel Arc", "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc.html"),
+        ],
+        "Referencias técnicas": [
+            ("TechPowerUp GPU", "https://www.techpowerup.com/gpu-specs/"),
+            ("GPU-Specs.com", "https://www.gpu-specs.com/"),
+        ],
+        "Benchmarks": [
+            ("PassMark GPU", "https://www.videocardbenchmark.net/gpu_list.php"),
+            ("UserBenchmark GPU", "https://gpu.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker GPU", "https://pcpartpicker.com/products/video-card/"),
+        ],
+    },
+    ComponentType.RAM: {
+        "Oficiales": [
+            ("Corsair Memory", "https://www.corsair.com/us/en/Categories/Products/Memory/c/Cor_Products_Memory"),
+            ("Kingston", "https://www.kingston.com/unitedstates/en/memory"),
+            ("G.Skill", "https://www.gskill.com/products/1/Desktop-Memory"),
+            ("Crucial", "https://www.crucial.com/products/memory"),
+        ],
+        "Benchmarks": [
+            ("PassMark RAM", "https://www.memorybenchmark.net/ram_list.php"),
+            ("UserBenchmark RAM", "https://ram.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker RAM", "https://pcpartpicker.com/products/memory/"),
+        ],
+    },
+    ComponentType.MAINBOARD: {
+        "Oficiales": [
+            ("ASUS Motherboards", "https://www.asus.com/motherboards-components/motherboards/"),
+            ("MSI Motherboards", "https://www.msi.com/Motherboards"),
+            ("Gigabyte Motherboards", "https://www.gigabyte.com/Motherboard"),
+            ("ASRock Motherboards", "https://www.asrock.com/mb/index.asp"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker Motherboards", "https://pcpartpicker.com/products/motherboard/"),
+        ],
+    },
+    ComponentType.DISK: {
+        "Oficiales": [
+            ("Samsung SSD", "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/"),
+            ("Western Digital", "https://www.westerndigital.com/products"),
+            ("Seagate", "https://www.seagate.com/products/hard-drives/"),
+        ],
+        "Benchmarks": [
+            ("PassMark Disk", "https://www.harddrivebenchmark.net/hdd_list.php"),
+            ("UserBenchmark SSD", "https://ssd.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker Storage", "https://pcpartpicker.com/products/internal-hard-drive/"),
+        ],
+    },
+}
+
 
 class HardwareXtractorApp(tk.Tk):
     """Main application window for HardwareXtractor."""
@@ -208,6 +289,7 @@ class HardwareXtractorApp(tk.Tk):
         self.progress_var = tk.IntVar(value=0)
         self.banner_var = tk.StringVar(value="")
         self.expanded_view_var = tk.BooleanVar(value=False)  # Toggle ficha ampliada
+        self._source_urls = {}  # Store URLs for source links
         _debug_log("[APP] UI state vars OK")
 
         _debug_log("[APP] Building UI...")
@@ -336,12 +418,12 @@ class HardwareXtractorApp(tk.Tk):
         self.log_text.tag_configure("info", foreground="#60a5fa")
         self.log_text.tag_configure("debug", foreground="#6b7280")  # Gray for debug logs
 
-        # Right: Candidates
+        # Right: Candidates and Sources Panel
         right = ttk.Frame(body)
         right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=False)
 
         ttk.Label(right, text="Candidatos", style="Sub.TLabel").pack(anchor=tk.W)
-        self.candidate_list = tk.Listbox(right, height=10, width=40, font=("Helvetica Neue", 11))
+        self.candidate_list = tk.Listbox(right, height=8, width=40, font=("Helvetica Neue", 11))
         self.candidate_list.configure(
             bg=COLORS["card"],
             fg=COLORS["text"],
@@ -353,6 +435,53 @@ class HardwareXtractorApp(tk.Tk):
         self.candidate_list.bind("<Double-1>", lambda e: self._select_candidate())
 
         ttk.Button(right, text="Seleccionar", command=self._select_candidate).pack(fill=tk.X)
+
+        # Sources Panel - Reference Links
+        sources_frame = ttk.Frame(right)
+        sources_frame.pack(fill=tk.BOTH, expand=True, pady=(12, 0))
+
+        # Component type selector
+        type_row = ttk.Frame(sources_frame)
+        type_row.pack(fill=tk.X)
+        ttk.Label(type_row, text="Fuentes de consulta", style="Sub.TLabel").pack(side=tk.LEFT)
+
+        self.component_type_var = tk.StringVar(value="CPU")
+        type_combo = ttk.Combobox(
+            type_row,
+            textvariable=self.component_type_var,
+            values=["CPU", "GPU", "RAM", "MAINBOARD", "DISK"],
+            state="readonly",
+            width=12,
+        )
+        type_combo.pack(side=tk.RIGHT)
+        type_combo.bind("<<ComboboxSelected>>", lambda e: self._update_sources_panel())
+
+        # Scrollable sources list
+        self.sources_text = tk.Text(
+            sources_frame,
+            height=12,
+            width=40,
+            wrap=tk.WORD,
+            font=("Helvetica Neue", 10),
+            cursor="arrow",
+        )
+        self.sources_text.configure(
+            bg=COLORS["card"],
+            fg=COLORS["text"],
+            relief=tk.FLAT,
+            state=tk.DISABLED,
+        )
+        self.sources_text.pack(fill=tk.BOTH, expand=True, pady=(6, 0))
+
+        # Configure tags for sources panel
+        self.sources_text.tag_configure("category", font=("Helvetica Neue", 10, "bold"), foreground=COLORS["accent"])
+        self.sources_text.tag_configure("link", foreground=COLORS["accent"], underline=True)
+        self.sources_text.tag_bind("link", "<Button-1>", self._on_source_link_click)
+        self.sources_text.tag_bind("link", "<Enter>", lambda e: self.sources_text.configure(cursor="hand2"))
+        self.sources_text.tag_bind("link", "<Leave>", lambda e: self.sources_text.configure(cursor="arrow"))
+
+        # Initialize sources panel
+        self._update_sources_panel()
 
         # Footer with export options
         footer = ttk.Frame(container)
@@ -428,6 +557,46 @@ class HardwareXtractorApp(tk.Tk):
             url = self.output.get(tag_range[0], tag_range[1]).strip()
             if url.startswith("http"):
                 webbrowser.open(url)
+
+    def _update_sources_panel(self) -> None:
+        """Update the sources panel based on selected component type."""
+        self.sources_text.configure(state=tk.NORMAL)
+        self.sources_text.delete("1.0", tk.END)
+
+        # Get selected component type
+        type_str = self.component_type_var.get()
+        try:
+            comp_type = ComponentType(type_str)
+        except ValueError:
+            comp_type = ComponentType.CPU
+
+        links = REFERENCE_LINKS.get(comp_type, {})
+
+        # Store URLs for click handling
+        self._source_urls = {}
+        url_index = 0
+
+        for category, items in links.items():
+            self.sources_text.insert(tk.END, f"\n{category}\n", "category")
+            for name, url in items:
+                # Store URL with unique tag
+                tag_name = f"link_{url_index}"
+                self._source_urls[tag_name] = url
+                self.sources_text.insert(tk.END, f"  • ")
+                self.sources_text.insert(tk.END, name, ("link", tag_name))
+                self.sources_text.insert(tk.END, "\n")
+                # Bind click to this specific tag
+                self.sources_text.tag_bind(tag_name, "<Button-1>", lambda e, u=url: webbrowser.open(u))
+                self.sources_text.tag_bind(tag_name, "<Enter>", lambda e: self.sources_text.configure(cursor="hand2"))
+                self.sources_text.tag_bind(tag_name, "<Leave>", lambda e: self.sources_text.configure(cursor="arrow"))
+                url_index += 1
+
+        self.sources_text.configure(state=tk.DISABLED)
+
+    def _on_source_link_click(self, event: tk.Event) -> None:
+        """Handle click on source link."""
+        # This is handled by individual tag bindings now
+        pass
 
     def _clear_log(self) -> None:
         """Clear the log area."""
