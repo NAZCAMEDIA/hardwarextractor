@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from typing import Optional
 
-from hardwarextractor.cli.renderer import CLIRenderer
+from hardwarextractor.cli.renderer import CLIRenderer, Spinner, Colors
 from hardwarextractor.engine.commands import CommandHandler
 from hardwarextractor.engine.ficha_manager import FichaManager
 
@@ -95,25 +95,40 @@ class InteractiveCLI:
             return
 
         print()
-        import time
-        start_time = time.time()
 
-        # Process and show clean progress
+        # Use spinner for progress feedback
+        spinner = Spinner("Analizando entrada...", use_colors=self._renderer._use_colors)
+        spinner.start()
+
+        # Map event messages to user-friendly descriptions
+        phase_messages = {
+            "Normalizando": "Normalizando entrada...",
+            "Input normalized": "Clasificando componente...",
+            "Classified as": "Buscando en catálogos...",
+            "Candidate selected": "Extrayendo especificaciones...",
+            "Trying reference": "Consultando fuentes de referencia...",
+            "Scrape complete": "Procesando datos...",
+            "Ready to add": "Finalizando...",
+        }
+
+        # Process events and update spinner
         for event in self._handler.analyze_component(input_text):
             msg = event.message
             # Filter out noisy debug messages
             if msg.startswith("[SCRAPE]") or "HTML preview" in msg:
                 continue
-            # Show clean progress
-            print(self._renderer.log(msg))
 
-        elapsed = time.time() - start_time
+            # Update spinner with friendly message
+            for key, friendly_msg in phase_messages.items():
+                if key in msg:
+                    spinner.update(friendly_msg)
+                    break
 
-        # Check orchestrator state for result
+        # Stop spinner and show result
         if self._handler._last_component:
-            # Success case
+            spinner.stop("Análisis completado", success=True)
             component = self._handler._component_to_dict(self._handler._last_component)
-            print(self._renderer.success(f"Completado en {elapsed:.1f}s"))
+            print()
             print(self._renderer.component_result(component))
 
             # Check for reference warning
@@ -125,7 +140,6 @@ class InteractiveCLI:
                 print(self._renderer.warning(
                     "Este componente incluye datos no oficiales (REFERENCE)."
                 ))
-                print()
 
             # Auto-add to ficha
             result = self._handler.add_to_ficha()
@@ -139,6 +153,7 @@ class InteractiveCLI:
                 self._do_export(export.upper())
 
         elif self._handler.orchestrator.last_candidates:
+            spinner.stop("Se encontraron múltiples candidatos", success=True)
             # Needs selection
             candidates = [
                 self._handler._candidate_to_dict(c)
@@ -177,7 +192,7 @@ class InteractiveCLI:
                 return
 
         else:
-            print(self._renderer.error("No se encontraron resultados"))
+            spinner.stop("No se encontraron resultados", success=False)
             print()
 
         # Ask for another search

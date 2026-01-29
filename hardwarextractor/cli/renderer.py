@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import sys
+import threading
+import time
 from typing import Any, Optional
 
 
@@ -45,6 +47,73 @@ class Icons:
     WARNING = "⚠"
     INFO = "ℹ"
     SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+
+
+class Spinner:
+    """Animated spinner for showing progress."""
+
+    def __init__(self, message: str = "Procesando", use_colors: bool = True):
+        self._message = message
+        self._use_colors = use_colors and sys.stdout.isatty()
+        self._running = False
+        self._thread: Optional[threading.Thread] = None
+        self._frame = 0
+        self._start_time = 0.0
+
+    def _animate(self) -> None:
+        """Animation loop running in background thread."""
+        while self._running:
+            elapsed = time.time() - self._start_time
+            spinner_char = Icons.SPINNER[self._frame % len(Icons.SPINNER)]
+
+            if self._use_colors:
+                line = f"\r  {Colors.CYAN}{spinner_char}{Colors.RESET} {self._message} {Colors.DIM}({elapsed:.1f}s){Colors.RESET}  "
+            else:
+                line = f"\r  {spinner_char} {self._message} ({elapsed:.1f}s)  "
+
+            sys.stdout.write(line)
+            sys.stdout.flush()
+            self._frame += 1
+            time.sleep(0.1)
+
+    def start(self) -> None:
+        """Start the spinner animation."""
+        if self._running:
+            return
+        self._running = True
+        self._start_time = time.time()
+        self._thread = threading.Thread(target=self._animate, daemon=True)
+        self._thread.start()
+
+    def update(self, message: str) -> None:
+        """Update the spinner message."""
+        self._message = message
+
+    def stop(self, final_message: str = "", success: bool = True) -> None:
+        """Stop the spinner and show final message."""
+        self._running = False
+        if self._thread:
+            self._thread.join(timeout=0.2)
+
+        # Clear the line
+        sys.stdout.write("\r" + " " * 80 + "\r")
+        sys.stdout.flush()
+
+        if final_message:
+            elapsed = time.time() - self._start_time
+            if self._use_colors:
+                icon = f"{Colors.GREEN}{Icons.CHECK}" if success else f"{Colors.RED}{Icons.CROSS}"
+                print(f"  {icon}{Colors.RESET} {final_message} {Colors.DIM}({elapsed:.1f}s){Colors.RESET}")
+            else:
+                icon = Icons.CHECK if success else Icons.CROSS
+                print(f"  {icon} {final_message} ({elapsed:.1f}s)")
+
+    def __enter__(self) -> "Spinner":
+        self.start()
+        return self
+
+    def __exit__(self, *args) -> None:
+        self.stop()
 
 
 class CLIRenderer:
@@ -175,7 +244,7 @@ class CLIRenderer:
         return f"{self._c(bar, Colors.CYAN)} {pct:3d}% {message}"
 
     def component_result(self, component: dict) -> str:
-        """Render a component result in clean format."""
+        """Render a component result in clean format with full details."""
         lines = []
 
         # Header line
@@ -188,20 +257,31 @@ class CLIRenderer:
         if pn:
             header += f" {self._c(f'({pn})', Colors.DIM)}"
 
-        lines.append("")
-        lines.append(f"  {self._c('━' * 60, Colors.DIM)}")
+        lines.append(f"  {self._c('━' * 70, Colors.DIM)}")
         lines.append(f"  {header}")
-        lines.append(f"  {self._c('━' * 60, Colors.DIM)}")
+        lines.append(f"  {self._c('━' * 70, Colors.DIM)}")
         lines.append("")
 
-        # Specs in clean format
+        # Collect sources for later
+        sources = set()
+
+        # Specs in clean format with source info
         specs = component.get("specs", [])
         if specs:
+            lines.append(f"  {self._c('ESPECIFICACIONES:', Colors.BOLD)}")
+            lines.append("")
+
             for spec in specs:
                 label = spec.get("label", spec.get("key", ""))
                 value = spec.get("value", "")
                 unit = spec.get("unit", "")
                 tier = spec.get("tier", "")
+                source_name = spec.get("source_name", "")
+                source_url = spec.get("source_url", "")
+
+                # Collect sources
+                if source_name and source_url:
+                    sources.add((source_name, source_url))
 
                 # Tier indicator with color
                 if tier in ("OFFICIAL", "CATALOG"):
@@ -218,9 +298,32 @@ class CLIRenderer:
                 if unit:
                     value_str += f" {self._c(unit, Colors.DIM)}"
 
-                lines.append(f"  {indicator} {self._c(label + ':', Colors.BOLD)} {value_str}")
+                # Add source indicator
+                source_indicator = ""
+                if source_name:
+                    source_indicator = f" {self._c(f'[{source_name}]', Colors.DIM)}"
 
+                lines.append(f"    {indicator} {self._c(label + ':', Colors.BOLD)} {value_str}{source_indicator}")
+
+        # Sources section
+        if sources:
+            lines.append("")
+            lines.append(f"  {self._c('FUENTES:', Colors.BOLD)}")
+            for name, url in sorted(sources):
+                lines.append(f"    {self._c('•', Colors.CYAN)} {name}: {self._c(url, Colors.DIM)}")
+
+        # Legend
         lines.append("")
+        lines.append(f"  {self._c('━' * 70, Colors.DIM)}")
+        legend = (
+            f"  {self._c('●', Colors.GREEN)} Oficial  "
+            f"{self._c('◐', Colors.YELLOW)} Referencia  "
+            f"{self._c('◇', Colors.CYAN)} Calculado  "
+            f"{self._c('○', Colors.DIM)} Desconocido"
+        )
+        lines.append(legend)
+        lines.append("")
+
         return "\n".join(lines)
 
     def candidates_list(self, candidates: list[dict]) -> str:
