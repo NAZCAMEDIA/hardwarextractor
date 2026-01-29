@@ -2,6 +2,9 @@
 
 This module uses only standard library to ensure instant startup.
 Heavy imports are deferred to background loading.
+
+IMPORTANT: Tkinter is NOT thread-safe. All widget creation/manipulation
+must happen in the main thread. This module only does imports in background.
 """
 
 from __future__ import annotations
@@ -11,11 +14,16 @@ import sys
 import threading
 import tkinter as tk
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Callable, Optional, Type
 
 
 class SplashScreen:
-    """Lightweight splash screen that appears instantly while app loads."""
+    """Lightweight splash screen that appears instantly while app loads.
+
+    Uses a two-phase loading approach to avoid tkinter threading issues:
+    1. Background thread does heavy imports (no tkinter)
+    2. Main thread creates widgets after imports complete
+    """
 
     # App branding
     APP_NAME = "HardwareXtractor"
@@ -141,9 +149,9 @@ class SplashScreen:
         # State
         self._app_ready = False
         self._main_app: Optional[tk.Tk] = None
-        self._loader: Optional[Callable[[], tk.Tk]] = None
-        self._loaded_app: Optional[tk.Tk] = None
-        self._load_error: Optional[str] = None
+        self._app_class: Optional[Type[tk.Tk]] = None
+        self._import_error: Optional[str] = None
+        self._imports_done = False
 
     def set_progress(self, value: int, status: str = "") -> None:
         """Update progress bar and status text.
@@ -189,65 +197,92 @@ class SplashScreen:
             self.close()
             self._main_app.deiconify()
 
-    def run_with_loading(self, loader: Callable[[], tk.Tk]) -> None:
-        """Run splash with background loading.
+    def run_with_loading(self, import_fn: Callable[[], Type[tk.Tk]]) -> None:
+        """Run splash with background import loading.
+
+        IMPORTANT: The import_fn should ONLY do imports and return the app class,
+        NOT instantiate the app. App instantiation happens in main thread.
 
         Args:
-            loader: Function that loads and returns the main app
+            import_fn: Function that imports modules and returns the app CLASS
+                       (not an instance). Example:
+                       def do_imports():
+                           from myapp.ui.app import MyApp
+                           return MyApp
 
         Note:
             Uses after() scheduling to ensure thread-safe tkinter operations.
+            The app instance is created in the main thread after imports complete.
         """
         self.show()
-        self._loader = loader
-        self._loaded_app: Optional[tk.Tk] = None
-        self._load_error: Optional[str] = None
+        self._import_fn = import_fn
+        self._app_class = None
+        self._import_error = None
+        self._imports_done = False
 
-        # Start loading sequence
-        self.root.after(50, self._start_loading)
+        # Start import sequence
+        self.root.after(50, self._start_imports)
 
         # Run splash event loop
         self.root.mainloop()
 
-    def _start_loading(self) -> None:
-        """Start the background loading process."""
+    def _start_imports(self) -> None:
+        """Start the background import process."""
         self.set_progress(10, "Cargando módulos...")
 
-        def load_in_thread() -> None:
+        def do_imports_in_thread() -> None:
+            """Only do imports here - NO tkinter widget creation."""
             try:
-                # Create main app (triggers heavy imports)
-                self._loaded_app = self._loader()
-                self._loaded_app.withdraw()  # Keep hidden
+                # Import heavy modules and get the app class
+                self._app_class = self._import_fn()
             except Exception as e:
-                self._load_error = str(e)
+                self._import_error = str(e)
+            finally:
+                self._imports_done = True
 
-        # Start loading thread
-        thread = threading.Thread(target=load_in_thread, daemon=True)
+        # Start import thread
+        thread = threading.Thread(target=do_imports_in_thread, daemon=True)
         thread.start()
 
-        # Check loading progress
-        self.root.after(100, lambda: self._check_loading(thread))
+        # Check import progress
+        self.root.after(100, lambda: self._check_imports(thread))
 
-    def _check_loading(self, thread: threading.Thread) -> None:
-        """Check if loading is complete."""
+    def _check_imports(self, thread: threading.Thread) -> None:
+        """Check if imports are complete."""
         if thread.is_alive():
             # Still loading - animate progress
             current = self._progress
             if current < 70:
                 self.set_progress(current + 5, "Inicializando scrapers...")
-            self.root.after(100, lambda: self._check_loading(thread))
+            self.root.after(100, lambda: self._check_imports(thread))
         else:
-            # Loading complete
-            if self._load_error:
-                self.set_progress(0, f"Error: {self._load_error}")
+            # Imports complete - now create app in main thread
+            if self._import_error:
+                self.set_progress(0, f"Error: {self._import_error}")
                 self.root.after(3000, self.close)
-            elif self._loaded_app:
-                self.set_progress(90, "Preparando interfaz...")
-                self.root.after(100, lambda: self.transition_to_app(self._loaded_app))
+            elif self._app_class:
+                self.set_progress(80, "Preparando interfaz...")
+                # Schedule app creation in main thread
+                self.root.after(50, self._create_app_in_main_thread)
+
+    def _create_app_in_main_thread(self) -> None:
+        """Create the app instance in the main thread (thread-safe)."""
+        try:
+            self.set_progress(90, "Iniciando aplicación...")
+            # Create app instance here - in the main thread
+            app = self._app_class()
+            app.withdraw()  # Keep hidden until transition
+            self.transition_to_app(app)
+        except Exception as e:
+            self.set_progress(0, f"Error: {e}")
+            self.root.after(3000, self.close)
 
 
 class SingleInstance:
-    """Prevents multiple instances of the application."""
+    """Prevents multiple instances of the application.
+
+    Cross-platform implementation that works on macOS, Linux, and Windows.
+    """
 
     def __init__(self, app_name: str = "hardwarextractor") -> None:
         self.app_name = app_name
@@ -281,12 +316,16 @@ class SingleInstance:
                 with open(self.lock_file) as f:
                     pid = int(f.read().strip())
 
-                # Check if process exists
-                os.kill(pid, 0)
-                return False  # Process is running
+                # Check if process exists (cross-platform)
+                if self._is_process_running(pid):
+                    return False  # Process is running
 
-            except (ValueError, OSError, ProcessLookupError):
                 # Stale lock file, remove and try again
+                os.unlink(self.lock_file)
+                return self.acquire()
+
+            except (ValueError, OSError):
+                # Stale lock file or read error, try to remove
                 try:
                     os.unlink(self.lock_file)
                     return self.acquire()
@@ -295,6 +334,37 @@ class SingleInstance:
 
         except OSError:
             return False
+
+    def _is_process_running(self, pid: int) -> bool:
+        """Check if a process with given PID is running (cross-platform).
+
+        Args:
+            pid: Process ID to check
+
+        Returns:
+            True if process is running, False otherwise
+        """
+        if sys.platform == "win32":
+            # Windows: use ctypes to check process
+            try:
+                import ctypes
+                kernel32 = ctypes.windll.kernel32
+                PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+                handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
+                if handle:
+                    kernel32.CloseHandle(handle)
+                    return True
+                return False
+            except (AttributeError, OSError):
+                # Fallback: assume not running if we can't check
+                return False
+        else:
+            # Unix/macOS: use kill with signal 0
+            try:
+                os.kill(pid, 0)
+                return True
+            except (OSError, ProcessLookupError):
+                return False
 
     def release(self) -> None:
         """Release the single instance lock."""

@@ -6,6 +6,9 @@ Supports two modes:
 
 The GUI uses a lightweight splash screen for instant feedback while
 heavy modules load in the background.
+
+IMPORTANT: Tkinter is NOT thread-safe. The splash screen only does
+imports in the background thread, then creates the app in main thread.
 """
 
 from __future__ import annotations
@@ -27,6 +30,9 @@ def run_gui() -> None:
 
     Uses lightweight splash for instant startup while heavy modules
     (scrapy, parsel, requests, etc.) load in the background.
+
+    The splash only does imports in background thread, then creates
+    the app instance in the main thread (tkinter thread-safety).
     """
     # Import splash first (lightweight, stdlib only)
     from hardwarextractor.ui.splash import (
@@ -45,13 +51,18 @@ def run_gui() -> None:
         # Show splash and load app
         splash = SplashScreen()
 
-        def load_app():
-            """Load the main application (triggers heavy imports)."""
+        def do_imports():
+            """Import heavy modules and return the app CLASS (not instance).
+
+            IMPORTANT: This runs in a background thread.
+            Only do imports here - NO tkinter widget creation.
+            The app instance is created in the main thread by the splash.
+            """
             # This import pulls in scrapy, parsel, requests, etc.
             from hardwarextractor.ui.app import HardwareXtractorApp
-            return HardwareXtractorApp()
+            return HardwareXtractorApp  # Return CLASS, not instance
 
-        splash.run_with_loading(load_app)
+        splash.run_with_loading(do_imports)
 
     finally:
         instance.release()

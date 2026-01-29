@@ -125,14 +125,14 @@ class Orchestrator:
         """Select a candidate by index for processing.
 
         Args:
-            index: Index of the candidate to select
+            index: Index of the candidate to select (must be >= 0)
             component_type: Override component type (optional)
             confidence: Override confidence (optional)
 
         Returns:
             List of OrchestratorEvent for legacy compatibility
         """
-        if index >= len(self.last_candidates):
+        if index < 0 or index >= len(self.last_candidates):
             self._emit(Event.error_recoverable("Candidate index out of range"))
             return [OrchestratorEvent(status="ERROR_RECOVERABLE", progress=100, log="Candidate index out of range")]
 

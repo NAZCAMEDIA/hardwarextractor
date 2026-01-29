@@ -75,7 +75,7 @@ class SpecResult:
     specs: list[SpecField]
     source: Optional[Source]
     engine_used: Optional[str] = None
-    errors: list[tuple[Source, str]] = None
+    errors: Optional[list[tuple[Source, str]]] = None
 
     def __post_init__(self):
         if self.errors is None:

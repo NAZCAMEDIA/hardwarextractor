@@ -24,7 +24,11 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
         if model and model in normalized:
             candidates.append(candidate)
             continue
-        if brand and brand in normalized and any(token for token in normalized.split() if token in model and len(token) > 3):
+        # Fallback: brand match + any significant token (>3 chars) from input found in model
+        # e.g., input="corsair vengeance" matches model="vengeance lpx 3200" because "vengeance" is in model
+        if brand and brand in normalized and model and any(
+            token for token in normalized.split() if token in model and len(token) > 3
+        ):
             candidates.append(candidate)
 
     candidates = sorted(candidates, key=lambda c: (-c.score, c.canonical.get("model", "")))
