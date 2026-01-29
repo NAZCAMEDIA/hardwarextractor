@@ -39,6 +39,20 @@ class DataOrigin(str, Enum):
     DESCONOCIDO = "DESCONOCIDO"  # Sin datos
 
 
+# Mapeo de SourceTier a DataOrigin
+_TIER_TO_ORIGIN = {
+    SourceTier.OFFICIAL: DataOrigin.OFICIAL,
+    SourceTier.CATALOG: DataOrigin.CATALOGO,
+    SourceTier.REFERENCE: DataOrigin.REFERENCIA,
+}
+
+# Mapeo de SpecStatus a DataOrigin (fallback cuando tier no determina origen)
+_STATUS_TO_ORIGIN = {
+    SpecStatus.EXTRACTED_OFFICIAL: DataOrigin.OFICIAL,
+    SpecStatus.EXTRACTED_REFERENCE: DataOrigin.REFERENCIA,
+}
+
+
 def get_data_origin(status: SpecStatus, tier: SourceTier) -> DataOrigin:
     """Deriva el origen simplificado a partir de status y tier.
 
@@ -49,29 +63,16 @@ def get_data_origin(status: SpecStatus, tier: SourceTier) -> DataOrigin:
     Returns:
         DataOrigin simplificado para display
     """
-    # Calculado tiene prioridad
     if status == SpecStatus.CALCULATED:
         return DataOrigin.CALCULADO
 
-    # Desconocido
-    if status == SpecStatus.UNKNOWN or status == SpecStatus.NA:
+    if status in (SpecStatus.UNKNOWN, SpecStatus.NA):
         return DataOrigin.DESCONOCIDO
 
-    # Basado en tier
-    if tier == SourceTier.OFFICIAL:
-        return DataOrigin.OFICIAL
-    elif tier == SourceTier.CATALOG:
-        return DataOrigin.CATALOGO
-    elif tier == SourceTier.REFERENCE:
-        return DataOrigin.REFERENCIA
+    if tier in _TIER_TO_ORIGIN:
+        return _TIER_TO_ORIGIN[tier]
 
-    # Fallback basado en status
-    if status == SpecStatus.EXTRACTED_OFFICIAL:
-        return DataOrigin.OFICIAL
-    elif status == SpecStatus.EXTRACTED_REFERENCE:
-        return DataOrigin.REFERENCIA
-
-    return DataOrigin.DESCONOCIDO
+    return _STATUS_TO_ORIGIN.get(status, DataOrigin.DESCONOCIDO)
 
 
 # Mapeo de SourceTier a porcentaje de confianza
@@ -82,8 +83,18 @@ SOURCE_TIER_CONFIDENCE = {
     SourceTier.NONE: 0.0,        # 0%
 }
 
-# Fecha de última actualización del catálogo embebido
+# Fecha de ultima actualizacion del catalogo embebido
 CATALOG_LAST_UPDATED = "2026-01-29"
+
+# Mapeo de tipo de componente a secciones relevantes de la ficha
+COMPONENT_SECTIONS = {
+    "CPU": ["Identificación", "Procesador"],
+    "MAINBOARD": ["Identificación", "Placa base"],
+    "RAM": ["Identificación", "RAM"],
+    "GPU": ["Identificación", "Gráfica"],
+    "DISK": ["Identificación", "Disco duro"],
+    "GENERAL": ["Identificación", "Datos generales"],
+}
 
 
 @dataclass

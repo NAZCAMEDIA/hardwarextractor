@@ -28,6 +28,13 @@ from hardwarextractor.cache.sqlite_cache import SQLiteCache
 from hardwarextractor.core.events import Event, EventType
 from hardwarextractor.engine.ficha_manager import FichaManager
 from hardwarextractor.export.factory import ExporterFactory
+from hardwarextractor.models.schemas import (
+    COMPONENT_SECTIONS,
+    DataOrigin,
+    get_data_origin,
+    SourceTier,
+    SpecStatus,
+)
 
 
 # Version info
@@ -49,15 +56,39 @@ COLORS = {
     "card": "#ffffff",
 }
 
-# Mapeo de tipo de componente a secciones relevantes de la ficha
-COMPONENT_SECTIONS = {
-    "CPU": ["Identificación", "Procesador"],
-    "MAINBOARD": ["Identificación", "Placa base"],
-    "RAM": ["Identificación", "RAM"],
-    "GPU": ["Identificación", "Gráfica"],
-    "DISK": ["Identificación", "Disco duro"],
-    "GENERAL": ["Identificación", "Datos generales"],
+# Mapeo de DataOrigin a indicadores visuales (tag, symbol)
+ORIGIN_INDICATORS = {
+    DataOrigin.OFICIAL: ("tier_official", "●"),
+    DataOrigin.CATALOGO: ("tier_official", "◆"),
+    DataOrigin.REFERENCIA: ("tier_reference", "◐"),
+    DataOrigin.CALCULADO: ("tier_calculated", "◇"),
+    DataOrigin.DESCONOCIDO: ("", ""),
 }
+
+
+def _to_spec_status(value) -> SpecStatus:
+    """Convert value to SpecStatus enum safely."""
+    if isinstance(value, SpecStatus):
+        return value
+    if isinstance(value, str):
+        try:
+            return SpecStatus(value)
+        except ValueError:
+            pass
+    return SpecStatus.UNKNOWN
+
+
+def _to_source_tier(value) -> SourceTier:
+    """Convert value to SourceTier enum safely."""
+    if isinstance(value, SourceTier):
+        return value
+    if isinstance(value, str):
+        try:
+            return SourceTier(value)
+        except ValueError:
+            pass
+    return SourceTier.NONE
+
 
 # Translations for extra spec fields (key -> Spanish label)
 SPEC_TRANSLATIONS = {
@@ -463,44 +494,11 @@ class HardwareXtractorApp(tk.Tk):
                 self.output.insert(tk.END, f"\n{current_section}\n", "section")
                 self.output.insert(tk.END, "-" * 40 + "\n")
 
-            # Determine origin indicator using simplified DataOrigin
-            from hardwarextractor.models.schemas import DataOrigin, get_data_origin, SpecStatus, SourceTier
-
-            tier_tag = ""
-            tier_label = ""
-
-            # Get status and tier, handling both enum and string
-            status = field.status if field.status else SpecStatus.UNKNOWN
-            tier = field.source_tier if field.source_tier else SourceTier.NONE
-
-            # Convert strings to enums if needed
-            if isinstance(status, str):
-                try:
-                    status = SpecStatus(status)
-                except ValueError:
-                    status = SpecStatus.UNKNOWN
-            if isinstance(tier, str):
-                try:
-                    tier = SourceTier(tier)
-                except ValueError:
-                    tier = SourceTier.NONE
-
+            # Determine origin indicator
+            status = _to_spec_status(field.status)
+            tier = _to_source_tier(field.source_tier)
             origin = get_data_origin(status, tier)
-
-            # Map origin to indicator
-            if origin == DataOrigin.OFICIAL:
-                tier_tag = "tier_official"
-                tier_label = "●"
-            elif origin == DataOrigin.CATALOGO:
-                tier_tag = "tier_official"  # Verde también para catálogo
-                tier_label = "◆"  # Diamante para catálogo
-            elif origin == DataOrigin.REFERENCIA:
-                tier_tag = "tier_reference"
-                tier_label = "◐"
-            elif origin == DataOrigin.CALCULADO:
-                tier_tag = "tier_calculated"
-                tier_label = "◇"
-            # DESCONOCIDO no tiene indicador
+            tier_tag, tier_label = ORIGIN_INDICATORS.get(origin, ("", ""))
 
             value_str = str(field.value)
             if field.unit:
@@ -545,25 +543,14 @@ class HardwareXtractorApp(tk.Tk):
                     if spec.unit:
                         value_str += f" {spec.unit}"
 
-                    # Determine tier indicator for extra fields
-                    tier_tag = ""
-                    tier_label = ""
-                    if spec.source_tier:
-                        tier_value = spec.source_tier.value if hasattr(spec.source_tier, 'value') else str(spec.source_tier)
-                        if "OFFICIAL" in tier_value or "CATALOG" in tier_value:
-                            tier_tag = "tier_official"
-                            tier_label = "●"
-                        elif "REFERENCE" in tier_value:
-                            tier_tag = "tier_reference"
-                            tier_label = "◐"
-                        elif "CALCULATED" in tier_value:
-                            tier_tag = "tier_calculated"
-                            tier_label = "◇"
+                    # Determine tier indicator using same logic as template fields
+                    status = _to_spec_status(spec.status)
+                    tier = _to_source_tier(spec.source_tier)
+                    origin = get_data_origin(status, tier)
+                    tier_tag, tier_label = ORIGIN_INDICATORS.get(origin, ("", ""))
 
-                    # Use Spanish translation or fallback to label/key
                     field_name = SPEC_TRANSLATIONS.get(spec.key) or spec.label or spec.key
 
-                    # Insert with tier indicator on the left
                     if tier_label:
                         self.output.insert(tk.END, f"    {tier_label} ", tier_tag)
                     else:

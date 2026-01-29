@@ -9,8 +9,8 @@ from typing import Any, Optional
 from uuid import uuid4
 
 from hardwarextractor.models.schemas import (
+    COMPONENT_SECTIONS,
     ComponentRecord,
-    DataOrigin,
     FichaAggregated,
     get_data_origin,
     SourceTier,
@@ -188,16 +188,6 @@ class FichaManager:
         Returns:
             List of dictionaries with export data
         """
-        # Mapeo de tipo de componente a secciones relevantes
-        COMPONENT_SECTIONS = {
-            "CPU": ["Identificación", "Procesador"],
-            "MAINBOARD": ["Identificación", "Placa base"],
-            "RAM": ["Identificación", "RAM"],
-            "GPU": ["Identificación", "Gráfica"],
-            "DISK": ["Identificación", "Disco duro"],
-            "GENERAL": ["Identificación", "Datos generales"],
-        }
-
         # Determinar secciones relevantes
         relevant_sections = set()
         for component in self._components:

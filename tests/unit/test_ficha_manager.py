@@ -370,8 +370,7 @@ class TestGetExportRows:
             assert "field" in row
             assert "value" in row
             assert "unit" in row
-            assert "status" in row
-            assert "tier" in row
+            assert "origen" in row  # Nuevo formato unificado
             assert "source_name" in row
             assert "source_url" in row
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Callable, List, Optional
 
 from hardwarextractor.aggregate.aggregator import aggregate_components
@@ -21,6 +22,8 @@ from hardwarextractor.models.schemas import (
     ResolveCandidate,
     SourceTier,
     SOURCE_TIER_CONFIDENCE,
+    SpecField,
+    SpecStatus,
 )
 from hardwarextractor.normalize.input import fingerprint, normalize_input
 from hardwarextractor.resolver.resolver import resolve_component
@@ -33,6 +36,17 @@ from hardwarextractor.data.reference_urls import get_reference_url
 
 # Type for event callback
 EventCallback = Callable[[Event], None]
+
+# JEDEC Standards para RAM (voltaje y pines estandar por tipo DDR)
+# Fuente: JEDEC JESD79 series specifications
+# https://www.jedec.org/standards-documents/docs/jesd-79-5b (DDR5)
+# https://www.jedec.org/standards-documents/docs/jesd-79-4c (DDR4)
+JEDEC_STANDARDS = {
+    "DDR5": {"voltage": 1.1, "pins": 288},   # JESD79-5: 1.1V, 288-pin DIMM
+    "DDR4": {"voltage": 1.2, "pins": 288},   # JESD79-4: 1.2V, 288-pin DIMM
+    "DDR3": {"voltage": 1.5, "pins": 240},   # JESD79-3: 1.5V, 240-pin DIMM
+    "DDR2": {"voltage": 1.8, "pins": 240},   # JESD79-2: 1.8V, 240-pin DIMM
+}
 
 
 class Orchestrator:
@@ -409,7 +423,7 @@ class Orchestrator:
         self,
         candidate: ResolveCandidate,
         component_type: ComponentType,
-    ) -> List:
+    ) -> List[SpecField]:
         """Build basic specs from catalog data when scraping fails.
 
         Args:
@@ -419,14 +433,11 @@ class Orchestrator:
         Returns:
             List of SpecField objects extracted from catalog canonical data
         """
-        from hardwarextractor.models.schemas import SpecField, SpecStatus, SourceTier
-        import re
-
-        specs = []
+        specs: List[SpecField] = []
         canonical = candidate.canonical
         source_url = candidate.source_url
 
-        def make_spec(key: str, label: str, value: str, unit: str = None) -> SpecField:
+        def make_spec(key: str, label: str, value, unit: str = None) -> SpecField:
             return SpecField(
                 key=key,
                 label=label,
@@ -434,12 +445,21 @@ class Orchestrator:
                 unit=unit,
                 status=SpecStatus.EXTRACTED_OFFICIAL,
                 source_tier=SourceTier.CATALOG,
-                source_name="Catálogo interno",
+                source_name="Catalogo interno",
                 source_url=source_url,
                 confidence=0.6,
             )
 
-        # Extraer specs básicas del canonical
+        def has_spec(key: str) -> bool:
+            return any(s.key == key for s in specs)
+
+        def get_spec_value(key: str):
+            for s in specs:
+                if s.key == key:
+                    return s.value
+            return None
+
+        # Extraer specs basicas del canonical
         brand = canonical.get("brand", "")
         model = canonical.get("model", "")
         part_number = canonical.get("part_number", "")
@@ -449,83 +469,53 @@ class Orchestrator:
         if model:
             specs.append(make_spec("model", "Modelo", model))
         if part_number:
-            specs.append(make_spec("part_number", "Número de parte", part_number))
+            specs.append(make_spec("part_number", "Numero de parte", part_number))
 
-        # Parsear información adicional del modelo para RAM
-        if component_type == ComponentType.RAM and model:
-            # Extraer capacidad (ej: "32GB", "16GB")
-            capacity_match = re.search(r'(\d+)\s*GB', model, re.IGNORECASE)
-            if capacity_match:
-                specs.append(make_spec("ram.capacity_gb", "Capacidad", capacity_match.group(1), "GB"))
+        if component_type != ComponentType.RAM:
+            return specs if len(specs) > 3 else []
 
-            # Extraer velocidad (ej: "6000MHz", "3200MHz") - mapper espera valor numérico en MT/s
-            speed_match = re.search(r'(\d{4,5})\s*MHz', model, re.IGNORECASE)
-            if speed_match:
-                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(speed_match.group(1)), "MT/s"))
+        # Parsear informacion adicional del modelo para RAM
+        if model:
+            if match := re.search(r'(\d+)\s*GB', model, re.IGNORECASE):
+                specs.append(make_spec("ram.capacity_gb", "Capacidad", match.group(1), "GB"))
 
-            # Extraer tipo DDR (ej: "DDR5", "DDR4")
-            ddr_match = re.search(r'(DDR[45])', model, re.IGNORECASE)
-            if ddr_match:
-                specs.append(make_spec("ram.type", "Tipo", ddr_match.group(1).upper()))
+            if match := re.search(r'(\d{4,5})\s*MHz', model, re.IGNORECASE):
+                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(match.group(1)), "MT/s"))
 
-        # Parsear información adicional del part_number para RAM Corsair
-        if component_type == ComponentType.RAM and part_number:
+            if match := re.search(r'(DDR[45])', model, re.IGNORECASE):
+                specs.append(make_spec("ram.type", "Tipo", match.group(1).upper()))
+
+        # Parsear informacion adicional del part_number para RAM Corsair
+        if part_number:
             pn_upper = part_number.upper()
 
-            # Capacidad del part number (CMK32G... = 32GB)
-            cap_match = re.search(r'CMK(\d+)G', pn_upper)
-            if cap_match and not any(s.key == "ram.capacity_gb" for s in specs):
-                specs.append(make_spec("ram.capacity_gb", "Capacidad", cap_match.group(1), "GB"))
+            if (match := re.search(r'CMK(\d+)G', pn_upper)) and not has_spec("ram.capacity_gb"):
+                specs.append(make_spec("ram.capacity_gb", "Capacidad", match.group(1), "GB"))
 
-            # DDR version (X4 = DDR4, X5 = DDR5)
-            if 'X5' in pn_upper and not any(s.key == "ram.type" for s in specs):
-                specs.append(make_spec("ram.type", "Tipo", "DDR5"))
-            elif 'X4' in pn_upper and not any(s.key == "ram.type" for s in specs):
-                specs.append(make_spec("ram.type", "Tipo", "DDR4"))
+            if not has_spec("ram.type"):
+                if 'X5' in pn_upper:
+                    specs.append(make_spec("ram.type", "Tipo", "DDR5"))
+                elif 'X4' in pn_upper:
+                    specs.append(make_spec("ram.type", "Tipo", "DDR4"))
 
-            # Módulos (M2 = 2 módulos)
-            mod_match = re.search(r'M(\d)', pn_upper)
-            if mod_match:
-                specs.append(make_spec("ram.modules", "Módulos", mod_match.group(1)))
+            if match := re.search(r'M(\d)', pn_upper):
+                specs.append(make_spec("ram.modules", "Modulos", match.group(1)))
 
-            # Velocidad del part number (B6000 = 6000MT/s) - valor numérico
-            speed_pn_match = re.search(r'[AB](\d{4,5})', pn_upper)
-            if speed_pn_match and not any(s.key == "ram.speed_effective_mt_s" for s in specs):
-                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(speed_pn_match.group(1)), "MT/s"))
+            if (match := re.search(r'[AB](\d{4,5})', pn_upper)) and not has_spec("ram.speed_effective_mt_s"):
+                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(match.group(1)), "MT/s"))
 
-            # CAS Latency (C36 = 36) - mapper espera valor numérico
-            cl_match = re.search(r'C(\d{2})', pn_upper)
-            if cl_match:
-                specs.append(make_spec("ram.latency_cl", "Latencia", int(cl_match.group(1))))
+            if match := re.search(r'C(\d{2})', pn_upper):
+                specs.append(make_spec("ram.latency_cl", "Latencia", int(match.group(1))))
 
-        # JEDEC Standards para RAM (voltaje y pines estándar por tipo DDR)
-        # Fuente: JEDEC JESD79 series specifications
-        # https://www.jedec.org/standards-documents/docs/jesd-79-5b (DDR5)
-        # https://www.jedec.org/standards-documents/docs/jesd-79-4c (DDR4)
-        if component_type == ComponentType.RAM:
-            JEDEC_STANDARDS = {
-                "DDR5": {"voltage": 1.1, "pins": 288},   # JESD79-5: 1.1V, 288-pin DIMM
-                "DDR4": {"voltage": 1.2, "pins": 288},   # JESD79-4: 1.2V, 288-pin DIMM
-                "DDR3": {"voltage": 1.5, "pins": 240},   # JESD79-3: 1.5V, 240-pin DIMM
-                "DDR2": {"voltage": 1.8, "pins": 240},   # JESD79-2: 1.8V, 240-pin DIMM
-            }
+        # Aplicar estandares JEDEC segun tipo DDR detectado
+        ddr_type = get_spec_value("ram.type")
+        if ddr_type and ddr_type in JEDEC_STANDARDS:
+            jedec = JEDEC_STANDARDS[ddr_type]
 
-            # Buscar el tipo DDR detectado
-            ddr_type = None
-            for s in specs:
-                if s.key == "ram.type" and s.value in JEDEC_STANDARDS:
-                    ddr_type = s.value
-                    break
+            if not has_spec("ram.voltage_v"):
+                specs.append(make_spec("ram.voltage_v", "Voltaje", jedec["voltage"], "V"))
 
-            if ddr_type:
-                jedec = JEDEC_STANDARDS[ddr_type]
+            if not has_spec("ram.pins"):
+                specs.append(make_spec("ram.pins", "Numero de pines", jedec["pins"]))
 
-                # Agregar voltaje estándar si no existe
-                if not any(s.key == "ram.voltage_v" for s in specs):
-                    specs.append(make_spec("ram.voltage_v", "Voltaje", jedec["voltage"], "V"))
-
-                # Agregar número de pines estándar si no existe
-                if not any(s.key == "ram.pins" for s in specs):
-                    specs.append(make_spec("ram.pins", "Número de pines", jedec["pins"]))
-
-        return specs if len(specs) > 3 else []  # Solo retornar si tenemos datos útiles
+        return specs if len(specs) > 3 else []

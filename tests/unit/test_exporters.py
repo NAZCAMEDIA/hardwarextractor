@@ -54,15 +54,14 @@ def create_mock_ficha_manager():
         ),
     ]
 
-    # Mock get_export_rows (used by CSVExporter)
+    # Mock get_export_rows (used by CSVExporter) - nuevo formato con "origen"
     manager.get_export_rows.return_value = [
         {
             "section": "Memory",
             "field": "capacity",
             "value": "32GB",
             "unit": "GB",
-            "status": "EXTRACTED_OFFICIAL",
-            "tier": "OFFICIAL",
+            "origen": "OFICIAL",
             "source_name": "corsair",
             "source_url": "https://corsair.com",
         },
@@ -71,8 +70,7 @@ def create_mock_ficha_manager():
             "field": "speed",
             "value": "3200",
             "unit": "MHz",
-            "status": "EXTRACTED_OFFICIAL",
-            "tier": "OFFICIAL",
+            "origen": "OFICIAL",
             "source_name": "corsair",
             "source_url": "https://corsair.com",
         },
