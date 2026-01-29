@@ -1,8 +1,11 @@
 """Entry point for HardwareXtractor.
 
 Supports two modes:
-- GUI mode (default): Launches the Tkinter UI
+- GUI mode (default): Launches the Tkinter UI with splash screen
 - CLI mode (--cli): Launches the interactive CLI
+
+The GUI uses a lightweight splash screen for instant feedback while
+heavy modules load in the background.
 """
 
 from __future__ import annotations
@@ -20,11 +23,38 @@ def main() -> None:
 
 
 def run_gui() -> None:
-    """Launch the Tkinter GUI."""
-    from hardwarextractor.ui.app import HardwareXtractorApp
+    """Launch the Tkinter GUI with splash screen.
 
-    app = HardwareXtractorApp()
-    app.mainloop()
+    Uses lightweight splash for instant startup while heavy modules
+    (scrapy, parsel, requests, etc.) load in the background.
+    """
+    # Import splash first (lightweight, stdlib only)
+    from hardwarextractor.ui.splash import (
+        SingleInstance,
+        SplashScreen,
+        show_already_running_dialog,
+    )
+
+    # Check for existing instance
+    instance = SingleInstance()
+    if not instance.acquire():
+        show_already_running_dialog()
+        return
+
+    try:
+        # Show splash and load app
+        splash = SplashScreen()
+
+        def load_app():
+            """Load the main application (triggers heavy imports)."""
+            # This import pulls in scrapy, parsel, requests, etc.
+            from hardwarextractor.ui.app import HardwareXtractorApp
+            return HardwareXtractorApp()
+
+        splash.run_with_loading(load_app)
+
+    finally:
+        instance.release()
 
 
 def run_cli() -> None:

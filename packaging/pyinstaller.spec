@@ -1,18 +1,99 @@
 # -*- mode: python ; coding: utf-8 -*-
+"""PyInstaller spec for HardwareXtractor macOS app bundle.
+
+Build with:
+    cd /path/to/sacramento
+    pyinstaller packaging/pyinstaller.spec --clean
+
+Output will be in dist/HardwareXtractor.app
+"""
+
+import os
+from pathlib import Path
+
+# Get project root (parent of packaging/)
+SPEC_DIR = Path(SPECPATH)
+PROJECT_ROOT = SPEC_DIR.parent
 
 block_cipher = None
 
+# Data files to include
+datas = [
+    (str(PROJECT_ROOT / "hardwarextractor" / "data" / "field_catalog.json"), "hardwarextractor/data"),
+    (str(PROJECT_ROOT / "hardwarextractor" / "data" / "resolver_index.json"), "hardwarextractor/data"),
+]
+
+# Hidden imports that PyInstaller might miss
+hiddenimports = [
+    # Core dependencies
+    "scrapy",
+    "scrapy.spiders",
+    "scrapy.http",
+    "parsel",
+    "parsel.selector",
+    "requests",
+    "requests.adapters",
+    "urllib3",
+    # App modules
+    "hardwarextractor.ui.app",
+    "hardwarextractor.ui.splash",
+    "hardwarextractor.app.orchestrator",
+    "hardwarextractor.app.config",
+    "hardwarextractor.core.events",
+    "hardwarextractor.core.source_chain",
+    "hardwarextractor.scrape.service",
+    "hardwarextractor.scrape.engines.base",
+    "hardwarextractor.scrape.engines.detector",
+    "hardwarextractor.scrape.engines.requests_engine",
+    "hardwarextractor.engine.ficha_manager",
+    "hardwarextractor.export.factory",
+    "hardwarextractor.export.csv_exporter",
+    "hardwarextractor.cache.sqlite_cache",
+    "hardwarextractor.classifier.heuristic",
+    "hardwarextractor.resolver.resolver",
+    "hardwarextractor.normalize.input",
+    "hardwarextractor.validate.validator",
+    "hardwarextractor.aggregate.aggregator",
+    "hardwarextractor.models.schemas",
+    "hardwarextractor.data.catalog",
+    "hardwarextractor.data.resolver_catalog",
+    # Tkinter (sometimes needs explicit inclusion on macOS)
+    "tkinter",
+    "tkinter.ttk",
+    "tkinter.filedialog",
+    "tkinter.messagebox",
+    # Optional deps (graceful failure if not installed)
+    "openpyxl",
+    "playwright",
+]
+
+# Icon file
+icon_file = PROJECT_ROOT / "icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns"
+if not icon_file.exists():
+    icon_file = None
+else:
+    icon_file = str(icon_file)
 
 a = Analysis(
-    ["/Users/carlosjperez/Documents/GitHub/hardwarextractor/hardwarextractor/__main__.py"],
-    pathex=["/Users/carlosjperez/Documents/GitHub/hardwarextractor"],
+    [str(PROJECT_ROOT / "hardwarextractor" / "__main__.py")],
+    pathex=[str(PROJECT_ROOT)],
     binaries=[],
-    datas=[("/Users/carlosjperez/Documents/GitHub/hardwarextractor/hardwarextractor/data/field_catalog.json", "hardwarextractor/data")],
-    hiddenimports=[],
+    datas=datas,
+    hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=[
+        # Exclude unused heavy modules
+        "matplotlib",
+        "numpy",
+        "pandas",
+        "scipy",
+        "PIL",
+        "cv2",
+        "torch",
+        "tensorflow",
+    ],
     noarchive=False,
 )
 
@@ -33,12 +114,24 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
-    icon="/Users/carlosjperez/Documents/GitHub/hardwarextractor/icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns",
+    disable_windowed_traceback=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+    icon=icon_file,
 )
 
 app = BUNDLE(
     exe,
     name="HardwareXtractor.app",
-    icon="/Users/carlosjperez/Documents/GitHub/hardwarextractor/icnsFile_0a7782c085eea2ac5e8527e215d70bf9_Open_GPIB.icns",
+    icon=icon_file,
     bundle_identifier="com.nazcamedia.hardwarextractor",
+    info_plist={
+        "CFBundleDisplayName": "HardwareXtractor",
+        "CFBundleShortVersionString": "0.2.0",
+        "CFBundleVersion": "0.2.0",
+        "NSHighResolutionCapable": True,
+        "NSRequiresAquaSystemAppearance": False,  # Support dark mode
+        "LSMinimumSystemVersion": "10.15",
+    },
 )
