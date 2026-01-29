@@ -57,6 +57,7 @@ class InteractiveCLI:
         from hardwarextractor.cli.renderer import Colors
         print(self._renderer._c(ascii_logo, Colors.CYAN))
         print(self._renderer._c(f"                           v{self.VERSION} - Hardware Specs Extractor", Colors.DIM))
+        print(self._renderer._c("                              © 2025 NAZCAMEDIA", Colors.DIM))
         print()
 
     def _show_main_menu(self) -> None:
