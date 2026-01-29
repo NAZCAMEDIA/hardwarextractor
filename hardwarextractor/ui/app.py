@@ -558,12 +558,15 @@ class HardwareXtractorApp(tk.Tk):
             if url.startswith("http"):
                 webbrowser.open(url)
 
-    def _update_sources_panel(self) -> None:
+    def _update_sources_panel(self, component_type: str = None) -> None:
         """Update the sources panel based on selected component type."""
         self.sources_text.configure(state=tk.NORMAL)
         self.sources_text.delete("1.0", tk.END)
 
-        # Get selected component type
+        # Use provided type or get from combobox
+        if component_type:
+            self.component_type_var.set(component_type)
+
         type_str = self.component_type_var.get()
         try:
             comp_type = ComponentType(type_str)
@@ -571,6 +574,11 @@ class HardwareXtractorApp(tk.Tk):
             comp_type = ComponentType.CPU
 
         links = REFERENCE_LINKS.get(comp_type, {})
+
+        if not links:
+            self.sources_text.insert(tk.END, "\nNo hay fuentes para este tipo.\n")
+            self.sources_text.configure(state=tk.DISABLED)
+            return
 
         # Store URLs for click handling
         self._source_urls = {}
@@ -582,7 +590,9 @@ class HardwareXtractorApp(tk.Tk):
                 # Store URL with unique tag
                 tag_name = f"link_{url_index}"
                 self._source_urls[tag_name] = url
-                self.sources_text.insert(tk.END, f"  • ")
+                self.sources_text.insert(tk.END, "  ")
+                # Insert bullet with link color
+                self.sources_text.insert(tk.END, "→ ", "link")
                 self.sources_text.insert(tk.END, name, ("link", tag_name))
                 self.sources_text.insert(tk.END, "\n")
                 # Bind click to this specific tag
@@ -592,6 +602,7 @@ class HardwareXtractorApp(tk.Tk):
                 url_index += 1
 
         self.sources_text.configure(state=tk.DISABLED)
+        self.update_idletasks()
 
     def _on_source_link_click(self, event: tk.Event) -> None:
         """Handle click on source link."""
@@ -791,8 +802,11 @@ class HardwareXtractorApp(tk.Tk):
             if event.status == "READY_TO_ADD" and event.component_result:
                 self.ficha_manager.add_component(event.component_result)
                 self._update_output()
-                # Log resultado
+                # Update sources panel with detected component type
                 r = event.component_result
+                if hasattr(r, 'component_type'):
+                    self._update_sources_panel(r.component_type.value)
+                # Log resultado
                 self._log_legacy_event(
                     "RESULTADO",
                     f"Match: {r.exact_match}, Tier: {r.source_tier.value}, Confianza: {r.source_confidence:.0%}"
@@ -826,6 +840,9 @@ class HardwareXtractorApp(tk.Tk):
                 self.ficha_manager.add_component(event.component_result)
                 self._update_output()
                 r = event.component_result
+                # Update sources panel with detected component type
+                if hasattr(r, 'component_type'):
+                    self._update_sources_panel(r.component_type.value)
                 self._log_legacy_event(
                     "RESULTADO",
                     f"Match: {r.exact_match}, Tier: {r.source_tier.value}, Confianza: {r.source_confidence:.0%}"
