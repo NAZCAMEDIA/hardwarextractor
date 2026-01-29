@@ -45,8 +45,18 @@ class InteractiveCLI:
         print(self._renderer.info("¡Hasta luego!"))
 
     def _print_welcome(self) -> None:
-        """Print welcome message."""
-        print(self._renderer.header(f"HXTRACTOR v{self.VERSION}"))
+        """Print welcome message with ASCII art."""
+        ascii_logo = """
+  ██╗  ██╗██╗  ██╗████████╗██████╗  █████╗  ██████╗████████╗ ██████╗ ██████╗
+  ██║  ██║╚██╗██╔╝╚══██╔══╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+  ███████║ ╚███╔╝    ██║   ██████╔╝███████║██║        ██║   ██║   ██║██████╔╝
+  ██╔══██║ ██╔██╗    ██║   ██╔══██╗██╔══██║██║        ██║   ██║   ██║██╔══██╗
+  ██║  ██║██╔╝ ██╗   ██║   ██║  ██║██║  ██║╚██████╗   ██║   ╚██████╔╝██║  ██║
+  ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+"""
+        from hardwarextractor.cli.renderer import Colors
+        print(self._renderer._c(ascii_logo, Colors.CYAN))
+        print(self._renderer._c(f"                           v{self.VERSION} - Hardware Specs Extractor", Colors.DIM))
         print()
 
     def _show_main_menu(self) -> None:
@@ -87,28 +97,26 @@ class InteractiveCLI:
             return
 
         print()
+        import time
+        start_time = time.time()
 
-        # Process and show progress
-        result = None
+        # Process and show clean progress
         for event in self._handler.analyze_component(input_text):
-            print(self._renderer.log(event.message))
-            result = None  # Will be set by generator return
+            msg = event.message
+            # Filter out noisy debug messages
+            if msg.startswith("[SCRAPE]") or "HTML preview" in msg:
+                continue
+            # Show clean progress
+            print(self._renderer.log(msg))
 
-        # Get final result
-        result = {}
-        for event in self._handler.analyze_component(input_text):
-            print(self._renderer.log(event.message))
-
-        # Re-run to get result (generator pattern)
-        events_list = list(self._handler.analyze_component(input_text))
+        elapsed = time.time() - start_time
 
         # Check orchestrator state for result
         if self._handler._last_component:
             # Success case
             component = self._handler._component_to_dict(self._handler._last_component)
-            print()
+            print(self._renderer.success(f"Completado en {elapsed:.1f}s"))
             print(self._renderer.component_result(component))
-            print()
 
             # Check for reference warning
             has_ref = any(
@@ -121,15 +129,11 @@ class InteractiveCLI:
                 ))
                 print()
 
-            # Ask to add to ficha
-            add = self._prompt("¿Añadir a la ficha agregada? (Y/n): ")
-            if add.lower() != "n":
-                result = self._handler.add_to_ficha()
-                if result.get("status") == "success":
-                    print(self._renderer.success("Componente añadido a la ficha."))
-                else:
-                    print(self._renderer.error(result.get("message", "Error")))
-                print()
+            # Auto-add to ficha
+            result = self._handler.add_to_ficha()
+            if result.get("status") == "success":
+                print(self._renderer.success("Componente añadido a la ficha."))
+            print()
 
             # Ask to export
             export = self._prompt("¿Exportar ahora? (No/CSV/XLSX/MD): ")
@@ -162,14 +166,12 @@ class InteractiveCLI:
                     component = self._handler._component_to_dict(self._handler._last_component)
                     print()
                     print(self._renderer.component_result(component))
-                    print()
 
-                    add = self._prompt("¿Añadir a la ficha agregada? (Y/n): ")
-                    if add.lower() != "n":
-                        result = self._handler.add_to_ficha()
-                        if result.get("status") == "success":
-                            print(self._renderer.success("Componente añadido."))
-                        print()
+                    # Auto-add to ficha
+                    result = self._handler.add_to_ficha()
+                    if result.get("status") == "success":
+                        print(self._renderer.success("Componente añadido a la ficha."))
+                    print()
 
             except (ValueError, IndexError):
                 print(self._renderer.error("Selección no válida"))

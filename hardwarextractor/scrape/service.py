@@ -11,9 +11,10 @@ from hardwarextractor.models.schemas import SpecField
 from hardwarextractor.scrape.engines import RequestsEngine, AntiBotDetector, FetchResult
 from hardwarextractor.scrape.spiders import SPIDERS
 from hardwarextractor.utils.allowlist import classify_tier, is_allowlisted
+from hardwarextractor.core.logger import get_logger
 
-# Logger para verbose output
-logger = logging.getLogger(__name__)
+# Logger para verbose output (usa sistema centralizado)
+logger = get_logger("scrape.service")
 
 # Callback opcional para logs en UI
 _log_callback: Optional[Callable[[str, str], None]] = None

@@ -175,39 +175,52 @@ class CLIRenderer:
         return f"{self._c(bar, Colors.CYAN)} {pct:3d}% {message}"
 
     def component_result(self, component: dict) -> str:
-        """Render a component result."""
+        """Render a component result in clean format."""
         lines = []
 
-        # Header
+        # Header line
         comp_type = component.get("type", "UNKNOWN")
         brand = component.get("brand", "")
         model = component.get("model", "")
         pn = component.get("part_number", "")
 
-        title = f"TIPO: {comp_type} | {brand} {model}"
+        header = f"{self._c(comp_type, Colors.BOLD, Colors.CYAN)} {self._c(brand, Colors.BOLD)} {model}"
         if pn:
-            title += f" ({pn})"
+            header += f" {self._c(f'({pn})', Colors.DIM)}"
 
-        lines.append(self.header(title))
+        lines.append("")
+        lines.append(f"  {self._c('━' * 60, Colors.DIM)}")
+        lines.append(f"  {header}")
+        lines.append(f"  {self._c('━' * 60, Colors.DIM)}")
+        lines.append("")
 
-        # Specs table
+        # Specs in clean format
         specs = component.get("specs", [])
         if specs:
-            headers = ["Campo", "Valor", "Status", "Tier", "Fuente"]
-            rows = []
             for spec in specs:
-                source = spec.get("source_name", "")
-                if len(source) > 15:
-                    source = source[:12] + "..."
-                rows.append([
-                    spec.get("label", spec.get("key", "")),
-                    str(spec.get("value", "")),
-                    spec.get("status", ""),
-                    spec.get("tier", ""),
-                    source,
-                ])
-            lines.append(self.table(headers, rows))
+                label = spec.get("label", spec.get("key", ""))
+                value = spec.get("value", "")
+                unit = spec.get("unit", "")
+                tier = spec.get("tier", "")
 
+                # Tier indicator with color
+                if tier in ("OFFICIAL", "CATALOG"):
+                    indicator = self._c("●", Colors.GREEN)
+                elif tier == "REFERENCE":
+                    indicator = self._c("◐", Colors.YELLOW)
+                elif tier == "CALCULATED":
+                    indicator = self._c("◇", Colors.CYAN)
+                else:
+                    indicator = self._c("○", Colors.DIM)
+
+                # Format value with unit
+                value_str = f"{value}"
+                if unit:
+                    value_str += f" {self._c(unit, Colors.DIM)}"
+
+                lines.append(f"  {indicator} {self._c(label + ':', Colors.BOLD)} {value_str}")
+
+        lines.append("")
         return "\n".join(lines)
 
     def candidates_list(self, candidates: list[dict]) -> str:
