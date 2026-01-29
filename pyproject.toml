@@ -37,8 +37,8 @@ dev = [
 ]
 
 [project.scripts]
-hxtractor = "hardwarextractor.__main__:main"
-hxtractor-cli = "hardwarextractor.cli.interactive:main"
+hxtractor = "hardwarextractor.cli.interactive:main"
+hxtractor-gui = "hardwarextractor.__main__:main"
 
 [tool.pytest.ini_options]
 addopts = "-q --cov=hardwarextractor --cov-report=term-missing --cov-fail-under=80"
