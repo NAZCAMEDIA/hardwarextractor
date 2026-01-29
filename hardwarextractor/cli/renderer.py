@@ -7,6 +7,9 @@ import threading
 import time
 from typing import Any, Optional
 
+from hardwarextractor.data.reference_urls import REFERENCE_LINKS
+from hardwarextractor.models.schemas import ComponentType
+
 
 # ANSI color codes
 class Colors:
@@ -50,21 +53,45 @@ class Icons:
 
 
 class Spinner:
-    """Animated spinner for showing progress."""
+    """Animated spinner for showing progress with timed phases."""
 
-    def __init__(self, message: str = "Procesando", use_colors: bool = True):
+    # Default phases with timing (seconds, message)
+    DEFAULT_PHASES = [
+        (0, "Iniciando..."),
+        (2, "Analizando entrada..."),
+        (4, "Identificando componente..."),
+        (7, "Buscando en catálogos..."),
+        (12, "Consultando fuentes web..."),
+        (18, "Extrayendo especificaciones..."),
+        (25, "Verificando datos..."),
+        (32, "Procesando resultados..."),
+        (40, "Finalizando..."),
+    ]
+
+    def __init__(self, message: str = "Procesando", use_colors: bool = True, phases: list = None):
         self._message = message
         self._use_colors = use_colors and sys.stdout.isatty()
         self._running = False
         self._thread: Optional[threading.Thread] = None
         self._frame = 0
         self._start_time = 0.0
+        self._phases = phases or self.DEFAULT_PHASES
+        self._current_phase_idx = 0
 
     def _animate(self) -> None:
         """Animation loop running in background thread."""
         while self._running:
             elapsed = time.time() - self._start_time
             spinner_char = Icons.SPINNER[self._frame % len(Icons.SPINNER)]
+
+            # Auto-update message based on elapsed time
+            while self._current_phase_idx < len(self._phases) - 1:
+                next_time, next_msg = self._phases[self._current_phase_idx + 1]
+                if elapsed >= next_time:
+                    self._message = next_msg
+                    self._current_phase_idx += 1
+                else:
+                    break
 
             if self._use_colors:
                 line = f"\r  {Colors.CYAN}{spinner_char}{Colors.RESET} {self._message} {Colors.DIM}({elapsed:.1f}s){Colors.RESET}  "
@@ -82,11 +109,14 @@ class Spinner:
             return
         self._running = True
         self._start_time = time.time()
+        self._current_phase_idx = 0
+        if self._phases:
+            self._message = self._phases[0][1]
         self._thread = threading.Thread(target=self._animate, daemon=True)
         self._thread.start()
 
     def update(self, message: str) -> None:
-        """Update the spinner message."""
+        """Update the spinner message manually."""
         self._message = message
 
     def stop(self, final_message: str = "", success: bool = True) -> None:
@@ -298,12 +328,7 @@ class CLIRenderer:
                 if unit:
                     value_str += f" {self._c(unit, Colors.DIM)}"
 
-                # Add source indicator
-                source_indicator = ""
-                if source_name:
-                    source_indicator = f" {self._c(f'[{source_name}]', Colors.DIM)}"
-
-                lines.append(f"    {indicator} {self._c(label + ':', Colors.BOLD)} {value_str}{source_indicator}")
+                lines.append(f"    {indicator} {self._c(label + ':', Colors.BOLD)} {value_str}")
 
         # Sources section
         if sources:
@@ -409,3 +434,37 @@ class CLIRenderer:
     def export_confirmation(self, path: str, format: str) -> str:
         """Render export confirmation."""
         return self.success(f"Exportado: {path} ({format.upper()})")
+
+    def reference_sources(self, component_type: str) -> str:
+        """Render reference sources for a component type.
+
+        Args:
+            component_type: Type of component (CPU, GPU, RAM, MAINBOARD, DISK)
+
+        Returns:
+            Formatted string with reference sources for manual lookup
+        """
+        lines = []
+
+        try:
+            comp_type = ComponentType(component_type)
+        except ValueError:
+            return ""
+
+        links = REFERENCE_LINKS.get(comp_type, {})
+        if not links:
+            return ""
+
+        lines.append("")
+        lines.append(f"  {self._c('FUENTES DE CONSULTA MANUAL:', Colors.BOLD)}")
+        lines.append(f"  {self._c('(para verificar o buscar más información)', Colors.DIM)}")
+        lines.append("")
+
+        for category, items in links.items():
+            lines.append(f"    {self._c(category, Colors.CYAN)}:")
+            for name, url in items:
+                lines.append(f"      {self._c('→', Colors.DIM)} {name}")
+                lines.append(f"        {self._c(url, Colors.DIM)}")
+            lines.append("")
+
+        return "\n".join(lines)

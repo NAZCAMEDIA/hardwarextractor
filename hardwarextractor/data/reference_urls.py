@@ -7,7 +7,91 @@ TechPowerUp has the most comprehensive GPU/CPU specs in a scrapable format.
 from __future__ import annotations
 
 import re
-from typing import Dict
+from typing import Dict, List, Tuple
+
+from hardwarextractor.models.schemas import ComponentType
+
+
+# Reference links organized by component type for user consultation
+# Format: ComponentType -> {category: [(name, url), ...]}
+REFERENCE_LINKS: Dict[ComponentType, Dict[str, List[Tuple[str, str]]]] = {
+    ComponentType.CPU: {
+        "Oficiales": [
+            ("Intel ARK", "https://ark.intel.com/content/www/es/es/ark.html"),
+            ("AMD Processors", "https://www.amd.com/en/products/processors/desktops.html"),
+        ],
+        "Referencias técnicas": [
+            ("TechPowerUp CPU", "https://www.techpowerup.com/cpu-specs/"),
+            ("WikiChip", "https://en.wikichip.org/wiki/WikiChip"),
+            ("CPU-World", "https://www.cpu-world.com/"),
+        ],
+        "Benchmarks": [
+            ("PassMark CPU", "https://www.cpubenchmark.net/cpu_list.php"),
+            ("UserBenchmark CPU", "https://cpu.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker CPU", "https://pcpartpicker.com/products/cpu/"),
+        ],
+    },
+    ComponentType.GPU: {
+        "Oficiales": [
+            ("NVIDIA GeForce", "https://www.nvidia.com/en-us/geforce/graphics-cards/"),
+            ("AMD Radeon", "https://www.amd.com/en/products/graphics/desktops.html"),
+            ("Intel Arc", "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc.html"),
+        ],
+        "Referencias técnicas": [
+            ("TechPowerUp GPU", "https://www.techpowerup.com/gpu-specs/"),
+            ("GPU-Specs.com", "https://www.gpu-specs.com/"),
+        ],
+        "Benchmarks": [
+            ("PassMark GPU", "https://www.videocardbenchmark.net/gpu_list.php"),
+            ("UserBenchmark GPU", "https://gpu.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker GPU", "https://pcpartpicker.com/products/video-card/"),
+        ],
+    },
+    ComponentType.RAM: {
+        "Oficiales": [
+            ("Corsair Memory", "https://www.corsair.com/us/en/Categories/Products/Memory/c/Cor_Products_Memory"),
+            ("Kingston", "https://www.kingston.com/unitedstates/en/memory"),
+            ("G.Skill", "https://www.gskill.com/products/1/Desktop-Memory"),
+            ("Crucial", "https://www.crucial.com/products/memory"),
+        ],
+        "Benchmarks": [
+            ("PassMark RAM", "https://www.memorybenchmark.net/ram_list.php"),
+            ("UserBenchmark RAM", "https://ram.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker RAM", "https://pcpartpicker.com/products/memory/"),
+        ],
+    },
+    ComponentType.MAINBOARD: {
+        "Oficiales": [
+            ("ASUS Motherboards", "https://www.asus.com/motherboards-components/motherboards/"),
+            ("MSI Motherboards", "https://www.msi.com/Motherboards"),
+            ("Gigabyte Motherboards", "https://www.gigabyte.com/Motherboard"),
+            ("ASRock Motherboards", "https://www.asrock.com/mb/index.asp"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker Motherboards", "https://pcpartpicker.com/products/motherboard/"),
+        ],
+    },
+    ComponentType.DISK: {
+        "Oficiales": [
+            ("Samsung SSD", "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/"),
+            ("Western Digital", "https://www.westerndigital.com/products"),
+            ("Seagate", "https://www.seagate.com/products/hard-drives/"),
+        ],
+        "Benchmarks": [
+            ("PassMark Disk", "https://www.harddrivebenchmark.net/hdd_list.php"),
+            ("UserBenchmark SSD", "https://ssd.userbenchmark.com/"),
+        ],
+        "Agregadores": [
+            ("PCPartPicker Storage", "https://pcpartpicker.com/products/internal-hard-drive/"),
+        ],
+    },
+}
 
 # GPU reference URLs from TechPowerUp
 # Format: model_normalized -> techpowerup_url

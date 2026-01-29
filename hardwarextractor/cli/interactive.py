@@ -96,33 +96,14 @@ class InteractiveCLI:
 
         print()
 
-        # Use spinner for progress feedback
-        spinner = Spinner("Analizando entrada...", use_colors=self._renderer._use_colors)
+        # Use spinner with automatic timed phases
+        spinner = Spinner(use_colors=self._renderer._use_colors)
         spinner.start()
 
-        # Map event messages to user-friendly descriptions
-        phase_messages = {
-            "Normalizando": "Normalizando entrada...",
-            "Input normalized": "Clasificando componente...",
-            "Classified as": "Buscando en catálogos...",
-            "Candidate selected": "Extrayendo especificaciones...",
-            "Trying reference": "Consultando fuentes de referencia...",
-            "Scrape complete": "Procesando datos...",
-            "Ready to add": "Finalizando...",
-        }
-
-        # Process events and update spinner
+        # Process events (spinner updates automatically based on time)
         for event in self._handler.analyze_component(input_text):
-            msg = event.message
-            # Filter out noisy debug messages
-            if msg.startswith("[SCRAPE]") or "HTML preview" in msg:
-                continue
-
-            # Update spinner with friendly message
-            for key, friendly_msg in phase_messages.items():
-                if key in msg:
-                    spinner.update(friendly_msg)
-                    break
+            # Just consume events, spinner handles progress display
+            pass
 
         # Stop spinner and show result
         if self._handler._last_component:
@@ -130,6 +111,11 @@ class InteractiveCLI:
             component = self._handler._component_to_dict(self._handler._last_component)
             print()
             print(self._renderer.component_result(component))
+
+            # Show reference sources for this component type
+            comp_type = component.get("type", "")
+            if comp_type:
+                print(self._renderer.reference_sources(comp_type))
 
             # Check for reference warning
             has_ref = any(
@@ -171,19 +157,46 @@ class InteractiveCLI:
                     print()
                     return
 
-                # Select and process
+                # Select and process with spinner
+                print()
+                select_spinner = Spinner(use_colors=self._renderer._use_colors)
+                select_spinner.start()
+
                 for event in self._handler.select_candidate(idx):
-                    print(self._renderer.log(event.message))
+                    # Just consume events, spinner handles progress display
+                    pass
 
                 if self._handler._last_component:
+                    select_spinner.stop("Análisis completado", success=True)
                     component = self._handler._component_to_dict(self._handler._last_component)
                     print()
                     print(self._renderer.component_result(component))
+
+                    # Show reference sources for this component type
+                    comp_type = component.get("type", "")
+                    if comp_type:
+                        print(self._renderer.reference_sources(comp_type))
+
+                    # Check for reference warning
+                    has_ref = any(
+                        s.get("tier") == "REFERENCE"
+                        for s in component.get("specs", [])
+                    )
+                    if has_ref:
+                        print(self._renderer.warning(
+                            "Este componente incluye datos no oficiales (REFERENCE)."
+                        ))
 
                     # Auto-add to ficha
                     result = self._handler.add_to_ficha()
                     if result.get("status") == "success":
                         print(self._renderer.success("Componente añadido a la ficha."))
+                    print()
+                else:
+                    select_spinner.stop("No se pudieron obtener especificaciones", success=False)
+                    print(self._renderer.warning(
+                        "El scraping falló. Intenta con otro componente o verifica la conexión."
+                    ))
                     print()
 
             except (ValueError, IndexError):
