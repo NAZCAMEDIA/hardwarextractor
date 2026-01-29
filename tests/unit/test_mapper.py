@@ -39,7 +39,7 @@ def test_mapper_precedence_and_calculated_cpu():
         input_raw="Intel i7",
         input_normalized="intel i7",
         component_type=ComponentType.CPU,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "Intel", "model": "i7"},
         specs=specs,
     )
@@ -66,7 +66,7 @@ def test_mapper_ram_calculations():
         input_raw="DDR4 3200",
         input_normalized="ddr4 3200",
         component_type=ComponentType.RAM,
-        classification_confidence=0.8,
+        source_confidence=0.8,
         canonical={"brand": "Kingston", "model": "Test"},
         specs=specs,
     )

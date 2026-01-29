@@ -54,7 +54,7 @@ class TestAddComponent:
             input_normalized="intel core i7 12700k",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7-12700K"},
-            classification_confidence=0.95,
+            source_confidence=0.95,
             specs=[
                 SpecField(
                     key="cores",
@@ -75,7 +75,7 @@ class TestAddComponent:
             input_normalized="corsair vengeance lpx 32gb",
             component_type=ComponentType.RAM,
             canonical={"brand": "Corsair", "model": "Vengeance LPX"},
-            classification_confidence=0.90,
+            source_confidence=0.90,
             specs=[
                 SpecField(
                     key="capacity",
@@ -101,7 +101,7 @@ class TestAddComponent:
             input_normalized="corsair vengeance lpx 2",
             component_type=ComponentType.RAM,
             canonical={"brand": "Corsair", "model": "Vengeance LPX 2"},
-            classification_confidence=0.90,
+            source_confidence=0.90,
             specs=[],
         )
         ficha_manager.add_component(ram_component)
@@ -116,7 +116,7 @@ class TestAddComponent:
             input_normalized="amd ryzen 9 5900x",
             component_type=ComponentType.CPU,
             canonical={"brand": "AMD", "model": "Ryzen 9"},
-            classification_confidence=0.95,
+            source_confidence=0.95,
             specs=[],
         )
         ficha_manager.add_component(cpu_component)
@@ -132,7 +132,7 @@ class TestAddComponent:
             input_normalized="samsung 980 pro 1tb",
             component_type=ComponentType.DISK,
             canonical={"brand": "Samsung", "model": "980 Pro"},
-            classification_confidence=0.90,
+            source_confidence=0.90,
             specs=[],
         )
         disk2 = ComponentRecord(
@@ -141,7 +141,7 @@ class TestAddComponent:
             input_normalized="wd black 2tb",
             component_type=ComponentType.DISK,
             canonical={"brand": "WD", "model": "Black"},
-            classification_confidence=0.90,
+            source_confidence=0.90,
             specs=[],
         )
         ficha_manager.add_component(disk1)
@@ -161,7 +161,7 @@ class TestRemoveComponent:
             input_normalized="test component",
             component_type=ComponentType.CPU,
             canonical={"brand": "Test"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
         fm.add_component(component)
@@ -195,7 +195,7 @@ class TestHasReferenceData:
             input_normalized="test component",
             component_type=ComponentType.CPU,
             canonical={},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[
                 SpecField(
                     key="test",
@@ -217,7 +217,7 @@ class TestHasReferenceData:
             input_normalized="test component",
             component_type=ComponentType.CPU,
             canonical={},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[
                 SpecField(
                     key="test",
@@ -244,7 +244,7 @@ class TestGetSpec:
             input_normalized="intel core i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[
                 SpecField(
                     key="cores",
@@ -287,7 +287,7 @@ class TestReset:
             input_normalized="test component",
             component_type=ComponentType.CPU,
             canonical={},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
         fm.add_component(component)
@@ -311,7 +311,7 @@ class TestToDict:
             input_normalized="intel core i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7", "part_number": "BX123"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
         fm.add_component(component)
@@ -359,7 +359,7 @@ class TestGetExportRows:
             input_normalized="intel core i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
         fm.add_component(component)
@@ -388,7 +388,7 @@ class TestExport:
             input_normalized="intel core i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
         fm.add_component(component)

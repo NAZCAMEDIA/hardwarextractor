@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Dict, List
 
-from hardwarextractor.models.schemas import ResolveCandidate
+from hardwarextractor.models.schemas import ResolveCandidate, SourceTier
 
 DATA_DIR = Path(__file__).resolve().parent
 
@@ -25,6 +25,7 @@ def load_resolver_index() -> List[ResolveCandidate]:
                 source_url=item["source_url"],
                 source_name=item["source_name"],
                 spider_name=item["spider_name"],
+                source_tier=SourceTier.CATALOG,
             )
         )
     return candidates
@@ -45,6 +46,7 @@ def group_by_component_type() -> Dict[str, List[ResolveCandidate]]:
                 source_url=item["source_url"],
                 source_name=item["source_name"],
                 spider_name=item["spider_name"],
+                source_tier=SourceTier.CATALOG,
             )
         )
     return grouped

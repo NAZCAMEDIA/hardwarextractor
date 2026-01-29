@@ -44,7 +44,7 @@ Eventos emitidos (contrato UI):
 - `component_id` (uuid)
 - `input_raw`, `input_normalized`
 - `component_type` (CPU|MAINBOARD|RAM|GPU|DISK|GENERAL)
-- `classification_confidence` (0–1)
+- `source_confidence` (0–1)
 - `canonical`: brand/model/part_number/ean_upc
 - `specs[]`: lista de SpecField
 

@@ -29,7 +29,7 @@ def create_mock_ficha_manager():
             input_raw="Corsair CMK32GX4M2B3200C16",
             input_normalized="corsair cmk32gx4m2b3200c16",
             component_type=ComponentType.RAM,
-            classification_confidence=0.95,
+            source_confidence=0.95,
             canonical={"brand": "Corsair", "model": "Vengeance LPX"},
             specs=[
                 SpecField(
@@ -388,7 +388,7 @@ class TestComponentRecord:
             input_raw="Intel Core i7-12700K",
             input_normalized="intel core i7 12700k",
             component_type=ComponentType.CPU,
-            classification_confidence=0.98,
+            source_confidence=0.98,
             canonical={"brand": "Intel", "model": "Core i7-12700K"},
             specs=[
                 SpecField(key="cores", label="Cores", value=12),
@@ -407,7 +407,7 @@ class TestComponentRecord:
             input_raw="Unknown Component",
             input_normalized="unknown component",
             component_type=ComponentType.GENERAL,
-            classification_confidence=0.5,
+            source_confidence=0.5,
             canonical={},
             specs=[],
         )

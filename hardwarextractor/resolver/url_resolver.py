@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional
 from urllib.parse import urlparse
 
-from hardwarextractor.models.schemas import ComponentType, ResolveCandidate, ResolveResult
+from hardwarextractor.models.schemas import ComponentType, ResolveCandidate, ResolveResult, SourceTier
 from hardwarextractor.scrape.spiders import SPIDERS
 from hardwarextractor.utils.allowlist import classify_tier, is_allowlisted
 
@@ -20,16 +20,17 @@ def resolve_from_url(input_raw: str, component_type: ComponentType) -> Optional[
         return None
 
     spider = SPIDERS[spider_name]
+    tier_str = classify_tier(input_raw)
+    source_tier = SourceTier.OFFICIAL if tier_str == "OFFICIAL" else SourceTier.REFERENCE
+
     candidate = ResolveCandidate(
         canonical={"brand": spider.source_name, "model": "URL_INPUT", "part_number": None},
-        score=0.99,
+        score=0.99 if source_tier == SourceTier.OFFICIAL else 0.9,
         source_url=input_raw,
         source_name=spider.source_name,
         spider_name=spider_name,
+        source_tier=source_tier,
     )
-    tier = classify_tier(input_raw)
-    if tier == "REFERENCE":
-        candidate.score = 0.9
     return ResolveResult(exact=True, candidates=[candidate])
 
 

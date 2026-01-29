@@ -24,7 +24,7 @@ def test_aggregate_reference_flag():
         input_raw="RTX",
         input_normalized="rtx",
         component_type=ComponentType.GPU,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "NVIDIA", "model": "RTX"},
         specs=[_spec("gpu.vram_gb", 8, SpecStatus.EXTRACTED_REFERENCE, SourceTier.REFERENCE)],
     )
@@ -38,7 +38,7 @@ def test_aggregate_unknown_fills():
         input_raw="Intel",
         input_normalized="intel",
         component_type=ComponentType.CPU,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "Intel", "model": "i7"},
         specs=[],
     )

@@ -162,7 +162,7 @@ class TestAnalyzeComponent:
             input_normalized="intel i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7"},
-            classification_confidence=0.95,
+            source_confidence=0.95,
             specs=[],
         )
         orch_event = OrchestratorEvent(
@@ -230,7 +230,7 @@ class TestSelectCandidate:
             input_normalized="intel i7",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel", "model": "i7"},
-            classification_confidence=0.95,
+            source_confidence=0.95,
             specs=[],
         )
         orch_event = OrchestratorEvent(
@@ -272,7 +272,7 @@ class TestAddToFicha:
             input_normalized="intel cpu",
             component_type=ComponentType.CPU,
             canonical={"brand": "Intel"},
-            classification_confidence=0.9,
+            source_confidence=0.9,
             specs=[],
         )
 
@@ -314,7 +314,7 @@ class TestExportFicha:
                 input_normalized="intel cpu",
                 component_type=ComponentType.CPU,
                 canonical={"brand": "Intel"},
-                classification_confidence=0.9,
+                source_confidence=0.9,
                 specs=[],
             )
         )
@@ -335,7 +335,7 @@ class TestExportFicha:
                 input_normalized="unknown cpu",
                 component_type=ComponentType.CPU,
                 canonical={},
-                classification_confidence=0.9,
+                source_confidence=0.9,
                 specs=[],
             )
         )
@@ -358,7 +358,7 @@ class TestResetFicha:
                 input_normalized="intel cpu",
                 component_type=ComponentType.CPU,
                 canonical={},
-                classification_confidence=0.9,
+                source_confidence=0.9,
                 specs=[],
             )
         )
@@ -502,7 +502,7 @@ class TestComponentToDict:
                 "model": "i7-12700K",
                 "part_number": "BX123",
             },
-            classification_confidence=0.95,
+            source_confidence=0.95,
             specs=[
                 SpecField(
                     key="cores",
@@ -523,7 +523,7 @@ class TestComponentToDict:
         assert d["type"] == "CPU"
         assert d["brand"] == "Intel"
         assert d["model"] == "i7-12700K"
-        assert d["classification_confidence"] == 0.95
+        assert d["source_confidence"] == 0.95
         assert len(d["specs"]) == 1
         assert d["specs"][0]["key"] == "cores"
 

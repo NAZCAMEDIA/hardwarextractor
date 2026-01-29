@@ -24,9 +24,22 @@ class SpecStatus(str, Enum):
 
 
 class SourceTier(str, Enum):
-    OFFICIAL = "OFFICIAL"
-    REFERENCE = "REFERENCE"
-    NONE = "NONE"
+    OFFICIAL = "OFFICIAL"      # Fabricante oficial (intel.com, amd.com) → 100%
+    REFERENCE = "REFERENCE"    # Comunidad validada (techpowerup, pcpartpicker) → 80%
+    CATALOG = "CATALOG"        # Catálogo embebido (puede estar desactualizado) → 60%
+    NONE = "NONE"              # Fuente desconocida → 0%
+
+
+# Mapeo de SourceTier a porcentaje de confianza
+SOURCE_TIER_CONFIDENCE = {
+    SourceTier.OFFICIAL: 1.0,    # 100%
+    SourceTier.REFERENCE: 0.8,   # 80%
+    SourceTier.CATALOG: 0.6,     # 60%
+    SourceTier.NONE: 0.0,        # 0%
+}
+
+# Fecha de última actualización del catálogo embebido
+CATALOG_LAST_UPDATED = "2026-01-29"
 
 
 @dataclass
@@ -50,8 +63,11 @@ class ComponentRecord:
     input_raw: str
     input_normalized: str
     component_type: ComponentType
-    classification_confidence: float
     canonical: Dict[str, Any]
+    exact_match: bool = False                          # Si encontramos el componente buscado
+    source_tier: SourceTier = SourceTier.NONE          # Tier de la fuente
+    source_confidence: float = 0.0                     # Confianza basada en el tier
+    data_date: Optional[str] = None                    # Fecha de los datos (catálogo o scraping)
     specs: List[SpecField] = field(default_factory=list)
     source_url: Optional[str] = None
     source_name: Optional[str] = None
@@ -96,6 +112,7 @@ class ResolveCandidate:
     source_url: str
     source_name: str
     spider_name: str
+    source_tier: SourceTier = SourceTier.NONE
 
 
 @dataclass

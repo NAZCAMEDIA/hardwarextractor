@@ -11,11 +11,16 @@ from hardwarextractor.core.source_chain import (
     Source,
     SourceChainManager,
 )
+from datetime import date
+
 from hardwarextractor.models.schemas import (
+    CATALOG_LAST_UPDATED,
     ComponentRecord,
     ComponentType,
     OrchestratorEvent,
     ResolveCandidate,
+    SourceTier,
+    SOURCE_TIER_CONFIDENCE,
 )
 from hardwarextractor.normalize.input import fingerprint, normalize_input
 from hardwarextractor.resolver.resolver import resolve_component
@@ -202,13 +207,25 @@ class Orchestrator:
             return events
 
         # Create component record
+        # Confianza basada en el tier de la fuente, no en la clasificación
+        source_confidence = SOURCE_TIER_CONFIDENCE.get(candidate.source_tier, 0.0)
+
+        # Fecha de los datos: catálogo usa fecha fija, scraping usa fecha actual
+        if candidate.source_tier == SourceTier.CATALOG:
+            data_date = CATALOG_LAST_UPDATED
+        else:
+            data_date = date.today().isoformat()
+
         component = ComponentRecord(
             component_id=fingerprint(candidate.source_url),
             input_raw=self.last_input_raw or "",
             input_normalized=self.last_input_normalized or "",
             component_type=component_type,
-            classification_confidence=confidence,
             canonical=candidate.canonical,
+            exact_match=True,  # Si llegamos aquí, encontramos el componente
+            source_tier=candidate.source_tier,
+            source_confidence=source_confidence,
+            data_date=data_date,
             specs=specs,
             source_url=candidate.source_url,
             source_name=candidate.source_name,

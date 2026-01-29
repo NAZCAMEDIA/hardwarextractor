@@ -35,7 +35,7 @@ def test_mapper_mainboard_fields():
         input_raw="B550",
         input_normalized="b550",
         component_type=ComponentType.MAINBOARD,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "ASUS", "model": "B550"},
         specs=specs,
     )
@@ -57,7 +57,7 @@ def test_mapper_gpu_fields():
         input_raw="RTX",
         input_normalized="rtx",
         component_type=ComponentType.GPU,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "NVIDIA", "model": "RTX"},
         specs=specs,
     )
@@ -76,7 +76,7 @@ def test_mapper_disk_fields():
         input_raw="SSD",
         input_normalized="ssd",
         component_type=ComponentType.DISK,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "Samsung", "model": "SSD"},
         specs=specs,
     )
@@ -96,7 +96,7 @@ def test_mapper_general_fields():
         input_raw="Unknown component",
         input_normalized="unknown component",
         component_type=ComponentType.GENERAL,
-        classification_confidence=0.1,
+        source_confidence=0.1,
         canonical={"brand": "Unknown", "model": "Generic"},
         specs=specs,
     )
@@ -116,7 +116,7 @@ def test_mapper_common_identity_fields():
         input_raw="DDR5 RAM",
         input_normalized="ddr5 ram",
         component_type=ComponentType.RAM,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "Corsair", "model": "Vengeance", "part_number": "CMK32GX5M2B5600C40"},
         specs=specs,
     )
@@ -141,7 +141,7 @@ def test_mapper_nvme_disk():
         input_raw="Samsung 990 Pro",
         input_normalized="samsung 990 pro",
         component_type=ComponentType.DISK,
-        classification_confidence=0.9,
+        source_confidence=0.9,
         canonical={"brand": "Samsung", "model": "990 Pro"},
         specs=specs,
     )

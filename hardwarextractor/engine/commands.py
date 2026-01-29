@@ -265,7 +265,7 @@ class CommandHandler:
             "brand": component.canonical.get("brand", ""),
             "model": component.canonical.get("model", ""),
             "part_number": component.canonical.get("part_number", ""),
-            "classification_confidence": component.classification_confidence,
+            "source_confidence": component.source_confidence,
             "specs": [
                 {
                     "key": s.key,
