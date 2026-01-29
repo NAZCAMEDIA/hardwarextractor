@@ -27,12 +27,14 @@ def _extract_model_number(text: str) -> Optional[str]:
     """
     import re
     # Buscar patrones de modelo numérico
+    # IMPORTANTE: Patrones específicos (RTX, RX, Arc) van ANTES del patrón genérico
+    # para evitar que "RTX 3090" extraiga solo "3090" en vez de "rtx3090"
     patterns = [
         r'\bi[3579]-?([0-9]{4,5}[kfxu]?)\b',  # Intel: i7-12700K
-        r'\b([0-9]{4}[xg]?)\b',  # AMD Ryzen: 5900X, GPU: 4090
-        r'\b(rtx\s*[0-9]{4})\b',  # RTX 4090
-        r'\b(rx\s*[0-9]{4})\b',  # RX 7800
+        r'\b(rtx\s*[0-9]{4}(?:\s*ti)?)\b',  # RTX 4090, RTX 3090 Ti
+        r'\b(rx\s*[0-9]{4}(?:\s*xt)?)\b',  # RX 7800, RX 7800 XT
         r'\b(arc\s*a[0-9]{3})\b',  # Arc A770
+        r'\b([0-9]{4}[xg]?)\b',  # AMD Ryzen: 5900X, fallback genérico
     ]
     for pattern in patterns:
         match = re.search(pattern, text.lower())
@@ -41,10 +43,30 @@ def _extract_model_number(text: str) -> Optional[str]:
     return None
 
 
+def _looks_like_part_number(text: str) -> bool:
+    """Detecta si el input parece ser un código de referencia (part number).
+
+    Part numbers típicos: CMK32GX5M2B5600C36, F5-6000J3038F16GX2-TZ5RK, KF556C40BBK2-32
+    Características: alfanuméricos, pueden tener guiones, sin espacios significativos.
+    """
+    import re
+    # Eliminar espacios y verificar si es mayormente alfanumérico con guiones
+    clean = text.replace(" ", "").replace("-", "")
+    if len(clean) < 8:
+        return False
+    # Debe tener mezcla de letras y números
+    has_letters = any(c.isalpha() for c in clean)
+    has_numbers = any(c.isdigit() for c in clean)
+    # No debe tener muchas palabras separadas (eso sería un nombre de producto)
+    word_count = len(text.split())
+    return has_letters and has_numbers and word_count <= 2
+
+
 def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveResult:
     """Resuelve un componente a candidatos del catálogo.
 
     Usa matching exacto, por tokens, y fuzzy matching como fallback.
+    Prioriza match exacto de part_number cuando el input parece ser un código.
     """
     url_result = resolve_from_url(input_raw, component_type)
     if url_result:
@@ -52,6 +74,17 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
 
     normalized = normalize_input(input_raw)
     input_model_number = _extract_model_number(normalized)
+    is_part_number_search = _looks_like_part_number(input_raw)
+
+    # Fase 1: Buscar match EXACTO de part_number (prioridad máxima)
+    if is_part_number_search:
+        for candidate in catalog_by_type(component_type):
+            pn = normalize_input(candidate.canonical.get("part_number", ""))
+            if pn and pn == normalized:
+                # Match exacto 100% - retornar inmediatamente
+                candidate.score = 1.0
+                return ResolveResult(exact=True, candidates=[candidate])
+
     candidates: List[ResolveCandidate] = []
 
     for candidate in catalog_by_type(component_type):
@@ -60,9 +93,15 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
         brand = normalize_input(candidate.canonical.get("brand", ""))
         candidate_model_number = _extract_model_number(model)
 
-        # Match exacto por part_number (máxima prioridad)
+        # Match exacto por part_number contenido
         if pn and pn in normalized:
             candidate.score = 0.98
+            candidates.append(candidate)
+            continue
+
+        # Match inverso: input contenido en part_number
+        if pn and normalized in pn:
+            candidate.score = 0.97
             candidates.append(candidate)
             continue
 
@@ -79,37 +118,52 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
                 candidates.append(candidate)
                 continue
 
-        # Fuzzy match por modelo (similarity > 0.75)
-        if model:
-            similarity = fuzzy_match_score(model, normalized)
-            if similarity > 0.75:
-                candidate.score = similarity * 0.92  # Max 0.92
-                candidates.append(candidate)
-                continue
-
-        # Fuzzy match por part_number (similarity > 0.8)
-        if pn:
+        # Para búsquedas de part_number, usar fuzzy matching más estricto
+        if is_part_number_search and pn:
             similarity = fuzzy_match_score(pn, normalized)
-            if similarity > 0.8:
-                candidate.score = similarity * 0.88  # Max 0.88
+            if similarity > 0.90:  # Más estricto para part numbers
+                candidate.score = similarity * 0.94
                 candidates.append(candidate)
                 continue
+        elif not is_part_number_search:
+            # Fuzzy match por modelo (similarity > 0.75)
+            if model:
+                similarity = fuzzy_match_score(model, normalized)
+                if similarity > 0.75:
+                    candidate.score = similarity * 0.92
+                    candidates.append(candidate)
+                    continue
 
-        # Match por marca + tokens significativos
-        if brand and brand in normalized:
-            tokens_in_model = [
-                t for t in normalized.split()
-                if t in model and len(t) > 3
-            ]
-            if tokens_in_model:
-                candidate.score = 0.55 + (len(tokens_in_model) * 0.1)
-                candidates.append(candidate)
+            # Fuzzy match por part_number (similarity > 0.8)
+            if pn:
+                similarity = fuzzy_match_score(pn, normalized)
+                if similarity > 0.8:
+                    candidate.score = similarity * 0.88
+                    candidates.append(candidate)
+                    continue
+
+            # Match por marca + tokens significativos
+            if brand and brand in normalized:
+                tokens_in_model = [
+                    t for t in normalized.split()
+                    if t in model and len(t) > 3
+                ]
+                if tokens_in_model:
+                    candidate.score = 0.55 + (len(tokens_in_model) * 0.1)
+                    candidates.append(candidate)
 
     # Ordenar por score descendente
     candidates = sorted(candidates, key=lambda c: -c.score)
 
     # Filtrar candidatos con score muy bajo
     candidates = [c for c in candidates if c.score > 0.5]
+
+    # Para búsquedas de part_number, si hay un candidato con score muy alto, priorizar
+    if is_part_number_search and candidates:
+        top_score = candidates[0].score
+        if top_score >= 0.90:
+            # Filtrar solo los que están cerca del top
+            candidates = [c for c in candidates if c.score >= top_score - 0.05]
 
     # Limitar a 5 candidatos máximo
     candidates = candidates[:5]

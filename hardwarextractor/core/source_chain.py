@@ -119,6 +119,7 @@ _CPU_SOURCES = [
         spider_name="techpowerup_cpu_spider",
         domains=("techpowerup.com",),
         priority=10,
+        url_template="https://www.techpowerup.com/cpu-specs/?ajaxsrch={query}",
     ),
     Source(
         name="wikichip",
@@ -129,6 +130,7 @@ _CPU_SOURCES = [
         spider_name="wikichip_reference_spider",
         domains=("wikichip.org",),
         priority=11,
+        url_template="https://en.wikichip.org/w/index.php?search={query}",
     ),
     Source(
         name="cpu_world",
@@ -139,6 +141,7 @@ _CPU_SOURCES = [
         spider_name="cpu_world_spider",
         domains=("cpu-world.com",),
         priority=12,
+        url_template="https://www.cpu-world.com/cgi-bin/search.pl?search={query}",
     ),
     # Reference sources - Benchmarks (Tier 2)
     Source(
@@ -150,6 +153,7 @@ _CPU_SOURCES = [
         spider_name="passmark_cpu_spider",
         domains=("cpubenchmark.net",),
         priority=20,
+        url_template="https://www.cpubenchmark.net/cpu_list.php",
     ),
     Source(
         name="userbenchmark_cpu",
@@ -160,6 +164,7 @@ _CPU_SOURCES = [
         spider_name="userbenchmark_spider",
         domains=("userbenchmark.com",),
         priority=21,
+        url_template="https://cpu.userbenchmark.com/Search?searchTerm={query}",
     ),
     # Reference sources - Reviews (Tier 2)
     Source(
@@ -171,6 +176,7 @@ _CPU_SOURCES = [
         spider_name="tomshardware_spider",
         domains=("tomshardware.com",),
         priority=30,
+        url_template="https://www.tomshardware.com/search?searchTerm={query}",
     ),
     Source(
         name="anandtech_cpu",
@@ -181,6 +187,7 @@ _CPU_SOURCES = [
         spider_name="anandtech_spider",
         domains=("anandtech.com",),
         priority=31,
+        url_template="https://www.anandtech.com/SearchResult?search={query}",
     ),
     Source(
         name="notebookcheck_cpu",
@@ -191,6 +198,7 @@ _CPU_SOURCES = [
         spider_name="notebookcheck_spider",
         domains=("notebookcheck.net",),
         priority=32,
+        url_template="https://www.notebookcheck.net/Mobile-Processors-Benchmark-List.2436.0.html?search={query}",
     ),
     # Reference sources - Retailers/Aggregators (Tier 2)
     Source(
@@ -202,6 +210,7 @@ _CPU_SOURCES = [
         spider_name="pcpartpicker_spider",
         domains=("pcpartpicker.com",),
         priority=40,
+        url_template="https://pcpartpicker.com/search/?q={query}",
     ),
     Source(
         name="newegg_cpu",
@@ -276,6 +285,7 @@ _RAM_SOURCES = [
         spider_name="passmark_ram_spider",
         domains=("memorybenchmark.net",),
         priority=10,
+        url_template="https://www.memorybenchmark.net/ram_list.php",
     ),
     Source(
         name="userbenchmark_ram",
@@ -286,6 +296,7 @@ _RAM_SOURCES = [
         spider_name="userbenchmark_spider",
         domains=("userbenchmark.com",),
         priority=11,
+        url_template="https://ram.userbenchmark.com/Search?searchTerm={query}",
     ),
     # Reference sources - Retailers/Aggregators (Tier 2)
     Source(
@@ -297,6 +308,7 @@ _RAM_SOURCES = [
         spider_name="pcpartpicker_spider",
         domains=("pcpartpicker.com",),
         priority=20,
+        url_template="https://pcpartpicker.com/search/?q={query}",
     ),
     Source(
         name="newegg_ram",
@@ -307,6 +319,7 @@ _RAM_SOURCES = [
         spider_name="newegg_spider",
         domains=("newegg.com",),
         priority=21,
+        url_template="https://www.newegg.com/p/pl?d={query}",
     ),
     Source(
         name="pangoly_ram",
@@ -317,6 +330,7 @@ _RAM_SOURCES = [
         spider_name="pangoly_spider",
         domains=("pangoly.com",),
         priority=22,
+        url_template="https://pangoly.com/en/review/search?q={query}",
     ),
     # Embedded catalog (last resort)
     Source(
@@ -381,6 +395,7 @@ _GPU_SOURCES = [
         spider_name="techpowerup_gpu_spider",
         domains=("techpowerup.com",),
         priority=10,  # Best detailed GPU database
+        url_template="https://www.techpowerup.com/gpu-specs/?ajaxsrch={query}",
     ),
     Source(
         name="gpu_specs",
@@ -391,6 +406,7 @@ _GPU_SOURCES = [
         spider_name="gpu_specs_spider",
         domains=("gpu-specs.com",),
         priority=11,
+        url_template="https://www.gpu-specs.com/search.php?search={query}",
     ),
     # Reference sources - Benchmarks (Tier 2)
     Source(
@@ -402,6 +418,7 @@ _GPU_SOURCES = [
         spider_name="passmark_gpu_spider",
         domains=("videocardbenchmark.net",),
         priority=20,
+        url_template="https://www.videocardbenchmark.net/gpu_list.php",
     ),
     Source(
         name="userbenchmark_gpu",
@@ -412,6 +429,7 @@ _GPU_SOURCES = [
         spider_name="userbenchmark_spider",
         domains=("userbenchmark.com",),
         priority=21,
+        url_template="https://gpu.userbenchmark.com/Search?searchTerm={query}",
     ),
     # Reference sources - Reviews (Tier 2)
     Source(
@@ -423,6 +441,7 @@ _GPU_SOURCES = [
         spider_name="tomshardware_spider",
         domains=("tomshardware.com",),
         priority=30,
+        url_template="https://www.tomshardware.com/search?searchTerm={query}",
     ),
     Source(
         name="notebookcheck_gpu",
@@ -433,6 +452,7 @@ _GPU_SOURCES = [
         spider_name="notebookcheck_spider",
         domains=("notebookcheck.net",),
         priority=31,
+        url_template="https://www.notebookcheck.net/Mobile-Graphics-Cards-Benchmark-List.2963.0.html?search={query}",
     ),
     # Reference sources - Retailers/Aggregators (Tier 2)
     Source(
@@ -444,6 +464,7 @@ _GPU_SOURCES = [
         spider_name="pcpartpicker_spider",
         domains=("pcpartpicker.com",),
         priority=40,
+        url_template="https://pcpartpicker.com/search/?q={query}",
     ),
     Source(
         name="newegg_gpu",
@@ -518,6 +539,7 @@ _MAINBOARD_SOURCES = [
         spider_name="pcpartpicker_spider",
         domains=("pcpartpicker.com",),
         priority=10,
+        url_template="https://pcpartpicker.com/search/?q={query}",
     ),
     Source(
         name="newegg_mb",
@@ -528,6 +550,7 @@ _MAINBOARD_SOURCES = [
         spider_name="newegg_spider",
         domains=("newegg.com",),
         priority=11,
+        url_template="https://www.newegg.com/p/pl?d={query}",
     ),
     Source(
         name="pangoly_mb",
@@ -538,6 +561,7 @@ _MAINBOARD_SOURCES = [
         spider_name="pangoly_spider",
         domains=("pangoly.com",),
         priority=12,
+        url_template="https://pangoly.com/en/review/search?q={query}",
     ),
     # Reference sources - Reviews (Tier 2)
     Source(
@@ -549,6 +573,7 @@ _MAINBOARD_SOURCES = [
         spider_name="tomshardware_spider",
         domains=("tomshardware.com",),
         priority=20,
+        url_template="https://www.tomshardware.com/search?searchTerm={query}",
     ),
     # Embedded catalog (last resort)
     Source(
@@ -603,6 +628,7 @@ _DISK_SOURCES = [
         spider_name="passmark_disk_spider",
         domains=("harddrivebenchmark.net",),
         priority=10,
+        url_template="https://www.harddrivebenchmark.net/hdd_list.php",
     ),
     Source(
         name="userbenchmark_disk",
@@ -613,6 +639,7 @@ _DISK_SOURCES = [
         spider_name="userbenchmark_spider",
         domains=("userbenchmark.com",),
         priority=11,
+        url_template="https://ssd.userbenchmark.com/Search?searchTerm={query}",
     ),
     # Reference sources - Technical (Tier 2)
     Source(
@@ -624,6 +651,7 @@ _DISK_SOURCES = [
         spider_name="techpowerup_reference_spider",
         domains=("techpowerup.com",),
         priority=12,
+        url_template="https://www.techpowerup.com/ssd-specs/?ajaxsrch={query}",
     ),
     # Reference sources - Retailers/Aggregators (Tier 2)
     Source(
@@ -635,6 +663,7 @@ _DISK_SOURCES = [
         spider_name="pcpartpicker_spider",
         domains=("pcpartpicker.com",),
         priority=20,
+        url_template="https://pcpartpicker.com/search/?q={query}",
     ),
     Source(
         name="newegg_disk",
@@ -645,6 +674,7 @@ _DISK_SOURCES = [
         spider_name="newegg_spider",
         domains=("newegg.com",),
         priority=21,
+        url_template="https://www.newegg.com/p/pl?d={query}",
     ),
     # Reference sources - Reviews (Tier 2)
     Source(
@@ -656,6 +686,7 @@ _DISK_SOURCES = [
         spider_name="tomshardware_spider",
         domains=("tomshardware.com",),
         priority=30,
+        url_template="https://www.tomshardware.com/search?searchTerm={query}",
     ),
     # Embedded catalog (last resort)
     Source(

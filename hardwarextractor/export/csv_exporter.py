@@ -18,8 +18,7 @@ CSV_HEADERS = [
     "Campo",
     "Valor",
     "Unidad",
-    "Status",
-    "Tier",
+    "Origen",
     "Fuente",
     "URL",
 ]
@@ -57,8 +56,7 @@ class CSVExporter(BaseExporter):
                     "Campo": row["field"],
                     "Valor": row["value"],
                     "Unidad": row["unit"],
-                    "Status": row["status"],
-                    "Tier": row["tier"],
+                    "Origen": row["origen"],
                     "Fuente": row["source_name"],
                     "URL": self._truncate_url(row["source_url"], 80),
                 })

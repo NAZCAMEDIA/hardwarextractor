@@ -16,6 +16,19 @@ import tkinter as tk
 from pathlib import Path
 from typing import Callable, Optional, Type
 
+# Debug logging for PyInstaller troubleshooting
+_DEBUG_LOG = Path.home() / "Library" / "Logs" / "HardwareXtractor_debug.log"
+
+def _log(msg: str) -> None:
+    """Write debug message to log file."""
+    try:
+        _DEBUG_LOG.parent.mkdir(parents=True, exist_ok=True)
+        with open(_DEBUG_LOG, "a") as f:
+            f.write(f"{msg}\n")
+            f.flush()
+    except:
+        pass
+
 
 class SplashScreen:
     """Lightweight splash screen that appears instantly while app loads.
@@ -193,9 +206,11 @@ class SplashScreen:
 
     def _do_transition(self) -> None:
         """Perform the actual transition."""
+        _log(f"[SPLASH] _do_transition called, main_app={self._main_app is not None}")
         if self._main_app:
-            self.close()
-            self._main_app.deiconify()
+            _log("[SPLASH] Quitting splash mainloop...")
+            # Use quit() to exit mainloop, then handle transition in run_with_loading
+            self.root.quit()
 
     def run_with_loading(self, import_fn: Callable[[], Type[tk.Tk]]) -> None:
         """Run splash with background import loading.
@@ -223,22 +238,43 @@ class SplashScreen:
         # Start import sequence
         self.root.after(50, self._start_imports)
 
-        # Run splash event loop
+        # Run splash event loop (exits when quit() is called in _do_transition)
         self.root.mainloop()
+
+        # After mainloop exits, handle transition to main app
+        _log("[SPLASH] Mainloop exited, completing transition...")
+        if self._main_app:
+            _log("[SPLASH] Destroying splash window...")
+            self.root.destroy()
+            _log("[SPLASH] Showing main app...")
+            self._main_app.deiconify()
+            self._main_app.lift()
+            self._main_app.focus_force()
+            self._main_app.update()
+            _log("[SPLASH] Starting main app mainloop...")
+            self._main_app.mainloop()
+            _log("[SPLASH] Main app mainloop ended")
 
     def _start_imports(self) -> None:
         """Start the background import process."""
+        _log("[SPLASH] _start_imports called")
         self.set_progress(10, "Cargando módulos...")
 
         def do_imports_in_thread() -> None:
             """Only do imports here - NO tkinter widget creation."""
+            _log("[SPLASH] do_imports_in_thread started")
             try:
                 # Import heavy modules and get the app class
                 self._app_class = self._import_fn()
+                _log(f"[SPLASH] import_fn returned: {self._app_class}")
             except Exception as e:
                 self._import_error = str(e)
+                _log(f"[SPLASH] import error: {e}")
+                import traceback
+                _log(traceback.format_exc())
             finally:
                 self._imports_done = True
+                _log("[SPLASH] imports done flag set")
 
         # Start import thread
         thread = threading.Thread(target=do_imports_in_thread, daemon=True)
@@ -267,13 +303,21 @@ class SplashScreen:
 
     def _create_app_in_main_thread(self) -> None:
         """Create the app instance in the main thread (thread-safe)."""
+        _log("[SPLASH] _create_app_in_main_thread called")
         try:
             self.set_progress(90, "Iniciando aplicación...")
+            _log("[SPLASH] Creating app instance...")
             # Create app instance here - in the main thread
             app = self._app_class()
+            _log("[SPLASH] App created, withdrawing...")
             app.withdraw()  # Keep hidden until transition
+            _log("[SPLASH] Transitioning to app...")
             self.transition_to_app(app)
+            _log("[SPLASH] Transition complete")
         except Exception as e:
+            _log(f"[SPLASH] Error creating app: {e}")
+            import traceback
+            _log(traceback.format_exc())
             self.set_progress(0, f"Error: {e}")
             self.root.after(3000, self.close)
 

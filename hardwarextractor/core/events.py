@@ -69,6 +69,12 @@ class EventType(str, Enum):
     FICHA_EXPORTED = "ficha_exported"
     FICHA_RESET = "ficha_reset"
 
+    # Verbose logging
+    LOG_DEBUG = "log_debug"
+    LOG_INFO = "log_info"
+    LOG_WARNING = "log_warning"
+    LOG_ERROR = "log_error"
+
 
 # Progress percentages for each phase
 PHASE_PROGRESS = {
@@ -426,3 +432,15 @@ class Event:
     @classmethod
     def ficha_reset(cls) -> Event:
         return cls(EventType.FICHA_RESET, "Ficha reiniciada")
+
+    @classmethod
+    def log(cls, level: str, message: str) -> Event:
+        """Create a log event for verbose output."""
+        level_map = {
+            "debug": EventType.LOG_DEBUG,
+            "info": EventType.LOG_INFO,
+            "warning": EventType.LOG_WARNING,
+            "error": EventType.LOG_ERROR,
+        }
+        event_type = level_map.get(level.lower(), EventType.LOG_INFO)
+        return cls(event_type, message)

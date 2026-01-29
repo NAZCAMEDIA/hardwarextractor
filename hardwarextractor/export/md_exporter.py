@@ -81,8 +81,8 @@ class MarkdownExporter(BaseExporter):
 
             lines.append(f"## {section_name}")
             lines.append("")
-            lines.append("| Campo | Valor | Status | Tier | Fuente |")
-            lines.append("|-------|-------|--------|------|--------|")
+            lines.append("| Campo | Valor | Origen | Fuente |")
+            lines.append("|-------|-------|--------|--------|")
 
             for row in rows_with_data:
                 field = row["field"]
@@ -90,11 +90,10 @@ class MarkdownExporter(BaseExporter):
                 if row["unit"]:
                     value += f" {row['unit']}"
 
-                status = row["status"]
-                tier = row["tier"]
+                origen = row["origen"]
                 source = self._format_source(row["source_name"], row["source_url"])
 
-                lines.append(f"| {field} | {value} | {status} | {tier} | {source} |")
+                lines.append(f"| {field} | {value} | {origen} | {source} |")
 
             lines.append("")
 

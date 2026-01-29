@@ -11,15 +11,13 @@ if TYPE_CHECKING:
     from hardwarextractor.engine.ficha_manager import FichaManager
 
 
-# Tier colors (ARGB format for openpyxl)
-TIER_COLORS = {
-    "OFFICIAL": "FF90EE90",      # Light green
-    "EXTRACTED_OFFICIAL": "FF90EE90",
-    "REFERENCE": "FFFFE4B5",     # Light orange
-    "EXTRACTED_REFERENCE": "FFFFE4B5",
-    "CALCULATED": "FFADD8E6",    # Light blue
-    "UNKNOWN": "FFD3D3D3",       # Light gray
-    "NA": "FFFFFFFF",            # White
+# Origin colors (ARGB format for openpyxl)
+ORIGIN_COLORS = {
+    "OFICIAL": "FF90EE90",       # Light green
+    "CATÁLOGO": "FF98FB98",      # Pale green
+    "REFERENCIA": "FFFFE4B5",    # Light orange
+    "CALCULADO": "FFADD8E6",     # Light blue
+    "DESCONOCIDO": "FFD3D3D3",   # Light gray
     "": "FFFFFFFF",
 }
 
@@ -92,7 +90,7 @@ class XLSXExporter(BaseExporter):
         start_row += 1
 
         # Headers
-        headers = ["Sección", "Campo", "Valor", "Unidad", "Status", "Tier", "Fuente", "URL"]
+        headers = ["Sección", "Campo", "Valor", "Unidad", "Origen", "Fuente", "URL"]
         for col, header in enumerate(headers, 1):
             cell = ws.cell(row=start_row, column=col, value=header)
             cell.font = header_font
@@ -117,8 +115,7 @@ class XLSXExporter(BaseExporter):
                 row["field"],
                 row["value"],
                 row["unit"],
-                row["status"],
-                row["tier"],
+                row["origen"],
                 row["source_name"],
                 self._truncate_url(row["source_url"], 60),
             ]
@@ -127,10 +124,10 @@ class XLSXExporter(BaseExporter):
                 cell = ws.cell(row=data_row, column=col, value=value)
                 cell.border = border
 
-                # Color the Tier column
-                if col == 6:  # Tier column
-                    tier_value = str(value) if value else ""
-                    color = TIER_COLORS.get(tier_value, "FFFFFFFF")
+                # Color the Origen column
+                if col == 5:  # Origen column
+                    origen_value = str(value) if value else ""
+                    color = ORIGIN_COLORS.get(origen_value, "FFFFFFFF")
                     cell.fill = PatternFill("solid", fgColor=color[2:])  # Remove FF prefix
 
         # Adjust column widths
@@ -139,10 +136,9 @@ class XLSXExporter(BaseExporter):
             "B": 25,  # Campo
             "C": 20,  # Valor
             "D": 10,  # Unidad
-            "E": 18,  # Status
-            "F": 12,  # Tier
-            "G": 15,  # Fuente
-            "H": 50,  # URL
+            "E": 15,  # Origen
+            "F": 15,  # Fuente
+            "G": 50,  # URL
         }
         for col, width in column_widths.items():
             ws.column_dimensions[col].width = width

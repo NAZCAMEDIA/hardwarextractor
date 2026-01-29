@@ -56,18 +56,56 @@ LABEL_MAP_RAM = {
 }
 
 LABEL_MAP_GPU = {
+    # PCI Express
     "bus interface": "gpu.pcie.version",
     "pci express gen": "gpu.pcie.version",
+    "pci express gen 4": "gpu.pcie.version",
     "pcie lanes": "gpu.pcie.lanes",
+    # Memory
     "memory size": "gpu.vram_gb",
     "standard memory config": "gpu.vram_gb",
     "memory bus": "gpu.mem.bus_width_bits",
     "memory interface width": "gpu.mem.bus_width_bits",
     "memory speed": "gpu.mem.speed_gbps",
     "memory bandwidth": "gpu.mem.bandwidth_gbps",
-    "base clock ghz": "gpu.base_clock_mhz",
-    "boost clock": "gpu.boost_clock_mhz",
+    "memory type": "gpu.vram_type",
     "vram": "gpu.vram_gb",
+    # Clocks
+    "base clock ghz": "gpu.base_clock_ghz",
+    "boost clock": "gpu.boost_clock_ghz",
+    "boost clock ghz": "gpu.boost_clock_ghz",
+    # NVIDIA specific labels (from nvidia.com tables)
+    "nvidia cuda cores": "gpu.cuda_cores",
+    "nvidia cuda cores": "gpu.cuda_cores",
+    "cuda cores": "gpu.cuda_cores",
+    "shader cores": "gpu.shader_tflops",
+    "ray tracing cores": "gpu.rt_tflops",
+    "tensor cores ai": "gpu.tensor_tops",
+    "tensor cores": "gpu.tensor_cores",
+    "rt cores": "gpu.rt_cores",
+    # Architecture
+    "architecture": "gpu.architecture",
+    "nvidia architecture": "gpu.architecture",
+    "gpu engine specs": "gpu.engine_specs",
+    # Power
+    "total graphics power w": "gpu.tdp_w",
+    "average gaming power w": "gpu.gaming_power_w",
+    "required system power w": "gpu.recommended_psu_w",
+    "supplementary power connectors": "gpu.power_connectors",
+    "maximum gpu temperature in c": "gpu.max_temp_c",
+    # Display
+    "standard display connectors": "gpu.display_outputs",
+    "multi monitor": "gpu.max_monitors",
+    "hdcp": "gpu.hdcp_version",
+    # Dimensions
+    "length": "gpu.length_mm",
+    "width": "gpu.width_mm",
+    "slots": "gpu.slots",
+    # Features
+    "ray tracing": "gpu.ray_tracing",
+    "nvidia dlss": "gpu.dlss",
+    "directx": "gpu.directx_version",
+    "cuda capability": "gpu.cuda_capability",
 }
 
 LABEL_MAP_MAINBOARD = {

@@ -30,6 +30,50 @@ class SourceTier(str, Enum):
     NONE = "NONE"              # Fuente desconocida → 0%
 
 
+class DataOrigin(str, Enum):
+    """Origen simplificado del dato - unifica Status y Tier para display."""
+    OFICIAL = "OFICIAL"        # Scraping del sitio del fabricante
+    CATALOGO = "CATÁLOGO"      # Catálogo interno + estándares JEDEC
+    REFERENCIA = "REFERENCIA"  # Sitios de referencia (passmark, etc.)
+    CALCULADO = "CALCULADO"    # Calculado por la app
+    DESCONOCIDO = "DESCONOCIDO"  # Sin datos
+
+
+def get_data_origin(status: SpecStatus, tier: SourceTier) -> DataOrigin:
+    """Deriva el origen simplificado a partir de status y tier.
+
+    Args:
+        status: El SpecStatus del campo
+        tier: El SourceTier del campo
+
+    Returns:
+        DataOrigin simplificado para display
+    """
+    # Calculado tiene prioridad
+    if status == SpecStatus.CALCULATED:
+        return DataOrigin.CALCULADO
+
+    # Desconocido
+    if status == SpecStatus.UNKNOWN or status == SpecStatus.NA:
+        return DataOrigin.DESCONOCIDO
+
+    # Basado en tier
+    if tier == SourceTier.OFFICIAL:
+        return DataOrigin.OFICIAL
+    elif tier == SourceTier.CATALOG:
+        return DataOrigin.CATALOGO
+    elif tier == SourceTier.REFERENCE:
+        return DataOrigin.REFERENCIA
+
+    # Fallback basado en status
+    if status == SpecStatus.EXTRACTED_OFFICIAL:
+        return DataOrigin.OFICIAL
+    elif status == SpecStatus.EXTRACTED_REFERENCE:
+        return DataOrigin.REFERENCIA
+
+    return DataOrigin.DESCONOCIDO
+
+
 # Mapeo de SourceTier a porcentaje de confianza
 SOURCE_TIER_CONFIDENCE = {
     SourceTier.OFFICIAL: 1.0,    # 100%

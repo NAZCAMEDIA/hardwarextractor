@@ -3,9 +3,45 @@
 from __future__ import annotations
 
 import asyncio
+import os
+import sys
+from pathlib import Path
 from typing import Optional
 
 from hardwarextractor.scrape.engines.base import BaseFetchEngine, FetchResult
+
+
+def _setup_playwright_for_pyinstaller() -> None:
+    """Configure Playwright paths when running from PyInstaller bundle.
+
+    Browsers are stored in ~/Library/Caches/ms-playwright/ (standard location).
+    The driver is bundled with the app.
+    """
+    # Always set browser path to system cache (standard Playwright location)
+    browsers_path = Path.home() / "Library" / "Caches" / "ms-playwright"
+    if browsers_path.exists():
+        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(browsers_path)
+
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        meipass = Path(sys._MEIPASS)
+
+        # Check for bundled driver
+        driver_path = meipass / "playwright" / "driver"
+        if driver_path.exists():
+            os.environ["PLAYWRIGHT_DRIVER_PATH"] = str(driver_path)
+
+
+def check_chromium_installed() -> bool:
+    """Check if Chromium is installed for Playwright."""
+    browsers_path = Path.home() / "Library" / "Caches" / "ms-playwright"
+    if not browsers_path.exists():
+        return False
+    chromium_dirs = list(browsers_path.glob("chromium-*"))
+    return len(chromium_dirs) > 0
+
+
+# Configure Playwright paths at import time
+_setup_playwright_for_pyinstaller()
 
 
 # Realistic user agent
@@ -62,6 +98,12 @@ class PlaywrightEngine(BaseFetchEngine):
             raise ImportError(
                 "Playwright is not installed. Install with: "
                 "pip install playwright && playwright install chromium"
+            )
+
+        # Check if Chromium is available
+        if not check_chromium_installed():
+            raise ImportError(
+                "Chromium browser not found. Please run: playwright install chromium"
             )
 
         self._playwright = sync_playwright().start()

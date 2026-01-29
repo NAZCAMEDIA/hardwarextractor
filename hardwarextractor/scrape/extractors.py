@@ -59,14 +59,32 @@ def parse_labeled_fields(
 
 
 def _extract_label_value_pairs(selector: Selector) -> Iterable[Tuple[str, str]]:
-    # Table rows
+    # Table rows - handle both 2-column and 3-column tables (like NVIDIA)
     for row in selector.css("table tr"):
-        label = row.css("th::text").get() or row.css("td:nth-child(1)::text").get()
-        value = row.css("td:nth-child(2)::text").get()
-        if not value:
-            value = row.css("td:nth-child(2) ::text").get()
-        if label and value:
-            yield label.strip(), value.strip()
+        cells = row.css("td, th")
+        if len(cells) >= 2:
+            # Try standard 2-column: th/td[1] = label, td[2] = value
+            label = row.css("th::text").get() or row.css("td:nth-child(1)::text").get()
+            value = row.css("td:nth-child(2)::text").get()
+            if not value:
+                value = row.css("td:nth-child(2) ::text").get()
+            if label and value:
+                yield label.strip(), value.strip()
+
+            # Also try 3-column format: td[2] = label, td[3] = value (NVIDIA style)
+            if len(cells) >= 3:
+                label_3col = row.css("td:nth-child(2)::text").get()
+                if not label_3col:
+                    label_3col = row.css("td:nth-child(2)").xpath("string()").get()
+                value_3col = row.css("td:nth-child(3)::text").get()
+                if not value_3col:
+                    value_3col = row.css("td:nth-child(3)").xpath("string()").get()
+                if label_3col and value_3col:
+                    label_3col = label_3col.strip()
+                    value_3col = value_3col.strip()
+                    # Skip if it's the same as what we already yielded
+                    if label_3col and value_3col and label_3col != label:
+                        yield label_3col, value_3col
 
     # Definition lists
     for node in selector.css("dl"):
@@ -190,7 +208,7 @@ def _field_from_value(
     unit_normalized = unit
     value_normalized = value_coerced
     if isinstance(value_coerced, str):
-        pcie_parsed = _parse_pcie_value(key, value_coerced)
+        pcie_parsed = _parse_pcie_value(key, value_coerced, label)
         if pcie_parsed is not None:
             value_normalized, unit_normalized = pcie_parsed
         lanes_parsed = _parse_lanes_value(key, value_coerced)
@@ -265,14 +283,25 @@ def _extract_numeric_with_unit(raw: str):
     return value, unit
 
 
-def _parse_pcie_value(key: str, raw: str):
+def _parse_pcie_value(key: str, raw: str, label: str = ""):
     if "pcie" not in key and "pci" not in key:
         return None
-    text = raw.lower()
-    version_match = re.search(r"(?:pcie|pci express)\s*([0-9]+(?:\.[0-9]+)?)", text)
+
+    # Combine raw value and label for searching (NVIDIA puts version in label like "PCI Express Gen 4")
+    text = f"{raw} {label}".lower()
+
+    # Look for version number (Gen 4, Gen 5, PCIe 4.0, etc.)
+    version_match = re.search(r"(?:pcie|pci express|gen)\s*([0-9]+(?:\.[0-9]+)?)", text)
     lanes_match = re.search(r"x\s*([0-9]+)", text)
-    if "version" in key and version_match:
-        return (float(version_match.group(1)) if "." in version_match.group(1) else version_match.group(1), None)
+
+    if "version" in key:
+        if version_match:
+            ver = version_match.group(1)
+            return (float(ver) if "." in ver else int(ver), None)
+        # Try to parse raw value directly if it's a version number (3, 4, 5, 3.0, 4.0, 5.0)
+        raw_clean = raw.strip()
+        if re.match(r"^[3-5](?:\.[0-9])?$", raw_clean):
+            return (float(raw_clean) if "." in raw_clean else int(raw_clean), None)
     if "lanes" in key and lanes_match:
         return (int(lanes_match.group(1)), None)
     return None

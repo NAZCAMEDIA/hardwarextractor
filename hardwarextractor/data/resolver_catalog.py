@@ -1,12 +1,24 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Dict, List
 
 from hardwarextractor.models.schemas import ResolveCandidate, SourceTier
 
-DATA_DIR = Path(__file__).resolve().parent
+
+def _get_data_dir() -> Path:
+    """Get data directory, compatible with PyInstaller bundles."""
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        # Running in PyInstaller bundle
+        return Path(sys._MEIPASS) / "hardwarextractor" / "data"
+    else:
+        # Running in normal Python environment
+        return Path(__file__).resolve().parent
+
+
+DATA_DIR = _get_data_dir()
 
 
 def load_resolver_index() -> List[ResolveCandidate]:

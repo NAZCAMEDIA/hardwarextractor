@@ -25,9 +25,10 @@ from hardwarextractor.models.schemas import (
 from hardwarextractor.normalize.input import fingerprint, normalize_input
 from hardwarextractor.resolver.resolver import resolve_component
 from hardwarextractor.app.config import AppConfig, DEFAULT_CONFIG
-from hardwarextractor.scrape.service import scrape_specs
+from hardwarextractor.scrape.service import scrape_specs, set_log_callback
 from hardwarextractor.scrape.engines.detector import AntiBotDetector
 from hardwarextractor.validate.validator import validate_specs
+from hardwarextractor.data.reference_urls import get_reference_url
 
 
 # Type for event callback
@@ -60,6 +61,15 @@ class Orchestrator:
         self._event_callback = event_callback
         self._source_chain_manager = SourceChainManager()
         self._antibot_detector = AntiBotDetector()
+
+        # Configurar callback para logs del servicio de scrape
+        set_log_callback(self._on_scrape_log)
+
+    def _on_scrape_log(self, level: str, message: str) -> None:
+        """Handle log messages from scrape service."""
+        if self._event_callback:
+            # Convertir logs de scrape en eventos
+            self._emit(Event.log(level, message))
 
     def set_event_callback(self, callback: EventCallback) -> None:
         """Set the callback for detailed events."""
@@ -174,6 +184,11 @@ class Orchestrator:
         # Determine if Playwright should be used
         use_playwright = self.should_use_playwright(candidate)
 
+        specs = []
+        actual_source_tier = candidate.source_tier
+        actual_source_url = candidate.source_url
+        actual_source_name = candidate.source_name
+
         try:
             specs = self.scrape_fn(
                 candidate.spider_name,
@@ -189,7 +204,6 @@ class Orchestrator:
 
             # Emit success event
             self._emit(Event.source_success(source_name, len(specs)))
-            events.append(OrchestratorEvent(status="SCRAPE", progress=60, log="Scrape complete"))
 
         except Exception as exc:  # noqa: BLE001
             error_msg = str(exc)
@@ -197,38 +211,132 @@ class Orchestrator:
             # Check if it's an anti-bot error
             if self._antibot_detector.is_antibot_error(error_msg):
                 self._emit(Event.source_antibot(source_name, "Detected anti-bot protection"))
-                # Mark domain as blocked for future requests
                 self.mark_domain_blocked(candidate.source_url)
             else:
                 self._emit(Event.source_failed(source_name, error_msg))
 
-            self._emit(Event.error_recoverable(error_msg))
-            events.append(OrchestratorEvent(status="ERROR_RECOVERABLE", progress=100, log=error_msg))
-            return events
+        # Si no se obtuvieron specs, intentar fallback a sitios de referencia
+        if not specs:
+            self._emit(Event.error_recoverable(f"No specs from {source_name}, trying fallback sources..."))
+            events.append(OrchestratorEvent(status="FALLBACK", progress=50, log="Trying reference sources..."))
+
+            model_name = candidate.canonical.get("model", "")
+            component_type_str = component_type.value if hasattr(component_type, 'value') else str(component_type)
+
+            # PASO 1: Intentar URL de referencia directa conocida (TechPowerUp)
+            reference_url = get_reference_url(component_type_str, model_name)
+            if reference_url:
+                self._emit(Event.source_trying("techpowerup_direct", reference_url))
+                try:
+                    # Determinar el spider correcto
+                    spider_name = "techpowerup_gpu_spider" if component_type_str == "GPU" else "techpowerup_cpu_spider"
+
+                    specs = self.scrape_fn(
+                        spider_name,
+                        reference_url,
+                        cache=self.cache,
+                        enable_tier2=True,
+                        user_agent=self.config.user_agent,
+                        retries=2,
+                        throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
+                        use_playwright_fallback=True,
+                    )
+
+                    if specs:
+                        self._emit(Event.source_success("TechPowerUp", len(specs)))
+                        actual_source_tier = SourceTier.REFERENCE
+                        actual_source_url = reference_url
+                        actual_source_name = "TechPowerUp"
+
+                except Exception as e:  # noqa: BLE001
+                    self._emit(Event.source_failed("TechPowerUp", str(e)))
+
+            # PASO 2: Si aún no hay specs, intentar el chain de fallback normal
+            if not specs:
+                fallback_chain = self._source_chain_manager.get_chain(component_type)
+
+                for fallback_source in fallback_chain:
+                    # Saltar si es el mismo source o si es CATALOG
+                    if fallback_source.spider_name == candidate.spider_name:
+                        continue
+                    if fallback_source.source_type.value == "CATALOG":
+                        continue
+
+                    self._emit(Event.source_trying(fallback_source.name, f"Fallback: {fallback_source.spider_name}"))
+
+                    try:
+                        # Construir URL de búsqueda para el fallback
+                        brand = candidate.canonical.get("brand", "")
+                        search_term = f"{brand} {model_name}".strip()
+
+                        # Usar URL template si existe, sino skip
+                        fallback_url = fallback_source.url_template.format(query=search_term) if fallback_source.url_template else None
+
+                        if not fallback_url:
+                            continue
+
+                        specs = self.scrape_fn(
+                            fallback_source.spider_name,
+                            fallback_url,
+                            cache=self.cache,
+                            enable_tier2=True,
+                            user_agent=self.config.user_agent,
+                            retries=1,
+                            throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
+                            use_playwright_fallback=True,
+                        )
+
+                        if specs:
+                            self._emit(Event.source_success(fallback_source.name, len(specs)))
+                            actual_source_tier = SourceTier.REFERENCE
+                            actual_source_url = fallback_url
+                            actual_source_name = fallback_source.name
+                            break
+
+                    except Exception:  # noqa: BLE001
+                        self._emit(Event.source_failed(fallback_source.name, "Fallback failed"))
+                        continue
+
+        if not specs:
+            # PASO FINAL: Usar datos del catálogo como último recurso
+            self._emit(Event.source_trying("catalog_fallback", "Using catalog data as fallback"))
+            catalog_specs = self._build_specs_from_catalog(candidate, component_type)
+            if catalog_specs:
+                specs = catalog_specs
+                actual_source_tier = SourceTier.CATALOG
+                actual_source_url = candidate.source_url
+                actual_source_name = "Catálogo interno"
+                self._emit(Event.source_success("catalog_fallback", len(specs)))
+            else:
+                self._emit(Event.error_recoverable("No specs found from any source"))
+                events.append(OrchestratorEvent(status="ERROR_RECOVERABLE", progress=100, log="No specs found"))
+                return events
+
+        events.append(OrchestratorEvent(status="SCRAPE", progress=60, log=f"Scrape complete ({len(specs)} specs)"))
 
         # Create component record
-        # Confianza basada en el tier de la fuente, no en la clasificación
-        source_confidence = SOURCE_TIER_CONFIDENCE.get(candidate.source_tier, 0.0)
+        # Confianza basada en el tier de la fuente real (puede ser fallback)
+        source_confidence = SOURCE_TIER_CONFIDENCE.get(actual_source_tier, 0.0)
 
         # Fecha de los datos: catálogo usa fecha fija, scraping usa fecha actual
-        if candidate.source_tier == SourceTier.CATALOG:
+        if actual_source_tier == SourceTier.CATALOG:
             data_date = CATALOG_LAST_UPDATED
         else:
             data_date = date.today().isoformat()
 
         component = ComponentRecord(
-            component_id=fingerprint(candidate.source_url),
+            component_id=fingerprint(actual_source_url),
             input_raw=self.last_input_raw or "",
             input_normalized=self.last_input_normalized or "",
             component_type=component_type,
             canonical=candidate.canonical,
             exact_match=True,  # Si llegamos aquí, encontramos el componente
-            source_tier=candidate.source_tier,
+            source_tier=actual_source_tier,
             source_confidence=source_confidence,
             data_date=data_date,
             specs=specs,
-            source_url=candidate.source_url,
-            source_name=candidate.source_name,
+            source_url=actual_source_url,
+            source_name=actual_source_name,
         )
 
         # Handle stacking vs replacement
@@ -296,3 +404,128 @@ class Orchestrator:
             url: The URL whose domain should be blocked
         """
         self._source_chain_manager.mark_domain_blocked(url)
+
+    def _build_specs_from_catalog(
+        self,
+        candidate: ResolveCandidate,
+        component_type: ComponentType,
+    ) -> List:
+        """Build basic specs from catalog data when scraping fails.
+
+        Args:
+            candidate: The resolved candidate with catalog data
+            component_type: The component type
+
+        Returns:
+            List of SpecField objects extracted from catalog canonical data
+        """
+        from hardwarextractor.models.schemas import SpecField, SpecStatus, SourceTier
+        import re
+
+        specs = []
+        canonical = candidate.canonical
+        source_url = candidate.source_url
+
+        def make_spec(key: str, label: str, value: str, unit: str = None) -> SpecField:
+            return SpecField(
+                key=key,
+                label=label,
+                value=value,
+                unit=unit,
+                status=SpecStatus.EXTRACTED_OFFICIAL,
+                source_tier=SourceTier.CATALOG,
+                source_name="Catálogo interno",
+                source_url=source_url,
+                confidence=0.6,
+            )
+
+        # Extraer specs básicas del canonical
+        brand = canonical.get("brand", "")
+        model = canonical.get("model", "")
+        part_number = canonical.get("part_number", "")
+
+        if brand:
+            specs.append(make_spec("brand", "Fabricante", brand))
+        if model:
+            specs.append(make_spec("model", "Modelo", model))
+        if part_number:
+            specs.append(make_spec("part_number", "Número de parte", part_number))
+
+        # Parsear información adicional del modelo para RAM
+        if component_type == ComponentType.RAM and model:
+            # Extraer capacidad (ej: "32GB", "16GB")
+            capacity_match = re.search(r'(\d+)\s*GB', model, re.IGNORECASE)
+            if capacity_match:
+                specs.append(make_spec("ram.capacity_gb", "Capacidad", capacity_match.group(1), "GB"))
+
+            # Extraer velocidad (ej: "6000MHz", "3200MHz") - mapper espera valor numérico en MT/s
+            speed_match = re.search(r'(\d{4,5})\s*MHz', model, re.IGNORECASE)
+            if speed_match:
+                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(speed_match.group(1)), "MT/s"))
+
+            # Extraer tipo DDR (ej: "DDR5", "DDR4")
+            ddr_match = re.search(r'(DDR[45])', model, re.IGNORECASE)
+            if ddr_match:
+                specs.append(make_spec("ram.type", "Tipo", ddr_match.group(1).upper()))
+
+        # Parsear información adicional del part_number para RAM Corsair
+        if component_type == ComponentType.RAM and part_number:
+            pn_upper = part_number.upper()
+
+            # Capacidad del part number (CMK32G... = 32GB)
+            cap_match = re.search(r'CMK(\d+)G', pn_upper)
+            if cap_match and not any(s.key == "ram.capacity_gb" for s in specs):
+                specs.append(make_spec("ram.capacity_gb", "Capacidad", cap_match.group(1), "GB"))
+
+            # DDR version (X4 = DDR4, X5 = DDR5)
+            if 'X5' in pn_upper and not any(s.key == "ram.type" for s in specs):
+                specs.append(make_spec("ram.type", "Tipo", "DDR5"))
+            elif 'X4' in pn_upper and not any(s.key == "ram.type" for s in specs):
+                specs.append(make_spec("ram.type", "Tipo", "DDR4"))
+
+            # Módulos (M2 = 2 módulos)
+            mod_match = re.search(r'M(\d)', pn_upper)
+            if mod_match:
+                specs.append(make_spec("ram.modules", "Módulos", mod_match.group(1)))
+
+            # Velocidad del part number (B6000 = 6000MT/s) - valor numérico
+            speed_pn_match = re.search(r'[AB](\d{4,5})', pn_upper)
+            if speed_pn_match and not any(s.key == "ram.speed_effective_mt_s" for s in specs):
+                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(speed_pn_match.group(1)), "MT/s"))
+
+            # CAS Latency (C36 = 36) - mapper espera valor numérico
+            cl_match = re.search(r'C(\d{2})', pn_upper)
+            if cl_match:
+                specs.append(make_spec("ram.latency_cl", "Latencia", int(cl_match.group(1))))
+
+        # JEDEC Standards para RAM (voltaje y pines estándar por tipo DDR)
+        # Fuente: JEDEC JESD79 series specifications
+        # https://www.jedec.org/standards-documents/docs/jesd-79-5b (DDR5)
+        # https://www.jedec.org/standards-documents/docs/jesd-79-4c (DDR4)
+        if component_type == ComponentType.RAM:
+            JEDEC_STANDARDS = {
+                "DDR5": {"voltage": 1.1, "pins": 288},   # JESD79-5: 1.1V, 288-pin DIMM
+                "DDR4": {"voltage": 1.2, "pins": 288},   # JESD79-4: 1.2V, 288-pin DIMM
+                "DDR3": {"voltage": 1.5, "pins": 240},   # JESD79-3: 1.5V, 240-pin DIMM
+                "DDR2": {"voltage": 1.8, "pins": 240},   # JESD79-2: 1.8V, 240-pin DIMM
+            }
+
+            # Buscar el tipo DDR detectado
+            ddr_type = None
+            for s in specs:
+                if s.key == "ram.type" and s.value in JEDEC_STANDARDS:
+                    ddr_type = s.value
+                    break
+
+            if ddr_type:
+                jedec = JEDEC_STANDARDS[ddr_type]
+
+                # Agregar voltaje estándar si no existe
+                if not any(s.key == "ram.voltage_v" for s in specs):
+                    specs.append(make_spec("ram.voltage_v", "Voltaje", jedec["voltage"], "V"))
+
+                # Agregar número de pines estándar si no existe
+                if not any(s.key == "ram.pins" for s in specs):
+                    specs.append(make_spec("ram.pins", "Número de pines", jedec["pins"]))
+
+        return specs if len(specs) > 3 else []  # Solo retornar si tenemos datos útiles

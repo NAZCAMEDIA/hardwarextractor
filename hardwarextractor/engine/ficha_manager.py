@@ -10,7 +10,9 @@ from uuid import uuid4
 
 from hardwarextractor.models.schemas import (
     ComponentRecord,
+    DataOrigin,
     FichaAggregated,
+    get_data_origin,
     SourceTier,
     SpecField,
     SpecStatus,
@@ -181,20 +183,47 @@ class FichaManager:
     def get_export_rows(self) -> list[dict[str, Any]]:
         """Get rows for CSV/XLSX export.
 
+        Only exports sections relevant to the component types present.
+
         Returns:
             List of dictionaries with export data
         """
+        # Mapeo de tipo de componente a secciones relevantes
+        COMPONENT_SECTIONS = {
+            "CPU": ["Identificación", "Procesador"],
+            "MAINBOARD": ["Identificación", "Placa base"],
+            "RAM": ["Identificación", "RAM"],
+            "GPU": ["Identificación", "Gráfica"],
+            "DISK": ["Identificación", "Disco duro"],
+            "GENERAL": ["Identificación", "Datos generales"],
+        }
+
+        # Determinar secciones relevantes
+        relevant_sections = set()
+        for component in self._components:
+            comp_type = component.component_type.value
+            sections = COMPONENT_SECTIONS.get(comp_type, [])
+            relevant_sections.update(sections)
+
         ficha = self.get_aggregated()
         rows = []
 
         for tf in ficha.fields_by_template:
+            # Solo exportar secciones relevantes
+            if tf.section not in relevant_sections:
+                continue
+
+            # Obtener origen simplificado
+            status = tf.status if tf.status else SpecStatus.UNKNOWN
+            tier = tf.source_tier if tf.source_tier else SourceTier.NONE
+            origin = get_data_origin(status, tier)
+
             rows.append({
                 "section": tf.section,
                 "field": tf.field,
                 "value": tf.value if tf.value is not None else "",
                 "unit": tf.unit or "",
-                "status": tf.status.value if tf.status else "NA",
-                "tier": tf.source_tier.value if tf.source_tier else "",
+                "origen": origin.value,  # Origen simplificado
                 "source_name": tf.source_name or "",
                 "source_url": tf.source_url or "",
             })
