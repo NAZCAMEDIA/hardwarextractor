@@ -147,7 +147,9 @@ Binarios precompilados disponibles en:
 
 ## Licencia
 
-Propietario. Ver `LICENSE`.
+MIT License - Copyright (c) 2026 [NAZCAMEDIA](https://www.nazcamedia.net)
+
+Ver `LICENSE` para más detalles.
 
 ## Changelog
 
