@@ -63,7 +63,6 @@ class InteractiveCLI:
         """Show and handle the main menu."""
         menu = self._renderer.menu("MENÚ PRINCIPAL", [
             "Analizar componente",
-            "Ver ficha agregada",
             "Exportar ficha",
             "Reset ficha",
             "Salir",
@@ -75,12 +74,10 @@ class InteractiveCLI:
         if choice == "1":
             self._analyze_component()
         elif choice == "2":
-            self._show_ficha()
-        elif choice == "3":
             self._export_ficha()
-        elif choice == "4":
+        elif choice == "3":
             self._reset_ficha()
-        elif choice == "5":
+        elif choice == "4":
             self._running = False
         else:
             print(self._renderer.error("Opción no válida"))
