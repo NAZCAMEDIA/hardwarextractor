@@ -37,8 +37,27 @@ OFFICIAL_DOMAINS = {
 }
 
 REFERENCE_DOMAINS = {
-    "techpowerup.com",
-    "wikichip.org",
+    # Databases técnicas
+    "techpowerup.com",      # GPU/CPU specs database
+    "wikichip.org",         # CPU/semiconductor wiki
+    "cpu-world.com",        # CPU specifications database
+    "gpu-specs.com",        # GPU specifications database
+    # Benchmarks con specs
+    "cpubenchmark.net",     # PassMark CPU database
+    "videocardbenchmark.net",  # PassMark GPU database
+    "memorybenchmark.net",  # PassMark RAM database
+    "harddrivebenchmark.net",  # PassMark storage database
+    "userbenchmark.com",    # Community benchmarks
+    # Reviews técnicos
+    "tomshardware.com",     # Hardware reviews/specs
+    "anandtech.com",        # Technical reviews
+    "notebookcheck.net",    # Mobile GPU/CPU specs
+    # Tiendas con specs detallados
+    "pcpartpicker.com",     # Component database
+    "newegg.com",           # Retailer with detailed specs
+    # Agregadores
+    "pangoly.com",          # Component aggregator
+    "nanoreviews.net",      # Spec comparisons
 }
 
 DISCOVERY_DOMAINS = {

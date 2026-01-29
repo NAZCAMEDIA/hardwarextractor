@@ -88,6 +88,7 @@ class SpecResult:
 
 # Source definitions for each component type
 _CPU_SOURCES = [
+    # Official sources (Tier 1)
     Source(
         name="intel_ark",
         source_type=SourceType.SCRAPE,
@@ -108,6 +109,17 @@ _CPU_SOURCES = [
         domains=("amd.com",),
         priority=2,
     ),
+    # Reference sources - Technical databases (Tier 2)
+    Source(
+        name="techpowerup_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="techpowerup",
+        engine=FetchEngine.REQUESTS,
+        spider_name="techpowerup_cpu_spider",
+        domains=("techpowerup.com",),
+        priority=10,
+    ),
     Source(
         name="wikichip",
         source_type=SourceType.SCRAPE,
@@ -116,18 +128,92 @@ _CPU_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="wikichip_reference_spider",
         domains=("wikichip.org",),
-        priority=3,
+        priority=11,
     ),
     Source(
-        name="techpowerup_cpu",
+        name="cpu_world",
         source_type=SourceType.SCRAPE,
         tier=SourceTier.REFERENCE,
-        provider="techpowerup",
+        provider="cpu-world",
         engine=FetchEngine.REQUESTS,
-        spider_name="techpowerup_reference_spider",
-        domains=("techpowerup.com",),
-        priority=4,
+        spider_name="cpu_world_spider",
+        domains=("cpu-world.com",),
+        priority=12,
     ),
+    # Reference sources - Benchmarks (Tier 2)
+    Source(
+        name="passmark_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="passmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="passmark_cpu_spider",
+        domains=("cpubenchmark.net",),
+        priority=20,
+    ),
+    Source(
+        name="userbenchmark_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="userbenchmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="userbenchmark_spider",
+        domains=("userbenchmark.com",),
+        priority=21,
+    ),
+    # Reference sources - Reviews (Tier 2)
+    Source(
+        name="tomshardware_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="tomshardware",
+        engine=FetchEngine.REQUESTS,
+        spider_name="tomshardware_spider",
+        domains=("tomshardware.com",),
+        priority=30,
+    ),
+    Source(
+        name="anandtech_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="anandtech",
+        engine=FetchEngine.REQUESTS,
+        spider_name="anandtech_spider",
+        domains=("anandtech.com",),
+        priority=31,
+    ),
+    Source(
+        name="notebookcheck_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="notebookcheck",
+        engine=FetchEngine.REQUESTS,
+        spider_name="notebookcheck_spider",
+        domains=("notebookcheck.net",),
+        priority=32,
+    ),
+    # Reference sources - Retailers/Aggregators (Tier 2)
+    Source(
+        name="pcpartpicker_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pcpartpicker",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pcpartpicker_spider",
+        domains=("pcpartpicker.com",),
+        priority=40,
+    ),
+    Source(
+        name="newegg_cpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="newegg",
+        engine=FetchEngine.REQUESTS,
+        spider_name="newegg_spider",
+        domains=("newegg.com",),
+        priority=41,
+    ),
+    # Embedded catalog (last resort)
     Source(
         name="embedded_cpu",
         source_type=SourceType.CATALOG,
@@ -139,6 +225,7 @@ _CPU_SOURCES = [
 ]
 
 _RAM_SOURCES = [
+    # Official sources (Tier 1)
     Source(
         name="crucial",
         source_type=SourceType.SCRAPE,
@@ -179,16 +266,59 @@ _RAM_SOURCES = [
         domains=("gskill.com",),
         priority=4,
     ),
+    # Reference sources - Benchmarks (Tier 2)
     Source(
-        name="techpowerup_ram",
+        name="passmark_ram",
         source_type=SourceType.SCRAPE,
         tier=SourceTier.REFERENCE,
-        provider="techpowerup",
+        provider="passmark",
         engine=FetchEngine.REQUESTS,
-        spider_name="techpowerup_reference_spider",
-        domains=("techpowerup.com",),
-        priority=5,
+        spider_name="passmark_ram_spider",
+        domains=("memorybenchmark.net",),
+        priority=10,
     ),
+    Source(
+        name="userbenchmark_ram",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="userbenchmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="userbenchmark_spider",
+        domains=("userbenchmark.com",),
+        priority=11,
+    ),
+    # Reference sources - Retailers/Aggregators (Tier 2)
+    Source(
+        name="pcpartpicker_ram",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pcpartpicker",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pcpartpicker_spider",
+        domains=("pcpartpicker.com",),
+        priority=20,
+    ),
+    Source(
+        name="newegg_ram",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="newegg",
+        engine=FetchEngine.REQUESTS,
+        spider_name="newegg_spider",
+        domains=("newegg.com",),
+        priority=21,
+    ),
+    Source(
+        name="pangoly_ram",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pangoly",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pangoly_spider",
+        domains=("pangoly.com",),
+        priority=22,
+    ),
+    # Embedded catalog (last resort)
     Source(
         name="embedded_ram",
         source_type=SourceType.CATALOG,
@@ -200,16 +330,7 @@ _RAM_SOURCES = [
 ]
 
 _GPU_SOURCES = [
-    Source(
-        name="techpowerup_gpu",
-        source_type=SourceType.SCRAPE,
-        tier=SourceTier.REFERENCE,
-        provider="techpowerup",
-        engine=FetchEngine.REQUESTS,
-        spider_name="techpowerup_reference_spider",
-        domains=("techpowerup.com",),
-        priority=1,  # Best source for GPUs
-    ),
+    # Official sources (Tier 1)
     Source(
         name="nvidia_official",
         source_type=SourceType.SCRAPE,
@@ -218,7 +339,7 @@ _GPU_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="nvidia_gpu_chip_spider",
         domains=("nvidia.com",),
-        priority=2,
+        priority=1,
     ),
     Source(
         name="amd_gpu",
@@ -228,7 +349,7 @@ _GPU_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="amd_gpu_chip_spider",
         domains=("amd.com",),
-        priority=3,
+        priority=2,
     ),
     Source(
         name="intel_arc",
@@ -238,7 +359,7 @@ _GPU_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="intel_arc_gpu_chip_spider",
         domains=("intel.com",),
-        priority=4,
+        priority=3,
     ),
     Source(
         name="asus_gpu",
@@ -248,8 +369,93 @@ _GPU_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="asus_gpu_aib_spider",
         domains=("asus.com",),
-        priority=5,
+        priority=4,
     ),
+    # Reference sources - Technical databases (Tier 2) - BEST for GPUs
+    Source(
+        name="techpowerup_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="techpowerup",
+        engine=FetchEngine.REQUESTS,
+        spider_name="techpowerup_gpu_spider",
+        domains=("techpowerup.com",),
+        priority=10,  # Best detailed GPU database
+    ),
+    Source(
+        name="gpu_specs",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="gpu-specs",
+        engine=FetchEngine.REQUESTS,
+        spider_name="gpu_specs_spider",
+        domains=("gpu-specs.com",),
+        priority=11,
+    ),
+    # Reference sources - Benchmarks (Tier 2)
+    Source(
+        name="passmark_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="passmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="passmark_gpu_spider",
+        domains=("videocardbenchmark.net",),
+        priority=20,
+    ),
+    Source(
+        name="userbenchmark_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="userbenchmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="userbenchmark_spider",
+        domains=("userbenchmark.com",),
+        priority=21,
+    ),
+    # Reference sources - Reviews (Tier 2)
+    Source(
+        name="tomshardware_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="tomshardware",
+        engine=FetchEngine.REQUESTS,
+        spider_name="tomshardware_spider",
+        domains=("tomshardware.com",),
+        priority=30,
+    ),
+    Source(
+        name="notebookcheck_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="notebookcheck",
+        engine=FetchEngine.REQUESTS,
+        spider_name="notebookcheck_spider",
+        domains=("notebookcheck.net",),
+        priority=31,
+    ),
+    # Reference sources - Retailers/Aggregators (Tier 2)
+    Source(
+        name="pcpartpicker_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pcpartpicker",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pcpartpicker_spider",
+        domains=("pcpartpicker.com",),
+        priority=40,
+    ),
+    Source(
+        name="newegg_gpu",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="newegg",
+        engine=FetchEngine.REQUESTS,
+        spider_name="newegg_spider",
+        domains=("newegg.com",),
+        priority=41,
+    ),
+    # Embedded catalog (last resort)
     Source(
         name="embedded_gpu",
         source_type=SourceType.CATALOG,
@@ -261,6 +467,7 @@ _GPU_SOURCES = [
 ]
 
 _MAINBOARD_SOURCES = [
+    # Official sources (Tier 1)
     Source(
         name="asus_mb",
         source_type=SourceType.SCRAPE,
@@ -301,6 +508,49 @@ _MAINBOARD_SOURCES = [
         domains=("asrock.com",),
         priority=4,
     ),
+    # Reference sources - Retailers/Aggregators (Tier 2)
+    Source(
+        name="pcpartpicker_mb",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pcpartpicker",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pcpartpicker_spider",
+        domains=("pcpartpicker.com",),
+        priority=10,
+    ),
+    Source(
+        name="newegg_mb",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="newegg",
+        engine=FetchEngine.REQUESTS,
+        spider_name="newegg_spider",
+        domains=("newegg.com",),
+        priority=11,
+    ),
+    Source(
+        name="pangoly_mb",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pangoly",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pangoly_spider",
+        domains=("pangoly.com",),
+        priority=12,
+    ),
+    # Reference sources - Reviews (Tier 2)
+    Source(
+        name="tomshardware_mb",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="tomshardware",
+        engine=FetchEngine.REQUESTS,
+        spider_name="tomshardware_spider",
+        domains=("tomshardware.com",),
+        priority=20,
+    ),
+    # Embedded catalog (last resort)
     Source(
         name="embedded_mb",
         source_type=SourceType.CATALOG,
@@ -312,6 +562,7 @@ _MAINBOARD_SOURCES = [
 ]
 
 _DISK_SOURCES = [
+    # Official sources (Tier 1)
     Source(
         name="samsung_storage",
         source_type=SourceType.SCRAPE,
@@ -342,6 +593,28 @@ _DISK_SOURCES = [
         domains=("seagate.com",),
         priority=3,
     ),
+    # Reference sources - Benchmarks (Tier 2)
+    Source(
+        name="passmark_disk",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="passmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="passmark_disk_spider",
+        domains=("harddrivebenchmark.net",),
+        priority=10,
+    ),
+    Source(
+        name="userbenchmark_disk",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="userbenchmark",
+        engine=FetchEngine.REQUESTS,
+        spider_name="userbenchmark_spider",
+        domains=("userbenchmark.com",),
+        priority=11,
+    ),
+    # Reference sources - Technical (Tier 2)
     Source(
         name="techpowerup_ssd",
         source_type=SourceType.SCRAPE,
@@ -350,8 +623,41 @@ _DISK_SOURCES = [
         engine=FetchEngine.REQUESTS,
         spider_name="techpowerup_reference_spider",
         domains=("techpowerup.com",),
-        priority=4,
+        priority=12,
     ),
+    # Reference sources - Retailers/Aggregators (Tier 2)
+    Source(
+        name="pcpartpicker_disk",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="pcpartpicker",
+        engine=FetchEngine.REQUESTS,
+        spider_name="pcpartpicker_spider",
+        domains=("pcpartpicker.com",),
+        priority=20,
+    ),
+    Source(
+        name="newegg_disk",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="newegg",
+        engine=FetchEngine.REQUESTS,
+        spider_name="newegg_spider",
+        domains=("newegg.com",),
+        priority=21,
+    ),
+    # Reference sources - Reviews (Tier 2)
+    Source(
+        name="tomshardware_disk",
+        source_type=SourceType.SCRAPE,
+        tier=SourceTier.REFERENCE,
+        provider="tomshardware",
+        engine=FetchEngine.REQUESTS,
+        spider_name="tomshardware_spider",
+        domains=("tomshardware.com",),
+        priority=30,
+    ),
+    # Embedded catalog (last resort)
     Source(
         name="embedded_disk",
         source_type=SourceType.CATALOG,
