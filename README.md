@@ -42,29 +42,55 @@ pip install -e ".[full]"
 
 ## Uso
 
-### GUI (interfaz gráfica)
+### CLI (línea de comandos)
 
 ```bash
 hxtractor
 ```
 
-### CLI (línea de comandos)
+Muestra el menú interactivo con arte ASCII:
+
+```
+  ██╗  ██╗██╗  ██╗████████╗██████╗  █████╗  ██████╗████████╗ ██████╗ ██████╗
+  ██║  ██║╚██╗██╔╝╚══██╔══╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+  ███████║ ╚███╔╝    ██║   ██████╔╝███████║██║        ██║   ██║   ██║██████╔╝
+  ██╔══██║ ██╔██╗    ██║   ██╔══██╗██╔══██║██║        ██║   ██║   ██║██╔══██╗
+  ██║  ██║██╔╝ ██╗   ██║   ██║  ██║██║  ██║╚██████╗   ██║   ╚██████╔╝██║  ██║
+  ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+
+                           v1.0.0 - Hardware Specs Extractor
+                              © 2025 NAZCAMEDIA
+
+  1) Analizar componente
+  2) Exportar ficha
+  3) Reset ficha
+  4) Salir
+```
+
+### GUI (interfaz gráfica)
 
 ```bash
-hxtractor --cli
-# o
-hxtractor-cli
+hxtractor-gui
 ```
+
+### Características del CLI
+
+- **Spinner animado** con tiempo transcurrido durante el análisis
+- **Mensajes de estado** descriptivos: "Normalizando...", "Clasificando...", "Extrayendo..."
+- **Información completa** de cada componente con fuentes y URLs
+- **Leyenda de colores** para identificar el origen de cada dato
+- **Auto-agregado** a la ficha técnica
 
 ### Flujo básico
 
-1. Introduce un componente (ej. `Corsair CMK32GX4M2B3200C16`)
-2. El sistema clasifica el tipo (RAM, CPU, GPU, etc.)
-3. Busca en fuentes oficiales primero, luego referencias
-4. Muestra candidatos si hay ambigüedad
-5. Agrega a la ficha con todos los specs extraídos
-6. Repite con más componentes
-7. Exporta a CSV/XLSX/MD
+1. Introduce un componente (ej. `CMK32GX5M2B6000C36`)
+2. El spinner muestra el progreso con tiempo transcurrido
+3. El sistema clasifica el tipo (RAM, CPU, GPU, etc.)
+4. Busca en fuentes oficiales primero, luego referencias
+5. Muestra especificaciones con indicador de tier y fuente
+6. Agrega automáticamente a la ficha
+7. Repite con más componentes
+8. Exporta a CSV/XLSX/MD
 
 ## Sistema de Tiers
 
@@ -152,6 +178,15 @@ MIT License - Copyright (c) 2026 [NAZCAMEDIA](https://www.nazcamedia.net)
 Ver `LICENSE` para más detalles.
 
 ## Changelog
+
+### v1.0.0 (CLI)
+- Header ASCII art con branding NAZCAMEDIA
+- Spinner animado con tiempo transcurrido
+- Mensajes de estado descriptivos por fase
+- Información completa: specs, fuentes, URLs y leyenda de tiers
+- Auto-agregado de componentes a la ficha
+- Menú simplificado de 4 opciones
+- Filtrado de mensajes de debug
 
 ### v0.2.0
 - CLI interactivo con menú y colores ANSI
