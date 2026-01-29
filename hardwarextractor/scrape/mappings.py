@@ -1,24 +1,35 @@
 from __future__ import annotations
 
 LABEL_MAP_CPU = {
+    # Base clocks
     "base clock": "cpu.base_clock_mhz",
     "performance-core base frequency": "cpu.base_clock_mhz",
-    "efficient-core base frequency": "cpu.base_clock_mhz",
+    "efficient-core base frequency": "cpu.e_core_base_clock_mhz",
     "processor base frequency": "cpu.base_clock_mhz",
+    # Boost/Turbo clocks
     "max turbo frequency": "cpu.boost_clock_mhz",
     "max. boost clock": "cpu.boost_clock_mhz",
     "max boost clock": "cpu.boost_clock_mhz",
+    "performance-core max turbo frequency": "cpu.p_core_boost_clock_mhz",
+    "efficient-core max turbo frequency": "cpu.e_core_boost_clock_mhz",
+    "intel turbo boost max technology 3.0 frequency": "cpu.turbo_boost_3_mhz",
+    "intel thermal velocity boost frequency": "cpu.thermal_velocity_boost_mhz",
+    # Cores and threads
     "cores": "cpu.cores_physical",
     "total cores": "cpu.cores_physical",
     "# of cpu cores": "cpu.cores_physical",
+    "# of performance-cores": "cpu.p_cores",
+    "# of efficient-cores": "cpu.e_cores",
     "threads": "cpu.threads_logical",
     "total threads": "cpu.threads_logical",
     "# of threads": "cpu.threads_logical",
+    # Cache
     "l1 cache": "cpu.cache_l1_kb",
     "l2 cache": "cpu.cache_l2_kb",
     "l3 cache": "cpu.cache_l3_kb",
     "cache": "cpu.cache_l3_kb",
-    "total l2 cache": "cpu.cache_l2_kb",
+    "total l2 cache": "cpu.cache_l2_mb",
+    # Memory
     "memory types": "cpu.memory_type_supported",
     "system memory type": "cpu.memory_type_supported",
     "max memory": "cpu.max_memory_gb",
@@ -26,20 +37,42 @@ LABEL_MAP_CPU = {
     "max memory size": "cpu.max_memory_gb",
     "memory channels": "cpu.memory_channels_max",
     "max of memory channels": "cpu.memory_channels_max",
+    "max # of memory channels": "cpu.memory_channels_max",
     "max memory speed": "cpu.max_memory_speed_mt_s",
     "max memory speed mt s": "cpu.max_memory_speed_mt_s",
     "max memory bandwidth": "cpu.memory_bandwidth_gbs",
     "memory bandwidth": "cpu.memory_bandwidth_gbs",
+    # PCIe
     "pcie version": "cpu.pcie.version_max",
     "pci express revision": "cpu.pcie.version_max",
     "pcie lanes": "cpu.pcie.lanes_max",
     "max of pci express lanes": "cpu.pcie.lanes_max",
+    "max # of pci express lanes": "cpu.pcie.lanes_max",
     "native pcie lanes total usable": "cpu.pcie.lanes_max",
     "native pcie lanes": "cpu.pcie.lanes_max",
+    "pci express configurations": "cpu.pcie.configurations",
+    # Interconnect
     "dmi": "cpu.interconnect.type",
     "dmi version": "cpu.interconnect.type",
+    "direct media interface dmi revision": "cpu.dmi.version",
+    "max # of dmi lanes": "cpu.dmi.lanes",
     "bus speed": "cpu.interconnect.speed",
     "system bus speed": "cpu.interconnect.speed",
+    # Power
+    "processor base power": "cpu.tdp_w",
+    "maximum turbo power": "cpu.max_turbo_power_w",
+    "tdp": "cpu.tdp_w",
+    # Other Intel ARK specific
+    "processor number": "cpu.model_number",
+    "code name": "cpu.codename",
+    "lithography": "cpu.process_nm",
+    "sockets supported": "cpu.socket",
+    "t": "cpu.max_temp_c",
+    "max operating temperature": "cpu.max_temp_c",
+    "instruction set": "cpu.architecture_bits",
+    "instruction set extensions": "cpu.instruction_extensions",
+    "launch date": "cpu.launch_date",
+    "recommended customer price": "cpu.msrp_usd",
 }
 
 LABEL_MAP_RAM = {

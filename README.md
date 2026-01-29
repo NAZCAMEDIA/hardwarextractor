@@ -83,7 +83,7 @@ hxtractor-gui
 
 ### Flujo básico
 
-1. Introduce un componente (ej. `CMK32GX5M2B6000C36`)
+1. Introduce un componente (ej. `CMK32GX5M2B6000C36` o `intel i7`)
 2. El spinner muestra el progreso con tiempo transcurrido
 3. El sistema clasifica el tipo (RAM, CPU, GPU, etc.)
 4. Busca en fuentes oficiales primero, luego referencias
@@ -91,6 +91,13 @@ hxtractor-gui
 6. Agrega automáticamente a la ficha
 7. Repite con más componentes
 8. Exporta a CSV/XLSX/MD
+
+### Búsquedas soportadas
+
+- **Por modelo específico**: `i9-14900K`, `RTX 4090`, `CMK32GX5M2B6000C36`
+- **Por familia de procesador**: `intel i7`, `intel i5`, `ryzen 9`, `amd ryzen 7`
+- **Por part number**: `CMK32GX5M2B5600C36`
+- **Por URL**: URL directa a specs del fabricante
 
 ## Sistema de Tiers
 
@@ -178,6 +185,13 @@ MIT License - Copyright (c) 2026 [NAZCAMEDIA](https://www.nazcamedia.net)
 Ver `LICENSE` para más detalles.
 
 ## Changelog
+
+### v1.1.0
+- **Intel ARK Extractor**: Soporte completo para scraping de Intel ARK (29+ specs por CPU)
+- **Búsqueda por familia**: Soporta búsquedas genéricas como "intel i7" o "ryzen 9"
+- **Nuevos mappings**: 25+ labels de Intel ARK (P-cores, E-cores, Turbo Boost 3.0, TDP, etc.)
+- **macOS App**: Build actualizado con PyInstaller y DMG para distribución
+- Fix: Extracción de datos de Intel ARK que antes retornaba 0 specs
 
 ### v1.0.0 (CLI)
 - Header ASCII art con branding NAZCAMEDIA

@@ -62,6 +62,35 @@ def _looks_like_part_number(text: str) -> bool:
     return has_letters and has_numbers and word_count <= 2
 
 
+def _extract_processor_family(text: str) -> Optional[str]:
+    """Extrae la familia del procesador de un texto.
+
+    Ej: 'intel i7' -> 'i7', 'Ryzen 9' -> 'ryzen9', 'Core i5' -> 'i5'
+    """
+    import re
+    text_lower = text.lower()
+    # Intel Core families
+    if match := re.search(r'\bi([3579])\b', text_lower):
+        return f"i{match.group(1)}"
+    # AMD Ryzen families
+    if match := re.search(r'\bryzen\s*([3579])\b', text_lower):
+        return f"ryzen{match.group(1)}"
+    return None
+
+
+def _model_contains_family(model: str, family: str) -> bool:
+    """Verifica si el modelo contiene la familia del procesador."""
+    model_lower = model.lower()
+    if family.startswith("i"):
+        # Para Intel, buscar "i7" en el modelo
+        return family in model_lower
+    elif family.startswith("ryzen"):
+        # Para AMD, buscar "ryzen 7" o "ryzen7"
+        digit = family[-1]
+        return f"ryzen {digit}" in model_lower or f"ryzen{digit}" in model_lower
+    return False
+
+
 def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveResult:
     """Resuelve un componente a candidatos del catálogo.
 
@@ -151,6 +180,22 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
                 if tokens_in_model:
                     candidate.score = 0.55 + (len(tokens_in_model) * 0.1)
                     candidates.append(candidate)
+                    continue
+
+            # Match por familia de procesador (ej: "intel i7" -> todos los i7)
+            input_family = _extract_processor_family(normalized)
+            if input_family and model and _model_contains_family(model, input_family):
+                # Verificar también que la marca coincida si se especificó
+                brand_match = True
+                if "intel" in normalized and brand:
+                    brand_match = "intel" in brand.lower()
+                elif "amd" in normalized and brand:
+                    brand_match = "amd" in brand.lower()
+
+                if brand_match:
+                    candidate.score = 0.65  # Score moderado para búsquedas por familia
+                    candidates.append(candidate)
+                    continue
 
     # Ordenar por score descendente
     candidates = sorted(candidates, key=lambda c: -c.score)

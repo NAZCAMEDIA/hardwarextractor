@@ -260,6 +260,23 @@ def _extract_label_value_pairs(selector: Selector) -> Iterable[Tuple[str, str]]:
                 if label.strip() and value.strip():
                     yield label.strip(), value.strip()
 
+    # Intel ARK structure: tech-section-row with tech-label/tech-data columns
+    for row in selector.css(".tech-section-row"):
+        label = row.css(".tech-label span::text").get()
+        if not label:
+            label = row.css(".tech-label").xpath("string()").get()
+        # Value can be in span, a, or plain text
+        value = row.css(".tech-data span::text").get()
+        if not value:
+            value = row.css(".tech-data a::text").get()
+        if not value:
+            value = row.css(".tech-data").xpath("string()").get()
+        if label and value:
+            label = label.strip()
+            value = value.strip()
+            if label and value:
+                yield label, value
+
     # JSON-LD additionalProperty pairs
     for label, value in extract_jsonld_pairs(selector):
         yield label.strip(), value.strip()
