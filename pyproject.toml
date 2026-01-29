@@ -1,10 +1,10 @@
 [project]
 name = "hardwarextractor"
-version = "0.1.0"
-description = "EQUIPOS INFORMATICOS — AutoRelleno de Ficha Tecnica"
+version = "0.2.0"
+description = "HardwareXtractor - Extraccion de specs de hardware con trazabilidad"
 requires-python = ">=3.11"
 readme = "README.md"
-license = {text = "Proprietary"}
+license = "LicenseRef-Proprietary"
 
 dependencies = [
   "scrapy>=2.11.0",
@@ -13,7 +13,32 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-ui = []
+# Browser automation for anti-bot protected sites
+browser = [
+  "playwright>=1.40.0",
+]
+
+# Excel export support
+excel = [
+  "openpyxl>=3.1.0",
+]
+
+# Full installation with all features
+full = [
+  "playwright>=1.40.0",
+  "openpyxl>=3.1.0",
+]
+
+# Development dependencies
+dev = [
+  "pytest>=7.0.0",
+  "pytest-cov>=4.0.0",
+  "pytest-asyncio>=0.21.0",
+]
+
+[project.scripts]
+hxtractor = "hardwarextractor.__main__:main"
+hxtractor-cli = "hardwarextractor.cli.interactive:main"
 
 [tool.pytest.ini_options]
 addopts = "-q --cov=hardwarextractor --cov-report=term-missing --cov-fail-under=80"
@@ -22,11 +47,17 @@ testpaths = ["tests"]
 [tool.coverage.run]
 branch = true
 omit = [
-  "hardwarextractor/ui/*"
+  "hardwarextractor/ui/*",
+  "hardwarextractor/cli/*",
 ]
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hardwarextractor*"]
+exclude = ["tests*", "downloads*", "packaging*"]
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
