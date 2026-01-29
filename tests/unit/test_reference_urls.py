@@ -34,27 +34,22 @@ class TestGPUUrls:
 
 
 class TestCPUUrls:
-    """Test CPU reference URLs."""
+    """Test CPU reference URLs.
+
+    NOTE: CPU_TECHPOWERUP_URLS is currently empty because the TechPowerUp
+    URL IDs were incorrect (e.g., c3287 pointed to Ryzen Z1 instead of i9-14900K).
+    Tests are updated to reflect this until correct URLs are discovered.
+    """
 
     def test_cpu_urls_dict_exists(self):
         """Test that CPU_TECHPOWERUP_URLS is defined."""
         assert CPU_TECHPOWERUP_URLS is not None
         assert isinstance(CPU_TECHPOWERUP_URLS, dict)
 
-    def test_cpu_urls_has_intel_14th_gen(self):
-        """Test Intel 14th gen is in catalog."""
-        assert "core i9-14900k" in CPU_TECHPOWERUP_URLS
-        assert "core i7-14700k" in CPU_TECHPOWERUP_URLS
-
-    def test_cpu_urls_has_amd_ryzen_7000(self):
-        """Test AMD Ryzen 7000 is in catalog."""
-        assert "ryzen 9 7950x" in CPU_TECHPOWERUP_URLS
-        assert "ryzen 7 7800x3d" in CPU_TECHPOWERUP_URLS
-
-    def test_cpu_urls_has_ryzen_5000(self):
-        """Test AMD Ryzen 5000 is in catalog."""
-        assert "ryzen 9 5950x" in CPU_TECHPOWERUP_URLS
-        assert "ryzen 5 5600x" in CPU_TECHPOWERUP_URLS
+    def test_cpu_urls_is_empty(self):
+        """Test CPU URLs is currently empty (IDs were incorrect)."""
+        # CPU URLs are disabled until we verify correct TechPowerUp IDs
+        assert len(CPU_TECHPOWERUP_URLS) == 0
 
 
 class TestGetReferenceUrl:
@@ -77,17 +72,11 @@ class TestGetReferenceUrl:
         url = get_reference_url("GPU", "  geforce rtx 4090  ")
         assert url is not None
 
-    def test_get_cpu_url_exact_match(self):
-        """Test getting CPU URL with exact match."""
+    def test_get_cpu_url_returns_none(self):
+        """Test CPU URL returns None (URLs disabled due to incorrect IDs)."""
+        # CPU TechPowerUp URLs are currently disabled
         url = get_reference_url("CPU", "core i9-14900k")
-        assert url is not None
-        assert "techpowerup.com" in url
-
-    def test_get_cpu_url_amd(self):
-        """Test getting AMD CPU URL."""
-        url = get_reference_url("CPU", "ryzen 9 7950x")
-        assert url is not None
-        assert "ryzen-9-7950x" in url
+        assert url is None
 
     def test_get_url_not_found(self):
         """Test getting URL for unknown model."""
@@ -100,7 +89,8 @@ class TestGetReferenceUrl:
         assert url is None
 
     def test_get_url_empty_model(self):
-        """Test getting URL with empty model."""
+        """Test getting URL with empty model returns None."""
+        # Empty model should return None, not match anything
         url = get_reference_url("GPU", "")
         assert url is None
 

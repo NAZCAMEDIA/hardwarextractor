@@ -29,6 +29,7 @@ FIXTURE_BASE = Path(__file__).resolve().parent / "fixtures"
         ("samsung_storage_spider", "samsung_storage_spider/sample.html", SourceTier.OFFICIAL),
         ("wdc_storage_spider", "wdc_storage_spider/sample.html", SourceTier.OFFICIAL),
         ("seagate_storage_spider", "seagate_storage_spider/sample.html", SourceTier.OFFICIAL),
+        ("techpowerup_gpu_spider", "techpowerup_gpu_spider/sample.html", SourceTier.REFERENCE),
         ("techpowerup_reference_spider", "techpowerup_reference_spider/sample.html", SourceTier.REFERENCE),
         ("wikichip_reference_spider", "wikichip_reference_spider/sample.html", SourceTier.REFERENCE),
     ],

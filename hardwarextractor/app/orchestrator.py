@@ -265,51 +265,10 @@ class Orchestrator:
                 except Exception as e:  # noqa: BLE001
                     self._emit(Event.source_failed("TechPowerUp", str(e)))
 
-            # PASO 2: Si aún no hay specs, intentar el chain de fallback normal
-            if not specs:
-                fallback_chain = self._source_chain_manager.get_chain(component_type)
-
-                for fallback_source in fallback_chain:
-                    # Saltar si es el mismo source o si es CATALOG
-                    if fallback_source.spider_name == candidate.spider_name:
-                        continue
-                    if fallback_source.source_type.value == "CATALOG":
-                        continue
-
-                    self._emit(Event.source_trying(fallback_source.name, f"Fallback: {fallback_source.spider_name}"))
-
-                    try:
-                        # Construir URL de búsqueda para el fallback
-                        brand = candidate.canonical.get("brand", "")
-                        search_term = f"{brand} {model_name}".strip()
-
-                        # Usar URL template si existe, sino skip
-                        fallback_url = fallback_source.url_template.format(query=search_term) if fallback_source.url_template else None
-
-                        if not fallback_url:
-                            continue
-
-                        specs = self.scrape_fn(
-                            fallback_source.spider_name,
-                            fallback_url,
-                            cache=self.cache,
-                            enable_tier2=True,
-                            user_agent=self.config.user_agent,
-                            retries=1,
-                            throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
-                            use_playwright_fallback=True,
-                        )
-
-                        if specs:
-                            self._emit(Event.source_success(fallback_source.name, len(specs)))
-                            actual_source_tier = SourceTier.REFERENCE
-                            actual_source_url = fallback_url
-                            actual_source_name = fallback_source.name
-                            break
-
-                    except Exception:  # noqa: BLE001
-                        self._emit(Event.source_failed(fallback_source.name, "Fallback failed"))
-                        continue
+            # NOTA: El fallback chain genérico (URLs de búsqueda) está deshabilitado
+            # porque produce datos basura al parsear páginas de resultados de búsqueda
+            # como si fueran páginas de producto.
+            # Solo usamos URLs de referencia directas (TechPowerUp) + catálogo interno.
 
         if not specs:
             # PASO FINAL: Usar datos del catálogo como último recurso
@@ -471,8 +430,38 @@ class Orchestrator:
         if part_number:
             specs.append(make_spec("part_number", "Numero de parte", part_number))
 
+        # Para CPUs, GPUs y otros, extraer info adicional del modelo
+        if component_type == ComponentType.CPU:
+            if model:
+                # Extraer generación Intel (14900K -> Gen 14)
+                if match := re.search(r'i[3579]-?(\d{2})\d{3}', model, re.IGNORECASE):
+                    gen = match.group(1)
+                    specs.append(make_spec("cpu.generation", "Generación", f"Gen {gen}"))
+                # Extraer sufijo (K, KF, X, etc.)
+                if match := re.search(r'(\d{4,5})([KFXU]+)', model, re.IGNORECASE):
+                    suffix = match.group(2).upper()
+                    if 'K' in suffix:
+                        specs.append(make_spec("cpu.unlocked", "Desbloqueado", "Sí"))
+                    if 'F' in suffix:
+                        specs.append(make_spec("cpu.integrated_graphics", "Gráficos integrados", "No"))
+                # Detectar familia (i9, i7, Ryzen 9, etc.)
+                if match := re.search(r'(i[3579]|Ryzen\s*[3579])', model, re.IGNORECASE):
+                    specs.append(make_spec("cpu.family", "Familia", match.group(1)))
+
+        elif component_type == ComponentType.GPU:
+            if model:
+                # Extraer serie (RTX 4090, RX 7900, Arc A770)
+                if match := re.search(r'(RTX|GTX|RX|Arc)\s*([A-Z]?\d{3,4})', model, re.IGNORECASE):
+                    series = match.group(1).upper()
+                    number = match.group(2)
+                    specs.append(make_spec("gpu.series", "Serie", f"{series} {number}"))
+                # Detectar variante (Ti, XT, Super)
+                if match := re.search(r'(Ti|XT|Super|SUPER)', model, re.IGNORECASE):
+                    specs.append(make_spec("gpu.variant", "Variante", match.group(1)))
+
+        # Retornar si tenemos al menos brand, model y part_number
         if component_type != ComponentType.RAM:
-            return specs if len(specs) > 3 else []
+            return specs if len(specs) >= 3 else []
 
         # Parsear informacion adicional del modelo para RAM
         if model:

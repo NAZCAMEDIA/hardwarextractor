@@ -6,7 +6,11 @@ from typing import Dict, List
 from parsel import Selector
 
 from hardwarextractor.models.schemas import SpecField, SourceTier
-from hardwarextractor.scrape.extractors import parse_data_spec_fields, parse_labeled_fields
+from hardwarextractor.scrape.extractors import (
+    parse_data_spec_fields,
+    parse_labeled_fields,
+    parse_og_description_specs,
+)
 from hardwarextractor.scrape.mappings import (
     LABEL_MAP_CPU,
     LABEL_MAP_DISK,
@@ -40,6 +44,29 @@ class BaseSpecSpider:
         return fields
 
 
+@dataclass
+class TechPowerUpSpider(BaseSpecSpider):
+    """Specialized spider for TechPowerUp's new page format.
+
+    TechPowerUp now uses a minimal card layout with specs in the og:description meta tag.
+    Example: "NVIDIA AD102, 2520 MHz, 16384 Cores, 512 TMUs, 176 ROPs, 24576 MB GDDR6X, 1313 MHz, 384 bit"
+    """
+
+    def parse_html(self, html: str, url: str) -> List[SpecField]:
+        selector = Selector(text=html)
+        fields = []
+
+        # Try the new og:description format first (TechPowerUp's new layout)
+        fields.extend(parse_og_description_specs(selector, self.source_name, url, self.source_tier))
+
+        # Also try traditional extractors as fallback
+        fields.extend(parse_data_spec_fields(selector, self.source_name, url, self.source_tier))
+        if self.label_map:
+            fields.extend(parse_labeled_fields(selector, self.label_map, self.source_name, url, self.source_tier))
+
+        return fields
+
+
 SPIDERS = {
     "intel_ark_spider": BaseSpecSpider("intel_ark_spider", ["intel.com"], "Intel ARK", SourceTier.OFFICIAL, LABEL_MAP_CPU),
     "amd_cpu_specs_spider": BaseSpecSpider("amd_cpu_specs_spider", ["amd.com"], "AMD", SourceTier.OFFICIAL, LABEL_MAP_CPU),
@@ -59,10 +86,10 @@ SPIDERS = {
     "wdc_storage_spider": BaseSpecSpider("wdc_storage_spider", ["wdc.com", "western-digital.com", "sandisk.com"], "Western Digital", SourceTier.OFFICIAL, LABEL_MAP_DISK),
     "seagate_storage_spider": BaseSpecSpider("seagate_storage_spider", ["seagate.com"], "Seagate", SourceTier.OFFICIAL, LABEL_MAP_DISK),
     # === REFERENCE SPIDERS (Community validated) ===
-    # Technical databases
-    "techpowerup_gpu_spider": BaseSpecSpider("techpowerup_gpu_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_TECHPOWERUP_GPU),
-    "techpowerup_cpu_spider": BaseSpecSpider("techpowerup_cpu_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_TECHPOWERUP_CPU),
-    "techpowerup_reference_spider": BaseSpecSpider("techpowerup_reference_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_REFERENCE),
+    # Technical databases - TechPowerUp (specialized spider for og:description format)
+    "techpowerup_gpu_spider": TechPowerUpSpider("techpowerup_gpu_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_TECHPOWERUP_GPU),
+    "techpowerup_cpu_spider": TechPowerUpSpider("techpowerup_cpu_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_TECHPOWERUP_CPU),
+    "techpowerup_reference_spider": TechPowerUpSpider("techpowerup_reference_spider", ["techpowerup.com"], "TechPowerUp", SourceTier.REFERENCE, LABEL_MAP_REFERENCE),
     "wikichip_reference_spider": BaseSpecSpider("wikichip_reference_spider", ["wikichip.org"], "WikiChip", SourceTier.REFERENCE, LABEL_MAP_REFERENCE),
     "cpu_world_spider": BaseSpecSpider("cpu_world_spider", ["cpu-world.com"], "CPU-World", SourceTier.REFERENCE, LABEL_MAP_CPU),
     "gpu_specs_spider": BaseSpecSpider("gpu_specs_spider", ["gpu-specs.com"], "GPU-Specs", SourceTier.REFERENCE, LABEL_MAP_GPU),

@@ -103,6 +103,11 @@ class AntiBotDetector:
 
         html_lower = html.lower()
 
+        # If this looks like a real product page, don't mark as blocked
+        # even if it mentions cloudflare (many sites use CF as CDN)
+        if cls.is_likely_product_page(html):
+            return AntiBotResult(blocked=False)
+
         # Check for very short responses (likely blocked)
         if len(html.strip()) < 500:
             # Short response might be a challenge page
@@ -114,8 +119,21 @@ class AntiBotDetector:
                         confidence=min(confidence + 0.1, 1.0)  # Boost for short response
                     )
 
-        # Check all patterns
-        for pattern, reason, confidence in cls.CONTENT_PATTERNS:
+        # Only check high-confidence patterns for longer pages
+        # Skip generic patterns like "cloudflare" which cause false positives
+        HIGH_CONFIDENCE_PATTERNS = [
+            (r"checking your browser", "cloudflare_challenge", 0.95),
+            (r"cf-browser-verification", "cloudflare_challenge", 0.95),
+            (r"_cf_chl_opt", "cloudflare_challenge", 0.90),
+            (r"recaptcha", "recaptcha", 0.95),
+            (r"hcaptcha", "hcaptcha", 0.95),
+            (r"are you a robot", "robot_check", 0.90),
+            (r"bot.?detected", "bot_detected", 0.95),
+            (r"too many requests", "rate_limit", 0.95),
+            (r"403 forbidden", "access_denied", 0.95),
+        ]
+
+        for pattern, reason, confidence in HIGH_CONFIDENCE_PATTERNS:
             if re.search(pattern, html_lower):
                 return AntiBotResult(
                     blocked=True,

@@ -9,6 +9,112 @@ from hardwarextractor.models.schemas import SpecField, SpecStatus, SourceTier
 from hardwarextractor.scrape.jsonld import extract_jsonld_pairs
 
 
+def parse_og_description_specs(
+    selector: Selector,
+    source_name: str,
+    source_url: str,
+    source_tier: SourceTier,
+) -> List[SpecField]:
+    """Extract specs from og:description meta tag (TechPowerUp new format).
+
+    Example: "NVIDIA AD102, 2520 MHz, 16384 Cores, 512 TMUs, 176 ROPs, 24576 MB GDDR6X, 1313 MHz, 384 bit"
+    """
+    og_desc = selector.css('meta[property="og:description"]::attr(content)').get()
+    if not og_desc:
+        return []
+
+    fields: List[SpecField] = []
+    parts = [p.strip() for p in og_desc.split(",")]
+
+    # GPU pattern mapping for TechPowerUp og:description format
+    # "NVIDIA AD102, 2520 MHz, 16384 Cores, 512 TMUs, 176 ROPs, 24576 MB GDDR6X, 1313 MHz, 384 bit"
+    for part in parts:
+        part_lower = part.lower()
+
+        # GPU Name/Chip (first part like "NVIDIA AD102")
+        if any(chip in part_lower for chip in ["nvidia", "amd", "intel", "ad1", "ad0", "navi", "rdna"]):
+            fields.append(_field_from_value(
+                key="gpu_chip", label="GPU Chip", value=part,
+                unit=None, source_name=source_name, source_url=source_url, source_tier=source_tier
+            ))
+            continue
+
+        # Cores
+        if "cores" in part_lower:
+            match = re.search(r"([0-9]+)\s*cores", part_lower)
+            if match:
+                fields.append(_field_from_value(
+                    key="cuda_cores", label="CUDA Cores", value=match.group(1),
+                    unit=None, source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+            continue
+
+        # TMUs
+        if "tmu" in part_lower:
+            match = re.search(r"([0-9]+)\s*tmu", part_lower)
+            if match:
+                fields.append(_field_from_value(
+                    key="tmus", label="TMUs", value=match.group(1),
+                    unit=None, source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+            continue
+
+        # ROPs
+        if "rop" in part_lower:
+            match = re.search(r"([0-9]+)\s*rop", part_lower)
+            if match:
+                fields.append(_field_from_value(
+                    key="rops", label="ROPs", value=match.group(1),
+                    unit=None, source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+            continue
+
+        # Memory with type (e.g., "24576 MB GDDR6X")
+        if "gddr" in part_lower or " mb " in part_lower or " gb " in part_lower:
+            mem_match = re.search(r"([0-9]+)\s*(mb|gb)\s*(gddr[0-9x]*)?", part_lower)
+            if mem_match:
+                mem_size = int(mem_match.group(1))
+                mem_unit = mem_match.group(2).upper()
+                mem_type = mem_match.group(3).upper() if mem_match.group(3) else None
+
+                fields.append(_field_from_value(
+                    key="vram_gb", label="VRAM",
+                    value=str(mem_size // 1024) if mem_unit == "MB" else str(mem_size),
+                    unit="GB", source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+                if mem_type:
+                    fields.append(_field_from_value(
+                        key="memory_type", label="Memory Type", value=mem_type,
+                        unit=None, source_name=source_name, source_url=source_url, source_tier=source_tier
+                    ))
+            continue
+
+        # Memory bus width (e.g., "384 bit")
+        if "bit" in part_lower and "gddr" not in part_lower:
+            match = re.search(r"([0-9]+)\s*bit", part_lower)
+            if match:
+                fields.append(_field_from_value(
+                    key="memory_bus_bits", label="Memory Bus", value=match.group(1),
+                    unit="bit", source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+            continue
+
+        # Clock speeds (e.g., "2520 MHz")
+        if "mhz" in part_lower:
+            match = re.search(r"([0-9]+)\s*mhz", part_lower)
+            if match:
+                # First MHz is usually GPU clock, second is memory clock
+                key = "gpu_clock_mhz" if not any(f.key == "gpu_clock_mhz" for f in fields) else "memory_clock_mhz"
+                label = "GPU Clock" if key == "gpu_clock_mhz" else "Memory Clock"
+                fields.append(_field_from_value(
+                    key=key, label=label, value=match.group(1),
+                    unit="MHz", source_name=source_name, source_url=source_url, source_tier=source_tier
+                ))
+            continue
+
+    return fields
+
+
 def parse_data_spec_fields(selector: Selector, source_name: str, source_url: str, source_tier: SourceTier) -> List[SpecField]:
     fields: List[SpecField] = []
     for node in selector.css("[data-spec-key]"):

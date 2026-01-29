@@ -6,6 +6,7 @@ TechPowerUp has the most comprehensive GPU/CPU specs in a scrapable format.
 
 from __future__ import annotations
 
+import re
 from typing import Dict
 
 # GPU reference URLs from TechPowerUp
@@ -60,58 +61,47 @@ GPU_TECHPOWERUP_URLS: Dict[str, str] = {
 }
 
 # CPU reference URLs from TechPowerUp
-CPU_TECHPOWERUP_URLS: Dict[str, str] = {
-    # Intel 14th Gen
-    "core i9-14900k": "https://www.techpowerup.com/cpu-specs/core-i9-14900k.c3287",
-    "core i9-14900kf": "https://www.techpowerup.com/cpu-specs/core-i9-14900kf.c3288",
-    "core i7-14700k": "https://www.techpowerup.com/cpu-specs/core-i7-14700k.c3283",
-    "core i7-14700kf": "https://www.techpowerup.com/cpu-specs/core-i7-14700kf.c3284",
-    "core i5-14600k": "https://www.techpowerup.com/cpu-specs/core-i5-14600k.c3281",
-    "core i5-14600kf": "https://www.techpowerup.com/cpu-specs/core-i5-14600kf.c3282",
-    # Intel 13th Gen
-    "core i9-13900k": "https://www.techpowerup.com/cpu-specs/core-i9-13900k.c3049",
-    "core i9-13900kf": "https://www.techpowerup.com/cpu-specs/core-i9-13900kf.c3050",
-    "core i9-13900ks": "https://www.techpowerup.com/cpu-specs/core-i9-13900ks.c3122",
-    "core i7-13700k": "https://www.techpowerup.com/cpu-specs/core-i7-13700k.c3047",
-    "core i7-13700kf": "https://www.techpowerup.com/cpu-specs/core-i7-13700kf.c3048",
-    "core i5-13600k": "https://www.techpowerup.com/cpu-specs/core-i5-13600k.c3051",
-    "core i5-13600kf": "https://www.techpowerup.com/cpu-specs/core-i5-13600kf.c3052",
-    # Intel 12th Gen
-    "core i9-12900k": "https://www.techpowerup.com/cpu-specs/core-i9-12900k.c2838",
-    "core i9-12900kf": "https://www.techpowerup.com/cpu-specs/core-i9-12900kf.c2836",
-    "core i9-12900ks": "https://www.techpowerup.com/cpu-specs/core-i9-12900ks.c2925",
-    "core i7-12700k": "https://www.techpowerup.com/cpu-specs/core-i7-12700k.c2835",
-    "core i7-12700kf": "https://www.techpowerup.com/cpu-specs/core-i7-12700kf.c2833",
-    "core i5-12600k": "https://www.techpowerup.com/cpu-specs/core-i5-12600k.c2834",
-    "core i5-12600kf": "https://www.techpowerup.com/cpu-specs/core-i5-12600kf.c2832",
-    # AMD Ryzen 9000 Series
-    "ryzen 9 9950x": "https://www.techpowerup.com/cpu-specs/ryzen-9-9950x.c3361",
-    "ryzen 9 9900x": "https://www.techpowerup.com/cpu-specs/ryzen-9-9900x.c3360",
-    "ryzen 7 9700x": "https://www.techpowerup.com/cpu-specs/ryzen-7-9700x.c3359",
-    "ryzen 5 9600x": "https://www.techpowerup.com/cpu-specs/ryzen-5-9600x.c3358",
-    # AMD Ryzen 7000 Series
-    "ryzen 9 7950x": "https://www.techpowerup.com/cpu-specs/ryzen-9-7950x.c3018",
-    "ryzen 9 7950x3d": "https://www.techpowerup.com/cpu-specs/ryzen-9-7950x3d.c3101",
-    "ryzen 9 7900x": "https://www.techpowerup.com/cpu-specs/ryzen-9-7900x.c3015",
-    "ryzen 9 7900x3d": "https://www.techpowerup.com/cpu-specs/ryzen-9-7900x3d.c3102",
-    "ryzen 9 7900": "https://www.techpowerup.com/cpu-specs/ryzen-9-7900.c3121",
-    "ryzen 7 7800x3d": "https://www.techpowerup.com/cpu-specs/ryzen-7-7800x3d.c3103",
-    "ryzen 7 7700x": "https://www.techpowerup.com/cpu-specs/ryzen-7-7700x.c3016",
-    "ryzen 7 7700": "https://www.techpowerup.com/cpu-specs/ryzen-7-7700.c3120",
-    "ryzen 5 7600x": "https://www.techpowerup.com/cpu-specs/ryzen-5-7600x.c3017",
-    "ryzen 5 7600": "https://www.techpowerup.com/cpu-specs/ryzen-5-7600.c3119",
-    # AMD Ryzen 5000 Series
-    "ryzen 9 5950x": "https://www.techpowerup.com/cpu-specs/ryzen-9-5950x.c2316",
-    "ryzen 9 5900x": "https://www.techpowerup.com/cpu-specs/ryzen-9-5900x.c2315",
-    "ryzen 9 5900": "https://www.techpowerup.com/cpu-specs/ryzen-9-5900.c2505",
-    "ryzen 7 5800x": "https://www.techpowerup.com/cpu-specs/ryzen-7-5800x.c2313",
-    "ryzen 7 5800x3d": "https://www.techpowerup.com/cpu-specs/ryzen-7-5800x3d.c2877",
-    "ryzen 7 5800": "https://www.techpowerup.com/cpu-specs/ryzen-7-5800.c2506",
-    "ryzen 7 5700x": "https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2926",
-    "ryzen 5 5600x": "https://www.techpowerup.com/cpu-specs/ryzen-5-5600x.c2314",
-    "ryzen 5 5600": "https://www.techpowerup.com/cpu-specs/ryzen-5-5600.c2928",
-    "ryzen 5 5500": "https://www.techpowerup.com/cpu-specs/ryzen-5-5500.c2944",
-}
+# NOTE: TechPowerUp has changed their site structure and IDs are now incorrect.
+# This dictionary is empty until we can verify and update the URLs.
+# For now, CPU fallback will use the internal catalog.
+CPU_TECHPOWERUP_URLS: Dict[str, str] = {}
+
+
+def _normalize_model_for_lookup(model: str, component_type: str) -> str:
+    """Normalize a model name for dictionary lookup.
+
+    Handles variations like:
+    - "Intel Core i9-14900K" -> "core i9-14900k"
+    - "i9-14900K" -> "core i9-14900k"
+    - "NVIDIA GeForce RTX 4090" -> "geforce rtx 4090"
+    - "RTX 4090" -> "geforce rtx 4090"
+    """
+    normalized = model.lower().strip()
+
+    if component_type == "CPU":
+        # Remove brand prefixes
+        normalized = re.sub(r'^(intel\s+|amd\s+)', '', normalized)
+
+        # For Intel, ensure "core" prefix exists
+        if re.search(r'^i[3579]-?\d{4,5}', normalized):
+            normalized = "core " + normalized
+
+        # Normalize i9-14900k to i9-14900k (with hyphen)
+        normalized = re.sub(r'(i[3579])\s+(\d)', r'\1-\2', normalized)
+
+    elif component_type == "GPU":
+        # Remove brand prefixes
+        normalized = re.sub(r'^(nvidia\s+|amd\s+|intel\s+)', '', normalized)
+
+        # For NVIDIA, ensure "geforce" prefix exists for RTX/GTX
+        if re.match(r'^(rtx|gtx)\s+\d', normalized):
+            normalized = "geforce " + normalized
+
+        # For AMD, ensure "radeon" prefix exists for RX
+        if re.match(r'^rx\s+\d', normalized):
+            normalized = "radeon " + normalized
+
+    return normalized
 
 
 def get_reference_url(component_type: str, model: str) -> str | None:
@@ -119,16 +109,43 @@ def get_reference_url(component_type: str, model: str) -> str | None:
 
     Args:
         component_type: "GPU" or "CPU"
-        model: The model name (e.g., "GeForce RTX 4090")
+        model: The model name (e.g., "GeForce RTX 4090", "Intel Core i9-14900K")
 
     Returns:
         TechPowerUp URL if available, None otherwise
     """
-    normalized = model.lower().strip()
+    if not model or not model.strip():
+        return None
+
+    normalized = _normalize_model_for_lookup(model, component_type)
+    if not normalized:
+        return None
 
     if component_type == "GPU":
-        return GPU_TECHPOWERUP_URLS.get(normalized)
+        # Try exact match first
+        if url := GPU_TECHPOWERUP_URLS.get(normalized):
+            return url
+
+        # Try without "geforce"/"radeon" prefix
+        for key, url in GPU_TECHPOWERUP_URLS.items():
+            if normalized in key or key in normalized:
+                return url
+
     elif component_type == "CPU":
-        return CPU_TECHPOWERUP_URLS.get(normalized)
+        # Try exact match first
+        if url := CPU_TECHPOWERUP_URLS.get(normalized):
+            return url
+
+        # Try partial matching for CPUs
+        for key, url in CPU_TECHPOWERUP_URLS.items():
+            # Check if key model number matches (e.g., "14900k" in both)
+            model_match = re.search(r'(i[3579][-\s]?\d{4,5}[a-z]*|ryzen\s+\d\s+\d{4}[a-z0-9]*)', normalized)
+            key_match = re.search(r'(i[3579][-\s]?\d{4,5}[a-z]*|ryzen\s+\d\s+\d{4}[a-z0-9]*)', key)
+            if model_match and key_match:
+                # Normalize both matches for comparison
+                model_num = model_match.group(1).replace(' ', '-').replace('--', '-')
+                key_num = key_match.group(1).replace(' ', '-').replace('--', '-')
+                if model_num == key_num:
+                    return url
 
     return None
