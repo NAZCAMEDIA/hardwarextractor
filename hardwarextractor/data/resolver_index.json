@@ -2,12 +2,502 @@
   {
     "component_type": "CPU",
     "brand": "Intel",
+    "model": "Core i9-14900K",
+    "part_number": "BX8071514900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236773/intel-core-i9-14900k-processor-36m-cache-up-to-6-00-ghz.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-14900KF",
+    "part_number": "BX8071514900KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236774/intel-core-i9-14900kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-13900K",
+    "part_number": "BX8071513900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230496/intel-core-i9-13900k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-13900KF",
+    "part_number": "BX8071513900KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230497/intel-core-i9-13900kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-12900K",
+    "part_number": "BX8071512900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134599/intel-core-i9-12900k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-12900KF",
+    "part_number": "BX8071512900KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134600/intel-core-i9-12900kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-14700K",
+    "part_number": "BX8071514700K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236783/intel-core-i7-14700k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-14700KF",
+    "part_number": "BX8071514700KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236784/intel-core-i7-14700kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-13700K",
+    "part_number": "BX8071513700K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230500/intel-core-i7-13700k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-13700KF",
+    "part_number": "BX8071513700KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230501/intel-core-i7-13700kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
     "model": "Core i7-12700K",
     "part_number": "BX8071512700K",
     "score": 0.98,
-    "source_url": "https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i712700k-processor-25m-cache-up-to-5-00-ghz.html",
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134594/intel-core-i7-12700k-processor.html",
     "source_name": "Intel ARK",
     "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-12700KF",
+    "part_number": "BX8071512700KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134595/intel-core-i7-12700kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-12700",
+    "part_number": "BX8071512700",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134591/intel-core-i7-12700-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-14600K",
+    "part_number": "BX8071514600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236789/intel-core-i5-14600k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-14600KF",
+    "part_number": "BX8071514600KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236790/intel-core-i5-14600kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-13600K",
+    "part_number": "BX8071513600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230493/intel-core-i5-13600k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-13600KF",
+    "part_number": "BX8071513600KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230494/intel-core-i5-13600kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-12600K",
+    "part_number": "BX8071512600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134589/intel-core-i5-12600k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-12600KF",
+    "part_number": "BX8071512600KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134590/intel-core-i5-12600kf-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-12400",
+    "part_number": "BX8071512400",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134586/intel-core-i5-12400-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-12400F",
+    "part_number": "BX8071512400F",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134587/intel-core-i5-12400f-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-14100",
+    "part_number": "BX8071514100",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/236795/intel-core-i3-14100-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-13100",
+    "part_number": "BX8071513100",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/230486/intel-core-i3-13100-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-12100",
+    "part_number": "BX8071512100",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134581/intel-core-i3-12100-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-12100F",
+    "part_number": "BX8071512100F",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/134582/intel-core-i3-12100f-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-11900K",
+    "part_number": "BX8070811900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/212325/intel-core-i9-11900k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-11700K",
+    "part_number": "BX8070811700K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/212047/intel-core-i7-11700k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-11600K",
+    "part_number": "BX8070811600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/212275/intel-core-i5-11600k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-10900K",
+    "part_number": "BX8070110900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/199332/intel-core-i9-10900k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-10700K",
+    "part_number": "BX8070110700K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/199335/intel-core-i7-10700k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-10600K",
+    "part_number": "BX8070110600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/199311/intel-core-i5-10600k-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-3495X",
+    "part_number": "PK8071305076900",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/232544/intel-xeon-w-3495x-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-3475X",
+    "part_number": "PK8071305076800",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/232543/intel-xeon-w-3475x-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-2495X",
+    "part_number": "PK8071305076700",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/232542/intel-xeon-w-2495x-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon E-2388G",
+    "part_number": "CM8070804494617",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/212249/intel-xeon-e-2388g-processor.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 7950X",
+    "part_number": "100-100000514WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-7950x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 7950X3D",
+    "part_number": "100-100000908WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-7950x3d",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 7900X",
+    "part_number": "100-100000589WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-7900x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 7900X3D",
+    "part_number": "100-100000909WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-7900x3d",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 7900",
+    "part_number": "100-100000590BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-7900",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 7800X3D",
+    "part_number": "100-100000910WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-7800x3d",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 7700X",
+    "part_number": "100-100000593WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-7700x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 7700",
+    "part_number": "100-100000592BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-7700",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 7600X",
+    "part_number": "100-100000593WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-7600x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 7600",
+    "part_number": "100-100000592BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-7600",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 5950X",
+    "part_number": "100-100000059WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-5950x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 5900X",
+    "part_number": "100-100000061WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-5900x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 5800X",
+    "part_number": "100-100000063WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-5800x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 5800X3D",
+    "part_number": "100-100000651WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-5800x3d",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 5700X",
+    "part_number": "100-100000926WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-5700x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
   },
   {
     "component_type": "CPU",
@@ -20,9 +510,299 @@
     "spider_name": "amd_cpu_specs_spider"
   },
   {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 5600",
+    "part_number": "100-100000927BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-5600",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 5500",
+    "part_number": "100-100000457BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-5500",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 3950X",
+    "part_number": "100-100000051WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-3950x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 3900X",
+    "part_number": "100-100000023BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-9-3900x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 3800X",
+    "part_number": "100-100000025BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-3800x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 3700X",
+    "part_number": "100-100000071BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-7-3700x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 3600X",
+    "part_number": "100-100000022BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-3600x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 3600",
+    "part_number": "100-100000031BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-5-3600",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Threadripper PRO 5995WX",
+    "part_number": "100-100000444WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-threadripper-pro-5995wx",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Threadripper PRO 5975WX",
+    "part_number": "100-100000445WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-threadripper-pro-5975wx",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Threadripper 3990X",
+    "part_number": "100-100000163WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-threadripper-3990x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Threadripper 3970X",
+    "part_number": "100-100000011WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-ryzen-threadripper-3970x",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 9654",
+    "part_number": "100-000000789",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-epyc-9654",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 9554",
+    "part_number": "100-000000790",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-epyc-9554",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 7763",
+    "part_number": "100-000000312",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/cpu/amd-epyc-7763",
+    "source_name": "AMD",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 32GB 6000MHz",
+    "part_number": "CMK32GX5M2B6000C36",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c36/vengeance-ddr5-32gb-2x16gb-ddr5-6000mhz-c36-1-35v-amd-optimized-desktop-memory-cmk32gx5m2b6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 64GB 5600MHz",
+    "part_number": "CMK64GX5M2B5600C40",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b5600c40/vengeance-ddr5-64gb-2x32gb-ddr5-5600mhz-c40-1-25v-desktop-memory-cmk64gx5m2b5600c40",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 32GB 5200MHz",
+    "part_number": "CMK32GX5M2B5200C40",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5200c40/vengeance-ddr5-32gb-2x16gb-ddr5-5200mhz-c40-1-25v-desktop-memory",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR5 32GB 6400MHz",
+    "part_number": "CMT32GX5M2X6400C32",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt32gx5m2x6400c32/dominator-platinum-rgb-ddr5-32gb-2x16gb-ddr5-6400mhz-c32-1-40v-intel-xmp-amd-expo-desktop-memory-cmt32gx5m2x6400c32",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR5 64GB 5600MHz",
+    "part_number": "CMT64GX5M2X5600C40",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2x5600c40/dominator-platinum-rgb-ddr5-64gb-2x32gb-ddr5-5600mhz-c40",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 32GB 3200MHz",
+    "part_number": "CMK32GX4M2B3200C16",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2b3200c16/vengeance-lpx-32gb-2x16gb-ddr4-dram-3200mhz-c16-memory-kit-black",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 16GB 3200MHz",
+    "part_number": "CMK16GX4M2B3200C16",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/vengeance-lpx-16gb-2x8gb-ddr4-dram-3200mhz-c16-memory-kit-black",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 32GB 3600MHz",
+    "part_number": "CMK32GX4M2D3600C18",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3600c18/vengeance-lpx-32gb-2x16gb-ddr4-dram-3600mhz-c18-memory-kit-black",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB Pro DDR4 32GB 3600MHz",
+    "part_number": "CMW32GX4M2D3600C18",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw32gx4m2d3600c18/vengeance-rgb-pro-32gb-2x16gb-ddr4-dram-3600mhz-c18-memory-kit-black",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR4 32GB 3600MHz",
+    "part_number": "CMT32GX4M2D3600C18",
+    "score": 0.96,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt32gx4m2d3600c18/dominator-platinum-rgb-32gb-2x16gb-ddr4-dram-3600mhz-c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
     "component_type": "RAM",
     "brand": "Kingston",
-    "model": "FURY Beast 16GB DDR4",
+    "model": "FURY Beast DDR5 32GB 5600MHz",
+    "part_number": "KF556C36BBK2-32",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR5 32GB 6000MHz",
+    "part_number": "KF560C36BBK2-32",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR5 64GB 5200MHz",
+    "part_number": "KF552C40BBK2-64",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR4 32GB 3200MHz",
+    "part_number": "KF432C16BBK2-32",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr4-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR4 16GB 3200MHz",
     "part_number": "KF432C16BB/16",
     "score": 0.96,
     "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr4-memory",
@@ -31,8 +811,128 @@
   },
   {
     "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade DDR5 32GB 6400MHz",
+    "part_number": "KF564C32RSK2-32",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr5-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade DDR4 32GB 3600MHz",
+    "part_number": "KF436C16RBK2-32",
+    "score": 0.96,
+    "source_url": "https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr4-memory",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 RGB DDR5 32GB 6000MHz",
+    "part_number": "F5-6000J3040G16GX2-TZ5RK",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/326/1636449519/F5-6000J3040G16GX2-TZ5RK-Trident-Z5-RGB-DDR5",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 RGB DDR5 32GB 6400MHz",
+    "part_number": "F5-6400J3239G16GX2-TZ5RS",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/326/1636449519/F5-6400J3239G16GX2-TZ5RS-Trident-Z5-RGB-DDR5",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 DDR5 32GB 5600MHz",
+    "part_number": "F5-5600J3636C16GX2-TZ5K",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/326/1636449519/F5-5600J3636C16GX2-TZ5K-Trident-Z5-DDR5",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z Neo DDR4 32GB 3600MHz",
+    "part_number": "F4-3600C16D-32GTZN",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/326/1562838932/F4-3600C16D-32GTZN-Trident-Z-Neo-DDR4",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z RGB DDR4 32GB 3200MHz",
+    "part_number": "F4-3200C16D-32GTZR",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZR-Trident-Z-RGB-DDR4",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws V DDR4 32GB 3200MHz",
+    "part_number": "F4-3200C16D-32GVK",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/184/1562838932/F4-3200C16D-32GVK-Ripjaws-V-DDR4",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws V DDR4 16GB 3600MHz",
+    "part_number": "F4-3600C18D-16GVK",
+    "score": 0.96,
+    "source_url": "https://www.gskill.com/product/165/184/1562838932/F4-3600C18D-16GVK-Ripjaws-V-DDR4",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
     "brand": "Crucial",
-    "model": "Crucial 16GB DDR4",
+    "model": "DDR5 32GB 5600MHz",
+    "part_number": "CT32G56C46S5",
+    "score": 0.96,
+    "source_url": "https://www.crucial.com/memory/ddr5/ct32g56c46s5",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "DDR5 32GB 4800MHz",
+    "part_number": "CT32G48C40S5",
+    "score": 0.96,
+    "source_url": "https://www.crucial.com/memory/ddr5/ct32g48c40s5",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "DDR4 32GB 3200MHz",
+    "part_number": "CT32G4DFD832A",
+    "score": 0.96,
+    "source_url": "https://www.crucial.com/memory/ddr4/ct32g4dfd832a",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "DDR4 16GB 3200MHz",
     "part_number": "CT16G4DFRA32A",
     "score": 0.96,
     "source_url": "https://www.crucial.com/memory/ddr4/ct16g4dfra32a",
@@ -40,74 +940,124 @@
     "spider_name": "crucial_ram_spider"
   },
   {
-    "component_type": "DISK",
-    "brand": "Samsung",
-    "model": "970 EVO Plus 1TB",
-    "part_number": "MZ-V7S1T0",
-    "score": 0.95,
-    "source_url": "https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/",
-    "source_name": "Samsung",
-    "spider_name": "samsung_storage_spider"
-  },
-  {
-    "component_type": "DISK",
-    "brand": "Western Digital",
-    "model": "WD Blue 1TB",
-    "part_number": "WD10EZEX",
-    "score": 0.95,
-    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd",
-    "source_name": "Western Digital",
-    "spider_name": "wdc_storage_spider"
-  },
-  {
-    "component_type": "DISK",
-    "brand": "Seagate",
-    "model": "Barracuda 2TB",
-    "part_number": "ST2000DM008",
-    "score": 0.95,
-    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-hard-drive/",
-    "source_name": "Seagate",
-    "spider_name": "seagate_storage_spider"
-  },
-  {
-    "component_type": "MAINBOARD",
-    "brand": "ASUS",
-    "model": "ROG STRIX B550-F GAMING",
-    "part_number": "ROG-STRIX-B550-F",
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "Ballistix DDR4 32GB 3600MHz",
+    "part_number": "BL2K16G36C16U4B",
     "score": 0.96,
-    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-b550-f-gaming/",
-    "source_name": "ASUS",
-    "spider_name": "asus_mainboard_spider"
+    "source_url": "https://www.crucial.com/memory/ddr4/bl2k16g36c16u4b",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
   },
   {
-    "component_type": "MAINBOARD",
-    "brand": "MSI",
-    "model": "MAG B550 TOMAHAWK",
-    "part_number": "MAG-B550-TOMAHAWK",
+    "component_type": "RAM",
+    "brand": "TeamGroup",
+    "model": "T-Force Delta RGB DDR5 32GB 6000MHz",
+    "part_number": "FF3D532G6000HC38ADC01",
     "score": 0.96,
-    "source_url": "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK",
-    "source_name": "MSI",
-    "spider_name": "msi_mainboard_spider"
+    "source_url": "https://www.teamgroupinc.com/en/product/delta-ddr5",
+    "source_name": "TeamGroup",
+    "spider_name": "teamgroup_ram_spider"
   },
   {
-    "component_type": "MAINBOARD",
-    "brand": "Gigabyte",
-    "model": "B550 AORUS ELITE",
-    "part_number": "B550-AORUS-ELITE",
+    "component_type": "RAM",
+    "brand": "TeamGroup",
+    "model": "T-Force Vulcan DDR5 32GB 5600MHz",
+    "part_number": "FLBD532G5600HC36DC01",
     "score": 0.96,
-    "source_url": "https://www.gigabyte.com/Motherboard/B550-AORUS-ELITE-rev-10",
-    "source_name": "Gigabyte",
-    "spider_name": "gigabyte_mainboard_spider"
+    "source_url": "https://www.teamgroupinc.com/en/product/vulcan-ddr5",
+    "source_name": "TeamGroup",
+    "spider_name": "teamgroup_ram_spider"
   },
   {
-    "component_type": "MAINBOARD",
-    "brand": "ASRock",
-    "model": "B550 Steel Legend",
-    "part_number": "B550-STEEL-LEGEND",
+    "component_type": "RAM",
+    "brand": "TeamGroup",
+    "model": "T-Force Dark Za DDR4 32GB 3600MHz",
+    "part_number": "TDZAD432G3600HC18JDC01",
     "score": 0.96,
-    "source_url": "https://www.asrock.com/MB/AMD/B550%20Steel%20Legend/",
-    "source_name": "ASRock",
-    "spider_name": "asrock_mainboard_spider"
+    "source_url": "https://www.teamgroupinc.com/en/product/dark-za-ddr4",
+    "source_name": "TeamGroup",
+    "spider_name": "teamgroup_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Patriot",
+    "model": "Viper Venom DDR5 32GB 6200MHz",
+    "part_number": "PVEV532G620C40K",
+    "score": 0.96,
+    "source_url": "https://www.patriotmemory.com/products/viper-venom-ddr5-performance-memory",
+    "source_name": "Patriot",
+    "spider_name": "patriot_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Patriot",
+    "model": "Viper Steel DDR4 32GB 3600MHz",
+    "part_number": "PVS432G360C8K",
+    "score": 0.96,
+    "source_url": "https://www.patriotmemory.com/products/viper-steel-ddr4-performance-memory",
+    "source_name": "Patriot",
+    "spider_name": "patriot_ram_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4090",
+    "part_number": "RTX-4090",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4080 SUPER",
+    "part_number": "RTX-4080-SUPER",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4080-super/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4080",
+    "part_number": "RTX-4080",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4080/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4070 Ti SUPER",
+    "part_number": "RTX-4070-TI-SUPER",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-ti-super/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4070 Ti",
+    "part_number": "RTX-4070-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4070 SUPER",
+    "part_number": "RTX-4070-SUPER",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-super/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
   },
   {
     "component_type": "GPU",
@@ -121,11 +1071,281 @@
   },
   {
     "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4060 Ti",
+    "part_number": "RTX-4060-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060-4060ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4060",
+    "part_number": "RTX-4060",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060-4060ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3090 Ti",
+    "part_number": "RTX-3090-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3090",
+    "part_number": "RTX-3090",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3080 Ti",
+    "part_number": "RTX-3080-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080-3080ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3080",
+    "part_number": "RTX-3080",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080-3080ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3070 Ti",
+    "part_number": "RTX-3070-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3070-3070ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3070",
+    "part_number": "RTX-3070",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3070-3070ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3060 Ti",
+    "part_number": "RTX-3060-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3060",
+    "part_number": "RTX-3060",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1660 SUPER",
+    "part_number": "GTX-1660-SUPER",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1660-super/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1660 Ti",
+    "part_number": "GTX-1660-TI",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1660-ti/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1650 SUPER",
+    "part_number": "GTX-1650-SUPER",
+    "score": 0.96,
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1650-super/",
+    "source_name": "NVIDIA",
+    "spider_name": "nvidia_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7900 XTX",
+    "part_number": "RX-7900-XTX",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7900 XT",
+    "part_number": "RX-7900-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7900 GRE",
+    "part_number": "RX-7900-GRE",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900gre",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
     "brand": "AMD",
     "model": "Radeon RX 7800 XT",
     "part_number": "RX-7800-XT",
     "score": 0.96,
     "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7800-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7700 XT",
+    "part_number": "RX-7700-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7700-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 7600",
+    "part_number": "RX-7600",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7600",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6950 XT",
+    "part_number": "RX-6950-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6950-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6900 XT",
+    "part_number": "RX-6900-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6900-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6800 XT",
+    "part_number": "RX-6800-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6800-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6800",
+    "part_number": "RX-6800",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6800",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6750 XT",
+    "part_number": "RX-6750-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6750-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6700 XT",
+    "part_number": "RX-6700-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6700-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6650 XT",
+    "part_number": "RX-6650-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6650-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6600 XT",
+    "part_number": "RX-6600-XT",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6600-xt",
+    "source_name": "AMD",
+    "spider_name": "amd_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6600",
+    "part_number": "RX-6600",
+    "score": 0.96,
+    "source_url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6600",
     "source_name": "AMD",
     "spider_name": "amd_gpu_chip_spider"
   },
@@ -141,12 +1361,3642 @@
   },
   {
     "component_type": "GPU",
-    "brand": "ASUS",
-    "model": "TUF RTX 4070",
-    "part_number": "TUF-RTX-4070",
+    "brand": "Intel",
+    "model": "Arc A770 16GB",
+    "part_number": "ARC-A770-16GB",
     "score": 0.96,
-    "source_url": "https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4070/",
+    "source_url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/a-series/arc-a770.html",
+    "source_name": "Intel",
+    "spider_name": "intel_arc_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "Intel",
+    "model": "Arc A750",
+    "part_number": "ARC-A750",
+    "score": 0.96,
+    "source_url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/a-series/arc-a750.html",
+    "source_name": "Intel",
+    "spider_name": "intel_arc_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "Intel",
+    "model": "Arc A580",
+    "part_number": "ARC-A580",
+    "score": 0.96,
+    "source_url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/a-series/arc-a580.html",
+    "source_name": "Intel",
+    "spider_name": "intel_arc_gpu_chip_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "Intel",
+    "model": "Arc A380",
+    "part_number": "ARC-A380",
+    "score": 0.96,
+    "source_url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/a-series/arc-a380.html",
+    "source_name": "Intel",
+    "spider_name": "intel_arc_gpu_chip_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG MAXIMUS Z790 HERO",
+    "part_number": "ROG-MAXIMUS-Z790-HERO",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-maximus/rog-maximus-z790-hero/",
     "source_name": "ASUS",
-    "spider_name": "asus_gpu_aib_spider"
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX Z790-E GAMING WIFI",
+    "part_number": "ROG-STRIX-Z790-E-GAMING-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-z790-e-gaming-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX Z790-F GAMING WIFI",
+    "part_number": "ROG-STRIX-Z790-F-GAMING-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-z790-f-gaming-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING Z790-PLUS WIFI",
+    "part_number": "TUF-GAMING-Z790-PLUS-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-z790-plus-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "PRIME Z790-P WIFI",
+    "part_number": "PRIME-Z790-P-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/prime/prime-z790-p-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG CROSSHAIR X670E HERO",
+    "part_number": "ROG-CROSSHAIR-X670E-HERO",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-crosshair/rog-crosshair-x670e-hero/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX X670E-E GAMING WIFI",
+    "part_number": "ROG-STRIX-X670E-E-GAMING-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-x670e-e-gaming-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX B650E-F GAMING WIFI",
+    "part_number": "ROG-STRIX-B650E-F-GAMING-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-b650e-f-gaming-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING B650-PLUS WIFI",
+    "part_number": "TUF-GAMING-B650-PLUS-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650-plus-wifi/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX B550-F GAMING",
+    "part_number": "ROG-STRIX-B550-F",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix/rog-strix-b550-f-gaming/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING B550-PLUS",
+    "part_number": "TUF-GAMING-B550-PLUS",
+    "score": 0.96,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b550-plus/",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MEG Z790 ACE",
+    "part_number": "MEG-Z790-ACE",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MEG-Z790-ACE",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MPG Z790 CARBON WIFI",
+    "part_number": "MPG-Z790-CARBON-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MPG-Z790-CARBON-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MPG Z790 EDGE WIFI",
+    "part_number": "MPG-Z790-EDGE-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MPG-Z790-EDGE-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG Z790 TOMAHAWK WIFI",
+    "part_number": "MAG-Z790-TOMAHAWK-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MAG-Z790-TOMAHAWK-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "PRO Z790-A WIFI",
+    "part_number": "PRO-Z790-A-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/PRO-Z790-A-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MEG X670E ACE",
+    "part_number": "MEG-X670E-ACE",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MEG-X670E-ACE",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MPG X670E CARBON WIFI",
+    "part_number": "MPG-X670E-CARBON-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MPG-X670E-CARBON-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG B650 TOMAHAWK WIFI",
+    "part_number": "MAG-B650-TOMAHAWK-WIFI",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG B550 TOMAHAWK",
+    "part_number": "MAG-B550-TOMAHAWK",
+    "score": 0.96,
+    "source_url": "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "Z790 AORUS MASTER",
+    "part_number": "Z790-AORUS-MASTER",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/Z790-AORUS-MASTER-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "Z790 AORUS ELITE AX",
+    "part_number": "Z790-AORUS-ELITE-AX",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/Z790-AORUS-ELITE-AX-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "Z790 GAMING X AX",
+    "part_number": "Z790-GAMING-X-AX",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/Z790-GAMING-X-AX-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "X670E AORUS MASTER",
+    "part_number": "X670E-AORUS-MASTER",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/X670E-AORUS-MASTER-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "X670 AORUS ELITE AX",
+    "part_number": "X670-AORUS-ELITE-AX",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/X670-AORUS-ELITE-AX-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B650 AORUS ELITE AX",
+    "part_number": "B650-AORUS-ELITE-AX",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B550 AORUS ELITE",
+    "part_number": "B550-AORUS-ELITE",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/B550-AORUS-ELITE-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B550 GAMING X V2",
+    "part_number": "B550-GAMING-X-V2",
+    "score": 0.96,
+    "source_url": "https://www.gigabyte.com/Motherboard/B550-Gaming-X-V2-rev-10",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "Z790 Taichi",
+    "part_number": "Z790-TAICHI",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/Intel/Z790%20Taichi/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "Z790 PG Lightning",
+    "part_number": "Z790-PG-LIGHTNING",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/Intel/Z790%20PG%20Lightning/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "X670E Taichi",
+    "part_number": "X670E-TAICHI",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/X670E%20Taichi/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "X670E PG Lightning",
+    "part_number": "X670E-PG-LIGHTNING",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/X670E%20PG%20Lightning/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B650 PG Lightning",
+    "part_number": "B650-PG-LIGHTNING",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/B650%20PG%20Lightning/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B550 Steel Legend",
+    "part_number": "B550-STEEL-LEGEND",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/B550%20Steel%20Legend/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B550 Phantom Gaming 4",
+    "part_number": "B550-PHANTOM-GAMING-4",
+    "score": 0.96,
+    "source_url": "https://www.asrock.com/MB/AMD/B550%20Phantom%20Gaming%204/",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 PRO 2TB",
+    "part_number": "MZ-V9P2T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-pcie-4-0-nvme-ssd-2tb-mz-v9p2t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 PRO 1TB",
+    "part_number": "MZ-V9P1T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-pcie-4-0-nvme-ssd-1tb-mz-v9p1t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 PRO with Heatsink 2TB",
+    "part_number": "MZ-V9P2T0CW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-w-heatsink-pcie-4-0-nvme-ssd-2tb-mz-v9p2t0cw-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "980 PRO 2TB",
+    "part_number": "MZ-V8P2T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/980-pro-pcie-4-0-nvme-ssd-2tb-mz-v8p2t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "980 PRO 1TB",
+    "part_number": "MZ-V8P1T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/980-pro-pcie-4-0-nvme-ssd-1tb-mz-v8p1t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "970 EVO Plus 2TB",
+    "part_number": "MZ-V7S2T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/ssd-970-evo-plus-nvme-m-2-2tb-mz-v7s2t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "970 EVO Plus 1TB",
+    "part_number": "MZ-V7S1T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/ssd-970-evo-plus-nvme-m-2-1tb-mz-v7s1t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 EVO 2TB",
+    "part_number": "MZ-77E2T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-evo-sata-2-5-ssd-2tb-mz-77e2t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 EVO 1TB",
+    "part_number": "MZ-77E1T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-evo-sata-2-5-ssd-1tb-mz-77e1t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 QVO 4TB",
+    "part_number": "MZ-77Q4T0BW",
+    "score": 0.95,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-qvo-sata-iii-2-5-ssd-4tb-mz-77q4t0b-am/",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD_BLACK SN850X 2TB",
+    "part_number": "WDS200T2X0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD_BLACK SN850X 1TB",
+    "part_number": "WDS100T2X0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD_BLACK SN770 2TB",
+    "part_number": "WDS200T3X0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD_BLACK SN770 1TB",
+    "part_number": "WDS100T3X0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Blue SN580 2TB",
+    "part_number": "WDS200T3B0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-sn580-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Blue SN580 1TB",
+    "part_number": "WDS100T3B0E",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-sn580-nvme-ssd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Red Plus 8TB",
+    "part_number": "WD80EFPX",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-red-plus-sata-3-5-hdd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Blue 4TB",
+    "part_number": "WD40EZAX",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Western Digital",
+    "model": "WD Blue 2TB",
+    "part_number": "WD20EZBX",
+    "score": 0.95,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd",
+    "source_name": "Western Digital",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 530 2TB",
+    "part_number": "ZP2000GM3A013",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/gaming-drives/pc-gaming/firecuda-530-ssd/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 530 1TB",
+    "part_number": "ZP1000GM3A013",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/gaming-drives/pc-gaming/firecuda-530-ssd/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Barracuda 8TB",
+    "part_number": "ST8000DM004",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Barracuda 4TB",
+    "part_number": "ST4000DM004",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Barracuda 2TB",
+    "part_number": "ST2000DM008",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf 8TB",
+    "part_number": "ST8000VN004",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/nas-drives/ironwolf-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf 4TB",
+    "part_number": "ST4000VN006",
+    "score": 0.95,
+    "source_url": "https://www.seagate.com/products/nas-drives/ironwolf-hard-drive/",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "T700 2TB",
+    "part_number": "CT2000T700SSD3",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/t700/ct2000t700ssd3",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "T700 1TB",
+    "part_number": "CT1000T700SSD3",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/t700/ct1000t700ssd3",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P5 Plus 2TB",
+    "part_number": "CT2000P5PSSD8",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/p5-plus/ct2000p5pssd8",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P5 Plus 1TB",
+    "part_number": "CT1000P5PSSD8",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/p5-plus/ct1000p5pssd8",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "MX500 2TB",
+    "part_number": "CT2000MX500SSD1",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/mx500/ct2000mx500ssd1",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "MX500 1TB",
+    "part_number": "CT1000MX500SSD1",
+    "score": 0.95,
+    "source_url": "https://www.crucial.com/ssd/mx500/ct1000mx500ssd1",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "KC3000 2TB",
+    "part_number": "SKC3000D/2048G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/kc3000-nvme-m2-solid-state-drive",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "KC3000 1TB",
+    "part_number": "SKC3000S/1024G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/kc3000-nvme-m2-solid-state-drive",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "NV2 2TB",
+    "part_number": "SNV2S/2000G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/nv2-nvme-pcie-ssd",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "NV2 1TB",
+    "part_number": "SNV2S/1000G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/nv2-nvme-pcie-ssd",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "A400 960GB",
+    "part_number": "SA400S37/960G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/a400-solid-state-drive",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "A400 480GB",
+    "part_number": "SA400S37/480G",
+    "score": 0.95,
+    "source_url": "https://www.kingston.com/en/ssd/a400-solid-state-drive",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-10900KF",
+    "part_number": "BX80684i9109",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i9-10900kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-10900",
+    "part_number": "BX80684i9109",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i9-10900.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-10850K",
+    "part_number": "BX80684i9108",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i9-10850k.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-10700KF",
+    "part_number": "BX80684i7107",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i7-10700kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-10700",
+    "part_number": "BX80684i7107",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i7-10700.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-10600KF",
+    "part_number": "BX80684i5106",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-10600kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-10600",
+    "part_number": "BX80684i5106",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-10600.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-10400",
+    "part_number": "BX80684i5104",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-10400.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-10400F",
+    "part_number": "BX80684i5104",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-10400f.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-10300",
+    "part_number": "BX80684i3103",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i3-10300.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-10100",
+    "part_number": "BX80684i3101",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i3-10100.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-10100F",
+    "part_number": "BX80684i3101",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i3-10100f.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-11900KF",
+    "part_number": "BX80708i9119",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i9-11900kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-11900",
+    "part_number": "BX80708i9119",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i9-11900.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-11700KF",
+    "part_number": "BX80708i7117",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i7-11700kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-11700",
+    "part_number": "BX80708i7117",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i7-11700.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-11600KF",
+    "part_number": "BX80708i5116",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-11600kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-11600",
+    "part_number": "BX80708i5116",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-11600.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-11400",
+    "part_number": "BX80708i5114",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-11400.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-11400F",
+    "part_number": "BX80708i5114",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i5-11400f.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-11300",
+    "part_number": "BX80708i3113",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i3-11300.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-11100",
+    "part_number": "BX80708i3111",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/i3-11100.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-3465X",
+    "part_number": "PK8071305W346",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-3465x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-3445",
+    "part_number": "PK8071305W344",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-3445.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-3435X",
+    "part_number": "PK8071305W343",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-3435x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-2475X",
+    "part_number": "PK8071305W247",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-2475x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-2465X",
+    "part_number": "PK8071305W246",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-2465x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W-2445",
+    "part_number": "PK8071305W244",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w-2445.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W9-3595X",
+    "part_number": "PK8071305W935",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w9-3595x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W9-3575X",
+    "part_number": "PK8071305W935",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w9-3575x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W7-3465X",
+    "part_number": "PK8071305W734",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w7-3465x.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon W7-3455",
+    "part_number": "PK8071305W734",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-w7-3455.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon E-2488",
+    "part_number": "PK8071305E248",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-e-2488.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon E-2486",
+    "part_number": "PK8071305E248",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-e-2486.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon E-2478",
+    "part_number": "PK8071305E247",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-e-2478.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Xeon E-2468",
+    "part_number": "PK8071305E246",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/xeon-e-2468.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 7800",
+    "part_number": "100-00000178BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/7800.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 8700G",
+    "part_number": "100-100001870BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/apu/amd-ryzen-7-8700g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 8600G",
+    "part_number": "100-100001860BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/apu/amd-ryzen-5-8600g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 8500G",
+    "part_number": "100-100001850BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/apu/amd-ryzen-5-8500g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 3 8300G",
+    "part_number": "100-100001830BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/apu/amd-ryzen-3-8300g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 5700",
+    "part_number": "100-100000570BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/5700.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 3 5300G",
+    "part_number": "100-100000530BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/5300g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 5600G",
+    "part_number": "100-100000560BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/5600g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 5700G",
+    "part_number": "100-100000570BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/5700g.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 7980X",
+    "part_number": "100-100000798WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/7980x.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 7970X",
+    "part_number": "100-100000797WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/7970x.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 7960X",
+    "part_number": "100-100000796WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/7960x.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 5995WX",
+    "part_number": "100-100000599WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/5995wx.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 5975WX",
+    "part_number": "100-100000597WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/5975wx.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 5965WX",
+    "part_number": "100-100000596WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/5965wx.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 5955WX",
+    "part_number": "100-100000595WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/5955wx.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen Threadripper PRO 5945WX",
+    "part_number": "100-100000594WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/5945wx.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 9454",
+    "part_number": "100-000000945WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/9454.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 9354",
+    "part_number": "100-000000935WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/9354.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 9254",
+    "part_number": "100-000000925WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/9254.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 7773X",
+    "part_number": "100-000000777WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/7773x.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 7713",
+    "part_number": "100-000000771WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/7713.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 7543",
+    "part_number": "100-000000754WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/7543.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "EPYC 7443",
+    "part_number": "100-000000744WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/server/epyc/7443.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3080 12GB",
+    "part_number": "RTX308012GB",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-3080-12gb.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3060 8GB",
+    "part_number": "RTX30608GB",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-3060-8gb.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 3050",
+    "part_number": "RTX3050",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-3050.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1660",
+    "part_number": "GTX1660",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1660.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1650",
+    "part_number": "GTX1650",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1650.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1630",
+    "part_number": "GTX1630",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1630.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6700",
+    "part_number": "RX6700",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-6700.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6500 XT",
+    "part_number": "RX6500XT",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-6500-xt.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 6400",
+    "part_number": "RX6400",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-6400.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "Intel",
+    "model": "Arc A310",
+    "part_number": "ARCA310",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/arc-a310.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 32GB 5600MHz",
+    "part_number": "CMK32GX5M2B5600C40",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c40",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 32GB 6000MHz CL36",
+    "part_number": "CMK32GX5M2B6000C36",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 32GB 6400MHz CL32",
+    "part_number": "CMK32GX5M2B6400C32",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx5m2b6400c32",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 64GB 5200MHz",
+    "part_number": "CMK64GX5M2B5200C40",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b5200c40",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance DDR5 64GB 6000MHz",
+    "part_number": "CMK64GX5M2B6000C36",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk64gx5m2b6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB DDR5 32GB 6000MHz",
+    "part_number": "CMH32GX5M2E6000C36",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2e6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB DDR5 32GB 6400MHz",
+    "part_number": "CMH32GX5M2E6400C32",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmh32gx5m2e6400c32",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB DDR5 64GB 5600MHz",
+    "part_number": "CMH64GX5M2B5600C40",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmh64gx5m2b5600c40",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR5 32GB 6000MHz",
+    "part_number": "CMT32GX5M2X6000C36",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt32gx5m2x6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR5 64GB 6000MHz",
+    "part_number": "CMT64GX5M2X6000C36",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt64gx5m2x6000c36",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR5 32GB 5200MHz White",
+    "part_number": "CMT32GX5M2B5200C38W",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt32gx5m2b5200c38w",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 Neo DDR5 32GB 6000MHz",
+    "part_number": "F5-6000J3040F16GX2-TZ5N",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-6000J3040F16GX2-TZ5N",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 RGB DDR5 32GB 6400MHz Black",
+    "part_number": "F5-6400J3239F16GX2-TZ5RK",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-6400J3239F16GX2-TZ5RK",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 RGB DDR5 32GB 6400MHz Silver",
+    "part_number": "F5-6400J3239F16GX2-TZ5RS",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-6400J3239F16GX2-TZ5RS",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws S5 DDR5 32GB 6000MHz",
+    "part_number": "F5-6000J3038F16GX2-RS5K",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-6000J3038F16GX2-RS5K",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws S5 DDR5 32GB 5600MHz",
+    "part_number": "F5-5600J2834F16GX2-RS5K",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-5600J2834F16GX2-RS5K",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z5 RGB DDR5 48GB 6800MHz",
+    "part_number": "F5-6800J3445F24GX2-TZ5RK",
+    "score": 0.98,
+    "source_url": "https://www.gskill.com/product/F5-6800J3445F24GX2-TZ5RK",
+    "source_name": "G.Skill",
+    "spider_name": "gskill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast Black DDR5 32GB 5600MHz",
+    "part_number": "KF556C36BBK2-32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf556c36bbk2-32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast Black DDR5 32GB 6000MHz",
+    "part_number": "KF560C36BBK2-32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf560c36bbk2-32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast Black DDR5 64GB 5600MHz",
+    "part_number": "KF556C40BBK2-64",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf556c40bbk2-64",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast RGB DDR5 32GB 6000MHz",
+    "part_number": "KF560C36BBEK2-32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf560c36bbek2-32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade Silver DDR5 32GB 6000MHz",
+    "part_number": "KF560C40RS-32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf560c40rs-32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade Silver DDR5 32GB 6400MHz",
+    "part_number": "KF564C32RS-32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf564c32rs-32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade DDR5 64GB 5600MHz",
+    "part_number": "KF556C40RS-64",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf556c40rs-64",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 64GB 3200MHz",
+    "part_number": "CMK64GX4M2E3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmk64gx4m2e3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 32GB 3200MHz",
+    "part_number": "CMW32GX4M2C3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmw32gx4m2c3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 32GB 3600MHz",
+    "part_number": "CMW32GX4M2Z3600C18",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmw32gx4m2z3600c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws V DDR4 32GB 3600MHz",
+    "part_number": "F4-3600C16D-32GVKC",
+    "score": 0.98,
+    "source_url": "https://www.g.skill.com/memory/f4-3600c16d-32gvkc",
+    "source_name": "G.Skill",
+    "spider_name": "g.skill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z RGB DDR4 32GB 3600MHz",
+    "part_number": "F4-3600C16D-32GTZR",
+    "score": 0.98,
+    "source_url": "https://www.g.skill.com/memory/f4-3600c16d-32gtzr",
+    "source_name": "G.Skill",
+    "spider_name": "g.skill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Trident Z Neo DDR4 64GB 3600MHz",
+    "part_number": "F4-3600C18D-64GTZN",
+    "score": 0.98,
+    "source_url": "https://www.g.skill.com/memory/f4-3600c18d-64gtzn",
+    "source_name": "G.Skill",
+    "spider_name": "g.skill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR4 32GB 3600MHz",
+    "part_number": "KF436C17BBK2/32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf436c17bbk2/32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Renegade DDR4 32GB 3200MHz",
+    "part_number": "KF432C16RBK2/32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf432c16rbk2/32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX Z790-A GAMING WIFI",
+    "part_number": "ROG-STRIX-Z790-A-GAMING-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix-z790-a-gaming-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ProArt Z790-CREATOR WIFI",
+    "part_number": "ProArt-Z790-CREATOR-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/proart-z790-creator-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG MAXIMUS Z790 APEX",
+    "part_number": "ROG-MAXIMUS-Z790-APEX",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-maximus-z790-apex",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG MAXIMUS Z790 EXTREME",
+    "part_number": "ROG-MAXIMUS-Z790-EXTREME",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-maximus-z790-extreme",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING B760-PLUS WIFI",
+    "part_number": "TUF-GAMING-B760-PLUS-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming-b760-plus-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "PRIME B760-PLUS",
+    "part_number": "PRIME-B760-PLUS",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/prime-b760-plus",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX B760-F GAMING WIFI",
+    "part_number": "ROG-STRIX-B760-F-GAMING-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/rog-strix-b760-f-gaming-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING B760M-PLUS WIFI",
+    "part_number": "TUF-GAMING-B760M-PLUS-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming-b760m-plus-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "PRIME B760M-A WIFI",
+    "part_number": "PRIME-B760M-A-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboards-components/motherboards/prime-b760m-a-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MEG Z790 GODLIKE",
+    "part_number": "MEG-Z790-GODLIKE",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/Motherboard/meg-z790-godlike",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG B760 TOMAHAWK WIFI",
+    "part_number": "MAG-B760-TOMAHAWK-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/Motherboard/mag-b760-tomahawk-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG B760M MORTAR WIFI",
+    "part_number": "MAG-B760M-MORTAR-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/Motherboard/mag-b760m-mortar-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "PRO B760-P WIFI",
+    "part_number": "PRO-B760-P-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/Motherboard/pro-b760-p-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "PRO B760M-A WIFI",
+    "part_number": "PRO-B760M-A-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/Motherboard/pro-b760m-a-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "Z790 UD AX",
+    "part_number": "Z790-UD-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/Motherboard/z790-ud-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B760 AORUS ELITE AX",
+    "part_number": "B760-AORUS-ELITE-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/Motherboard/b760-aorus-elite-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B760 GAMING X AX",
+    "part_number": "B760-GAMING-X-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/Motherboard/b760-gaming-x-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B760M AORUS ELITE AX",
+    "part_number": "B760M-AORUS-ELITE-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/Motherboard/b760m-aorus-elite-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B760M DS3H AX",
+    "part_number": "B760M-DS3H-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/Motherboard/b760m-ds3h-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "Z790 Steel Legend WiFi",
+    "part_number": "Z790-Steel-Legend-WiFi",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/z790-steel-legend-wifi",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "Z790 Pro RS WiFi",
+    "part_number": "Z790-Pro-RS-WiFi",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/z790-pro-rs-wifi",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B760 Steel Legend WiFi",
+    "part_number": "B760-Steel-Legend-WiFi",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/b760-steel-legend-wifi",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B760 Pro RS",
+    "part_number": "B760-Pro-RS",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/b760-pro-rs",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B760M Steel Legend WiFi",
+    "part_number": "B760M-Steel-Legend-WiFi",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/b760m-steel-legend-wifi",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B760M PG Riptide",
+    "part_number": "B760M-PG-Riptide",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/mb/b760m-pg-riptide",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "TUF GAMING X670E-PLUS WIFI",
+    "part_number": "TUF-GAMING-X670E-PLUS-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboard/tuf-gaming-x670e-plus-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ProArt X670E-CREATOR WIFI",
+    "part_number": "ProArt-X670E-CREATOR-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboard/proart-x670e-creator-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASUS",
+    "model": "ROG STRIX B650E-E GAMING WIFI",
+    "part_number": "ROG-STRIX-B650E-E-GAMING-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.asus.com/motherboard/rog-strix-b650e-e-gaming-wifi",
+    "source_name": "ASUS",
+    "spider_name": "asus_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MEG X670E GODLIKE",
+    "part_number": "MEG-X670E-GODLIKE",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/motherboard/meg-x670e-godlike",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "MAG X670E TOMAHAWK WIFI",
+    "part_number": "MAG-X670E-TOMAHAWK-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/motherboard/mag-x670e-tomahawk-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "MSI",
+    "model": "PRO B650-P WIFI",
+    "part_number": "PRO-B650-P-WIFI",
+    "score": 0.98,
+    "source_url": "https://www.msi.com/motherboard/pro-b650-p-wifi",
+    "source_name": "MSI",
+    "spider_name": "msi_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "Gigabyte",
+    "model": "B650M AORUS ELITE AX",
+    "part_number": "B650M-AORUS-ELITE-AX",
+    "score": 0.98,
+    "source_url": "https://www.gigabyte.com/motherboard/b650m-aorus-elite-ax",
+    "source_name": "Gigabyte",
+    "spider_name": "gigabyte_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "X670E Steel Legend",
+    "part_number": "X670E-Steel-Legend",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/motherboard/x670e-steel-legend",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B650 Steel Legend WiFi",
+    "part_number": "B650-Steel-Legend-WiFi",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/motherboard/b650-steel-legend-wifi",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "MAINBOARD",
+    "brand": "ASRock",
+    "model": "B650M PG Riptide",
+    "part_number": "B650M-PG-Riptide",
+    "score": 0.98,
+    "source_url": "https://www.asrock.com/motherboard/b650m-pg-riptide",
+    "source_name": "ASRock",
+    "spider_name": "asrock_mainboard_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "980 PRO 500GB",
+    "part_number": "MZ-V980PBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/980-pro-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "970 EVO Plus 250GB",
+    "part_number": "MZ-V970EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/970-evo-plus-250gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "970 EVO Plus 500GB",
+    "part_number": "MZ-V970EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/970-evo-plus-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "980 500GB",
+    "part_number": "MZ-V980EBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/980-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "980 1TB",
+    "part_number": "MZ-V980EBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/980-1tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 EVO 250GB",
+    "part_number": "MZ-V870EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-evo-250gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 EVO 500GB",
+    "part_number": "MZ-V870EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-evo-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 EVO 4TB",
+    "part_number": "MZ-V870EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-evo-4tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 QVO 1TB",
+    "part_number": "MZ-V870EBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-qvo-1tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 QVO 2TB",
+    "part_number": "MZ-V870EBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-qvo-2tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "870 QVO 8TB",
+    "part_number": "MZ-V870EBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/870-qvo-8tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 PRO 4TB",
+    "part_number": "MZ-V990PBW",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-4tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 EVO 1TB",
+    "part_number": "MZ-V990EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-evo-1tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "990 EVO 2TB",
+    "part_number": "MZ-V990EBT",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-evo-2tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850X 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850x-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850X 2TB",
+    "part_number": "WDS2T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850x-2tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850X 4TB",
+    "part_number": "WDS4T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850x-4tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850 500GB",
+    "part_number": "WDS500G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850-500gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Black SN850 2TB",
+    "part_number": "WDS2T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn850-2tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN770 250GB",
+    "part_number": "WDS250G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn770-250gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN770 500GB",
+    "part_number": "WDS500G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn770-500gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN770 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn770-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN770 2TB",
+    "part_number": "WDS2T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn770-2tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN580 250GB",
+    "part_number": "WDS250G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn580-250gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN580 500GB",
+    "part_number": "WDS500G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn580-500gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN580 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn580-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD SN580 2TB",
+    "part_number": "WDS2T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/sn580-2tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SA510 250GB",
+    "part_number": "WDS250G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sa510-250gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SA510 500GB",
+    "part_number": "WDS500G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sa510-500gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SA510 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sa510-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SN570 250GB",
+    "part_number": "WDS250G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sn570-250gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SN570 500GB",
+    "part_number": "WDS500G1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sn570-500gb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SN570 1TB",
+    "part_number": "WDS1T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sn570-1tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "WD Blue SN570 2TB",
+    "part_number": "WDS2T1X0",
+    "score": 0.98,
+    "source_url": "https://www.westerndigital.com/products/internal-drives/blue-sn570-2tb",
+    "source_name": "WD",
+    "spider_name": "wdc_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "BarraCuda 1TB",
+    "part_number": "ST1000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-1tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "BarraCuda 2TB",
+    "part_number": "ST2000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-2tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "BarraCuda 4TB",
+    "part_number": "ST4000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-4tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "BarraCuda 8TB",
+    "part_number": "ST8000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/barracuda-8tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf 2TB",
+    "part_number": "ST2000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-2tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf 12TB",
+    "part_number": "ST12000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-12tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf 16TB",
+    "part_number": "ST16000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-16tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf Pro 4TB",
+    "part_number": "ST4000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-pro-4tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf Pro 8TB",
+    "part_number": "ST8000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-pro-8tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf Pro 16TB",
+    "part_number": "ST16000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-pro-16tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "IronWolf Pro 20TB",
+    "part_number": "ST20000VN",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/ironwolf-pro-20tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Exos X18 16TB",
+    "part_number": "ST16000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/exos-x18-16tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Exos X18 18TB",
+    "part_number": "ST18000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/exos-x18-18tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Exos X20 20TB",
+    "part_number": "ST20000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/exos-x20-20tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "Exos X22 22TB",
+    "part_number": "ST22000DM",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/products/hard-drives/exos-x22-22tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P5 Plus 500GB",
+    "part_number": "CT500P5SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p5-plus-500gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 Plus 500GB",
+    "part_number": "CT500P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-plus-500gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 Plus 1TB",
+    "part_number": "CT100P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-plus-1tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 Plus 2TB",
+    "part_number": "CT200P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-plus-2tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 Plus 4TB",
+    "part_number": "CT400P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-plus-4tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 500GB",
+    "part_number": "CT500P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-500gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 1TB",
+    "part_number": "CT100P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-1tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 2TB",
+    "part_number": "CT200P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-2tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "P3 4TB",
+    "part_number": "CT400P3SSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/p3-4tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "MX500 250GB",
+    "part_number": "CT250MXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/mx500-250gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "MX500 500GB",
+    "part_number": "CT500MXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/mx500-500gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "MX500 4TB",
+    "part_number": "CT400MXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/mx500-4tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "BX500 240GB",
+    "part_number": "CT240BXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/bx500-240gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "BX500 480GB",
+    "part_number": "CT480BXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/bx500-480gb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "BX500 1TB",
+    "part_number": "CT100BXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/bx500-1tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Crucial",
+    "model": "BX500 2TB",
+    "part_number": "CT200BXSSD",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/ssd/bx500-2tb",
+    "source_name": "Crucial",
+    "spider_name": "crucial_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "KC3000 512GB",
+    "part_number": "SKC3000S/512GB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/kc3000-512gb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "KC3000 4TB",
+    "part_number": "SKC3000S/4TB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/kc3000-4tb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "NV2 250GB",
+    "part_number": "SKC3000D/250GB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/nv2-250gb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "NV2 500GB",
+    "part_number": "SKC3000D/500GB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/nv2-500gb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "NV2 4TB",
+    "part_number": "SKC3000D/4TB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/nv2-4tb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Kingston",
+    "model": "A400 240GB",
+    "part_number": "SKC3000D/240GB",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/ssd/a400-240gb",
+    "source_name": "Kingston",
+    "spider_name": "kingston_storage_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 32GB 3200MHz White",
+    "part_number": "CMK32GX4M2Z3200C16W",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2z3200c16w",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 16GB 3000MHz",
+    "part_number": "CMK16GX4M2D3000C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2d3000c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 16GB 2400MHz",
+    "part_number": "CMK16GX4M2A2400C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk16gx4m2a2400c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 32GB 2666MHz",
+    "part_number": "CMK32GX4M2A2666C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2a2666c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 32GB 3000MHz",
+    "part_number": "CMK32GX4M2D3000C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2d3000c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 32GB 4000MHz",
+    "part_number": "CMK32GX4M2K4000C19",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk32gx4m2k4000c19",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 16GB 3200MHz",
+    "part_number": "CMW16GX4M2C3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw16gx4m2c3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 16GB 3600MHz",
+    "part_number": "CMW16GX4M2C3600C18",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw16gx4m2c3600c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 32GB 3000MHz",
+    "part_number": "CMW32GX4M2C3000C15",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw32gx4m2c3000c15",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 32GB 4000MHz",
+    "part_number": "CMW32GX4M2K4000C18",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw32gx4m2k4000c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 64GB 3200MHz",
+    "part_number": "CMW64GX4M2E3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw64gx4m2e3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance RGB PRO DDR4 64GB 3600MHz",
+    "part_number": "CMW64GX4M2D3600C18",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmw64gx4m2d3600c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR4 16GB 3200MHz",
+    "part_number": "CMT16GX4M2C3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt16gx4m2c3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR4 32GB 3200MHz",
+    "part_number": "CMT32GX4M2C3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt32gx4m2c3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Dominator Platinum RGB DDR4 64GB 3200MHz",
+    "part_number": "CMT64GX4M2C3200C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmt64gx4m2c3200c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance SODIMM DDR4 16GB 2400MHz",
+    "part_number": "CMSX16GX4M2A2400C16",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmsx16gx4m2a2400c16",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance SODIMM DDR4 32GB 2666MHz",
+    "part_number": "CMSX32GX4M2A2666C18",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmsx32gx4m2a2666c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance SODIMM DDR4 64GB 3200MHz",
+    "part_number": "CMSX64GX4M2A3200C22",
+    "score": 0.98,
+    "source_url": "https://www.corsair.com/memory/cmsx64gx4m2a3200c22",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "DDR4 SODIMM 16GB 3200MHz",
+    "part_number": "CT16G4SFRA32A",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/memory/ct16g4sfra32a",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Crucial",
+    "model": "DDR4 SODIMM 32GB 3200MHz",
+    "part_number": "CT32G4SFD832A",
+    "score": 0.98,
+    "source_url": "https://www.crucial.com/memory/ct32g4sfd832a",
+    "source_name": "Crucial",
+    "spider_name": "crucial_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Impact SODIMM DDR4 16GB 3200MHz",
+    "part_number": "KF432S20IB/16",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf432s20ib/16",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Kingston",
+    "model": "FURY Impact SODIMM DDR4 32GB 3200MHz",
+    "part_number": "KF432S20IBK2/32",
+    "score": 0.98,
+    "source_url": "https://www.kingston.com/memory/kf432s20ibk2/32",
+    "source_name": "Kingston",
+    "spider_name": "kingston_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws SODIMM DDR4 16GB 3200MHz",
+    "part_number": "F4-3200C22D-16GRS",
+    "score": 0.98,
+    "source_url": "https://www.g.skill.com/memory/f4-3200c22d-16grs",
+    "source_name": "G.Skill",
+    "spider_name": "g.skill_ram_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "G.Skill",
+    "model": "Ripjaws SODIMM DDR4 32GB 3200MHz",
+    "part_number": "F4-3200C22D-32GRS",
+    "score": 0.98,
+    "source_url": "https://www.g.skill.com/memory/f4-3200c22d-32grs",
+    "source_name": "G.Skill",
+    "spider_name": "g.skill_ram_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-9900K",
+    "part_number": "BX80684I99900K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i9-9900k.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-9900KF",
+    "part_number": "BX80684I99900KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i9-9900kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i9-9900",
+    "part_number": "BX80684I99900",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i9-9900.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-9700K",
+    "part_number": "BX80684I79700K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i7-9700k.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-9700KF",
+    "part_number": "BX80684I79700KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i7-9700kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i7-9700",
+    "part_number": "BX80684I79700",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i7-9700.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-9600K",
+    "part_number": "BX80684I59600K",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i5-9600k.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-9600KF",
+    "part_number": "BX80684I59600KF",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i5-9600kf.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i5-9400F",
+    "part_number": "BX80684I59400F",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i5-9400f.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-9100",
+    "part_number": "BX80684I39100",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i3-9100.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "Intel",
+    "model": "Core i3-9100F",
+    "part_number": "BX80684I39100F",
+    "score": 0.98,
+    "source_url": "https://ark.intel.com/content/www/us/en/ark/products/core-i3-9100f.html",
+    "source_name": "Intel ARK",
+    "spider_name": "intel_ark_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 9 3900XT",
+    "part_number": "100-100000277WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-9-3900xt.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 7 3800XT",
+    "part_number": "100-100000279WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-7-3800xt.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 5 3600XT",
+    "part_number": "100-100000281WOF",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-5-3600xt.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 3 3300X",
+    "part_number": "100-100000159BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-3-3300x.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "CPU",
+    "brand": "AMD",
+    "model": "Ryzen 3 3100",
+    "part_number": "100-100000284BOX",
+    "score": 0.98,
+    "source_url": "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-3-3100.html",
+    "source_name": "AMD Specs",
+    "spider_name": "amd_cpu_specs_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2080 Ti",
+    "part_number": "RTX2080TI",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2080 SUPER",
+    "part_number": "RTX2080SUPER",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-super.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2080",
+    "part_number": "RTX2080",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2080.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2070 SUPER",
+    "part_number": "RTX2070SUPER",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070-super.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2070",
+    "part_number": "RTX2070",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2070.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2060 SUPER",
+    "part_number": "RTX2060SUPER",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060-super.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 2060",
+    "part_number": "RTX2060",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-2060.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1080 Ti",
+    "part_number": "GTX1080TI",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080-ti.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1080",
+    "part_number": "GTX1080",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1080.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1070 Ti",
+    "part_number": "GTX1070TI",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070-ti.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1070",
+    "part_number": "GTX1070",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1070.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "NVIDIA",
+    "model": "GeForce GTX 1060 6GB",
+    "part_number": "GTX10606GB",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/geforce-gtx-1060-6gb.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 5700 XT",
+    "part_number": "RX5700XT",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700-xt.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 5700",
+    "part_number": "RX5700",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5700.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 5600 XT",
+    "part_number": "RX5600XT",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5600-xt.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 5500 XT",
+    "part_number": "RX5500XT",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-5500-xt.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 590",
+    "part_number": "RX590",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-590.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 580",
+    "part_number": "RX580",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-580.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 570",
+    "part_number": "RX570",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-570.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "GPU",
+    "brand": "AMD",
+    "model": "Radeon RX 560",
+    "part_number": "RX560",
+    "score": 0.98,
+    "source_url": "https://www.techpowerup.com/gpu-specs/radeon-rx-560.c",
+    "source_name": "TechPowerUp",
+    "spider_name": "techpowerup_reference_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "860 EVO 250GB",
+    "part_number": "MZ-76E250B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/860-evo-250gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "860 EVO 500GB",
+    "part_number": "MZ-76E500B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/860-evo-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "860 EVO 1TB",
+    "part_number": "MZ-76E1T0B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/860-evo-1tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "860 EVO 2TB",
+    "part_number": "MZ-76E2T0B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/860-evo-2tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "860 EVO 4TB",
+    "part_number": "MZ-76E4T0B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/860-evo-4tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "850 EVO 250GB",
+    "part_number": "MZ-75E250B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/850-evo-250gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "850 EVO 500GB",
+    "part_number": "MZ-75E500B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/850-evo-500gb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Samsung",
+    "model": "850 EVO 1TB",
+    "part_number": "MZ-75E1T0B",
+    "score": 0.98,
+    "source_url": "https://www.samsung.com/ssd/850-evo-1tb",
+    "source_name": "Samsung",
+    "spider_name": "samsung_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "Red SA500 500GB",
+    "part_number": "WDS500G1R0A",
+    "score": 0.98,
+    "source_url": "https://www.wd.com/ssd/red-sa500-500gb",
+    "source_name": "WD",
+    "spider_name": "wd_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "Red SA500 1TB",
+    "part_number": "WDS100T1R0A",
+    "score": 0.98,
+    "source_url": "https://www.wd.com/ssd/red-sa500-1tb",
+    "source_name": "WD",
+    "spider_name": "wd_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "Red SA500 2TB",
+    "part_number": "WDS200T1R0A",
+    "score": 0.98,
+    "source_url": "https://www.wd.com/ssd/red-sa500-2tb",
+    "source_name": "WD",
+    "spider_name": "wd_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "WD",
+    "model": "Red SA500 4TB",
+    "part_number": "WDS400T1R0A",
+    "score": 0.98,
+    "source_url": "https://www.wd.com/ssd/red-sa500-4tb",
+    "source_name": "WD",
+    "spider_name": "wd_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 530 500GB",
+    "part_number": "ZP500GM3A013",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/ssd/firecuda-530-500gb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 530 4TB",
+    "part_number": "ZP4000GM3A013",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/ssd/firecuda-530-4tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 520 500GB",
+    "part_number": "ZP500GM3A002",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/ssd/firecuda-520-500gb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 520 1TB",
+    "part_number": "ZP1000GM3A002",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/ssd/firecuda-520-1tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "DISK",
+    "brand": "Seagate",
+    "model": "FireCuda 520 2TB",
+    "part_number": "ZP2000GM3A002",
+    "score": 0.98,
+    "source_url": "https://www.seagate.com/ssd/firecuda-520-2tb",
+    "source_name": "Seagate",
+    "spider_name": "seagate_storage_spider"
+  },
+  {
+    "component_type": "RAM",
+    "brand": "Corsair",
+    "model": "Vengeance LPX DDR4 64GB 3600MHz",
+    "part_number": "CMK64GX4M2D3600C18",
+    "score": 0.97,
+    "source_url": "https://www.corsair.com/us/en/p/memory/cmk64gx4m2d3600c18",
+    "source_name": "Corsair",
+    "spider_name": "corsair_ram_spider"
   }
 ]

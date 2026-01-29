@@ -166,6 +166,9 @@ class Orchestrator:
         source_name = candidate.spider_name
         self._emit(Event.source_trying(source_name, candidate.source_url))
 
+        # Determine if Playwright should be used
+        use_playwright = self.should_use_playwright(candidate)
+
         try:
             specs = self.scrape_fn(
                 candidate.spider_name,
@@ -175,6 +178,7 @@ class Orchestrator:
                 user_agent=self.config.user_agent,
                 retries=self.config.retries,
                 throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
+                use_playwright_fallback=use_playwright,
             )
             validate_specs(specs)
 
@@ -188,6 +192,8 @@ class Orchestrator:
             # Check if it's an anti-bot error
             if self._antibot_detector.is_antibot_error(error_msg):
                 self._emit(Event.source_antibot(source_name, "Detected anti-bot protection"))
+                # Mark domain as blocked for future requests
+                self.mark_domain_blocked(candidate.source_url)
             else:
                 self._emit(Event.source_failed(source_name, error_msg))
 
@@ -204,6 +210,8 @@ class Orchestrator:
             classification_confidence=confidence,
             canonical=candidate.canonical,
             specs=specs,
+            source_url=candidate.source_url,
+            source_name=candidate.source_name,
         )
 
         # Handle stacking vs replacement
@@ -240,8 +248,34 @@ class Orchestrator:
         Returns:
             Ordered list of sources to try
         """
-        return self._source_chain_manager.get_sources_for_type(component_type)
+        return self._source_chain_manager.get_chain(component_type)
 
     def reset_blocked_domains(self) -> None:
         """Reset the blocked domains list."""
-        self._source_chain_manager.clear_blocked()
+        self._source_chain_manager._blocked_domains.clear()
+
+    def should_use_playwright(self, candidate: ResolveCandidate) -> bool:
+        """Check if Playwright should be used for this candidate.
+
+        Args:
+            candidate: The candidate to check
+
+        Returns:
+            True if Playwright should be used
+        """
+        source = self._source_chain_manager.get_source_for_candidate(
+            self.last_component_type, candidate
+        )
+        if source:
+            return self._source_chain_manager.should_use_playwright(
+                source, candidate.source_url
+            )
+        return self._source_chain_manager.is_domain_blocked(candidate.source_url)
+
+    def mark_domain_blocked(self, url: str) -> None:
+        """Mark a domain as blocked due to anti-bot detection.
+
+        Args:
+            url: The URL whose domain should be blocked
+        """
+        self._source_chain_manager.mark_domain_blocked(url)

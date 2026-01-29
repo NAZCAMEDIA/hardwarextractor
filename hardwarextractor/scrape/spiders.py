@@ -43,6 +43,8 @@ SPIDERS = {
     "asrock_mainboard_spider": BaseSpecSpider("asrock_mainboard_spider", ["asrock.com"], "ASRock", SourceTier.OFFICIAL, LABEL_MAP_MAINBOARD),
     "kingston_ram_spider": BaseSpecSpider("kingston_ram_spider", ["kingston.com"], "Kingston", SourceTier.OFFICIAL, LABEL_MAP_RAM),
     "crucial_ram_spider": BaseSpecSpider("crucial_ram_spider", ["crucial.com", "micron.com"], "Crucial", SourceTier.OFFICIAL, LABEL_MAP_RAM),
+    "corsair_ram_spider": BaseSpecSpider("corsair_ram_spider", ["corsair.com"], "Corsair", SourceTier.OFFICIAL, LABEL_MAP_RAM),
+    "gskill_ram_spider": BaseSpecSpider("gskill_ram_spider", ["gskill.com"], "G.Skill", SourceTier.OFFICIAL, LABEL_MAP_RAM),
     "nvidia_gpu_chip_spider": BaseSpecSpider("nvidia_gpu_chip_spider", ["nvidia.com"], "NVIDIA", SourceTier.OFFICIAL, LABEL_MAP_GPU),
     "amd_gpu_chip_spider": BaseSpecSpider("amd_gpu_chip_spider", ["amd.com"], "AMD", SourceTier.OFFICIAL, LABEL_MAP_GPU),
     "intel_arc_gpu_chip_spider": BaseSpecSpider("intel_arc_gpu_chip_spider", ["intel.com"], "Intel", SourceTier.OFFICIAL, LABEL_MAP_GPU),

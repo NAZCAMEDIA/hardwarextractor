@@ -98,6 +98,9 @@ def map_component_to_template(component: ComponentRecord) -> List[TemplateField]
     specs_by_key = _spec_by_key(component.specs)
     fields: List[TemplateField] = []
 
+    # Add common identity fields from canonical data
+    fields.extend(_map_common_identity(component))
+
     if component.component_type.value == "CPU":
         fields.extend(_map_cpu(component, specs_by_key))
     elif component.component_type.value == "MAINBOARD":
@@ -108,6 +111,62 @@ def map_component_to_template(component: ComponentRecord) -> List[TemplateField]
         fields.extend(_map_gpu(component, specs_by_key))
     elif component.component_type.value == "DISK":
         fields.extend(_map_disk(component, specs_by_key))
+    elif component.component_type.value == "GENERAL":
+        fields.extend(_map_general(component, specs_by_key))
+
+    return fields
+
+
+def _map_common_identity(component: ComponentRecord) -> List[TemplateField]:
+    """Map common identity fields from canonical data."""
+    section = "Identificación"
+    fields: List[TemplateField] = []
+    canonical = component.canonical or {}
+
+    brand = canonical.get("brand")
+    if brand:
+        fields.append(TemplateField(
+            section=section,
+            field="Marca",
+            value=brand,
+            unit=None,
+            status=SpecStatus.EXTRACTED_OFFICIAL,
+            source_tier=SourceTier.OFFICIAL,
+            source_name="catalog",
+            source_url=None,
+            confidence=1.0,
+            component_id=component.component_id,
+        ))
+
+    model = canonical.get("model")
+    if model:
+        fields.append(TemplateField(
+            section=section,
+            field="Modelo",
+            value=model,
+            unit=None,
+            status=SpecStatus.EXTRACTED_OFFICIAL,
+            source_tier=SourceTier.OFFICIAL,
+            source_name="catalog",
+            source_url=None,
+            confidence=1.0,
+            component_id=component.component_id,
+        ))
+
+    part_number = canonical.get("part_number")
+    if part_number:
+        fields.append(TemplateField(
+            section=section,
+            field="Part Number",
+            value=part_number,
+            unit=None,
+            status=SpecStatus.EXTRACTED_OFFICIAL,
+            source_tier=SourceTier.OFFICIAL,
+            source_name="catalog",
+            source_url=None,
+            confidence=1.0,
+            component_id=component.component_id,
+        ))
 
     return fields
 
@@ -350,9 +409,47 @@ def _map_disk(component: ComponentRecord, specs_by_key: Dict[str, List[SpecField
     section = "Disco duro"
     fields: List[TemplateField] = []
 
+    def add_from_key(field_name: str, key: str):
+        spec = _pick_spec(specs_by_key.get(key, []))
+        if spec:
+            fields.append(_field_from_spec(section, field_name, spec, component.component_id))
+        else:
+            fields.append(_unknown_field(section, field_name, component.component_id))
+
+    # Type (SSD/HDD/NVMe)
+    add_from_key("Tipo", "disk.type")
+
+    # Form factor
+    add_from_key("Factor de forma", "disk.form_factor")
+
+    # Capacity
+    add_from_key("Capacidad", "disk.capacity_gb")
+
     interface = _pick_spec(specs_by_key.get("disk.interface", []))
     pcie_ver = _pick_spec(specs_by_key.get("disk.interface.pcie.version", []))
     pcie_lanes = _pick_spec(specs_by_key.get("disk.interface.pcie.lanes", []))
+
+    # Interface type
+    if interface:
+        fields.append(_field_from_spec(section, "Interfaz", interface, component.component_id))
+    elif pcie_ver:
+        value = f"PCIe {pcie_ver.value}"
+        if pcie_lanes:
+            value += f" x{pcie_lanes.value}"
+        fields.append(TemplateField(
+            section=section,
+            field="Interfaz",
+            value=value,
+            unit=None,
+            status=pcie_ver.status,
+            source_tier=pcie_ver.source_tier,
+            source_name=pcie_ver.source_name,
+            source_url=pcie_ver.source_url,
+            confidence=pcie_ver.confidence,
+            component_id=component.component_id,
+        ))
+    else:
+        fields.append(_unknown_field(section, "Interfaz", component.component_id))
 
     bw_val = None
     if interface and "SATA" in str(interface.value).upper():
@@ -365,9 +462,13 @@ def _map_disk(component: ComponentRecord, specs_by_key: Dict[str, List[SpecField
     else:
         fields.append(_unknown_field(section, "Velocidad con chipset", component.component_id))
 
+    # Read/Write speeds
+    add_from_key("Velocidad lectura secuencial", "disk.read_seq_mbps")
+    add_from_key("Velocidad escritura secuencial", "disk.write_seq_mbps")
+
     disk_type = _pick_spec(specs_by_key.get("disk.type", []))
     rpm = _pick_spec(specs_by_key.get("disk.rpm", []))
-    if disk_type and str(disk_type.value).upper() == "SSD":
+    if disk_type and str(disk_type.value).upper() in ("SSD", "NVME"):
         fields.append(_na_field(section, "RPM", component.component_id))
     elif rpm:
         fields.append(_field_from_spec(section, "RPM", rpm, component.component_id))
@@ -379,5 +480,24 @@ def _map_disk(component: ComponentRecord, specs_by_key: Dict[str, List[SpecField
         fields.append(_field_from_spec(section, "Búfer", cache, component.component_id))
     else:
         fields.append(_unknown_field(section, "Búfer", component.component_id))
+
+    # TBW (Total Bytes Written) for SSDs
+    add_from_key("TBW", "disk.tbw")
+
+    return fields
+
+
+def _map_general(component: ComponentRecord, specs_by_key: Dict[str, List[SpecField]]) -> List[TemplateField]:
+    """Map specs for GENERAL component type - generic handler for unknown components."""
+    section = "Especificaciones"
+    fields: List[TemplateField] = []
+
+    # For GENERAL components, map all available specs directly
+    for key, specs in specs_by_key.items():
+        spec = _pick_spec(specs)
+        if spec:
+            # Use the spec label or derive a readable name from the key
+            field_name = spec.label if spec.label else key.replace(".", " ").replace("_", " ").title()
+            fields.append(_field_from_spec(section, field_name, spec, component.component_id))
 
     return fields

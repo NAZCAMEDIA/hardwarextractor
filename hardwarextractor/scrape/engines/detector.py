@@ -193,3 +193,37 @@ class AntiBotDetector:
             return "hard"
 
         return "soft"
+
+    @classmethod
+    def is_antibot_error(cls, error_msg: str) -> bool:
+        """Check if an error message indicates anti-bot protection.
+
+        Args:
+            error_msg: The error message string
+
+        Returns:
+            True if the error appears to be anti-bot related
+        """
+        if not error_msg:
+            return False
+
+        error_lower = error_msg.lower()
+
+        antibot_keywords = [
+            "cloudflare",
+            "captcha",
+            "rate limit",
+            "rate-limit",
+            "ratelimit",
+            "too many requests",
+            "bot detected",
+            "access denied",
+            "403 forbidden",
+            "blocked",
+            "challenge",
+            "verify",
+            "robot",
+            "human verification",
+        ]
+
+        return any(keyword in error_lower for keyword in antibot_keywords)

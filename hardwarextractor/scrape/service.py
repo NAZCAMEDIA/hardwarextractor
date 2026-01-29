@@ -5,16 +5,68 @@ from typing import Dict, List, Optional
 import time
 from urllib.parse import urlparse
 
-import requests
-
 from hardwarextractor.cache.sqlite_cache import SQLiteCache
 from hardwarextractor.models.schemas import SpecField
+from hardwarextractor.scrape.engines import RequestsEngine, AntiBotDetector, FetchResult
 from hardwarextractor.scrape.spiders import SPIDERS
 from hardwarextractor.utils.allowlist import classify_tier, is_allowlisted
 
 
 class ScrapeError(Exception):
     pass
+
+
+def _fetch_with_fallback(
+    url: str,
+    timeout: int = 15000,
+    retries: int = 2,
+    use_playwright_fallback: bool = True,
+) -> FetchResult:
+    """Fetch URL with automatic Playwright fallback on anti-bot detection.
+
+    Args:
+        url: URL to fetch
+        timeout: Timeout in milliseconds
+        retries: Number of retries for requests engine
+        use_playwright_fallback: Whether to try Playwright if blocked
+
+    Returns:
+        FetchResult with HTML content
+    """
+    # Try with RequestsEngine first (faster)
+    engine = RequestsEngine()
+    try:
+        result = engine.fetch_with_retry(url, timeout=timeout, retries=retries)
+
+        # Check if successful
+        if result.success:
+            # Verify not blocked by content analysis
+            detection = AntiBotDetector.detect(result.html, result.status_code)
+            if not detection.blocked:
+                return result
+
+        # If blocked or failed, try Playwright
+        if use_playwright_fallback:
+            # Only import if needed (heavy dependency)
+            from hardwarextractor.scrape.engines import get_playwright_engine
+
+            playwright_engine = get_playwright_engine()
+            try:
+                playwright_result = playwright_engine.fetch(url, timeout=timeout)
+                if playwright_result.success:
+                    # Verify Playwright result isn't blocked either
+                    detection = AntiBotDetector.detect(
+                        playwright_result.html, playwright_result.status_code
+                    )
+                    if not detection.blocked:
+                        return playwright_result
+                return playwright_result
+            finally:
+                playwright_engine.close()
+
+        return result
+    finally:
+        engine.close()
 
 
 def scrape_specs(
@@ -26,6 +78,7 @@ def scrape_specs(
     user_agent: str = "HardwareXtractor/0.1",
     retries: int = 2,
     throttle_seconds_by_domain: Optional[Dict[str, float]] = None,
+    use_playwright_fallback: bool = True,
 ) -> List[SpecField]:
     if not is_allowlisted(url):
         raise ScrapeError(f"URL not allowlisted: {url}")
@@ -45,7 +98,15 @@ def scrape_specs(
     html = html_override
     if html is None:
         _throttle(url, throttle_seconds_by_domain)
-        html = _fetch_with_retries(url, user_agent=user_agent, retries=retries)
+        result = _fetch_with_fallback(
+            url,
+            timeout=15000,
+            retries=retries,
+            use_playwright_fallback=use_playwright_fallback,
+        )
+        if result.error:
+            raise ScrapeError(f"Fetch failed: {result.error}")
+        html = result.html
 
     specs = spider.parse_html(html, url)
     if cache:
@@ -72,17 +133,3 @@ def _throttle(url: str, throttle_seconds_by_domain: Optional[Dict[str, float]]) 
     if elapsed < throttle:
         time.sleep(throttle - elapsed)
     _LAST_ACCESS[host] = time.time()
-
-
-def _fetch_with_retries(url: str, user_agent: str, retries: int) -> str:
-    attempts = max(1, retries + 1)
-    last_error: Exception | None = None
-    for _ in range(attempts):
-        try:
-            response = requests.get(url, timeout=15, headers={"User-Agent": user_agent})
-            response.raise_for_status()
-            return response.text
-        except Exception as exc:  # noqa: BLE001
-            last_error = exc
-            time.sleep(0.5)
-    raise ScrapeError(f"Fetch failed after retries: {last_error}")

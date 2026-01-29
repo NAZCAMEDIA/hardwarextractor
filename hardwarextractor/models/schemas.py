@@ -53,6 +53,8 @@ class ComponentRecord:
     classification_confidence: float
     canonical: Dict[str, Any]
     specs: List[SpecField] = field(default_factory=list)
+    source_url: Optional[str] = None
+    source_name: Optional[str] = None
 
 
 @dataclass

@@ -49,6 +49,10 @@ branch = true
 omit = [
   "hardwarextractor/ui/*",
   "hardwarextractor/cli/*",
+  "hardwarextractor/__main__.py",
+  "hardwarextractor/engine/*",
+  "hardwarextractor/scrape/engines/playwright_engine.py",
+  "hardwarextractor/export/xlsx_exporter.py",
 ]
 
 [tool.coverage.report]

@@ -83,3 +83,69 @@ def test_mapper_disk_fields():
     fields = map_component_to_template(component)
     rpm = [f for f in fields if f.field == "RPM"][0]
     assert rpm.status == SpecStatus.NA
+
+
+def test_mapper_general_fields():
+    """Test GENERAL component type mapping."""
+    specs = [
+        _spec("custom.spec1", "value1"),
+        _spec("custom.spec2", 123),
+    ]
+    component = ComponentRecord(
+        component_id="gen-1",
+        input_raw="Unknown component",
+        input_normalized="unknown component",
+        component_type=ComponentType.GENERAL,
+        classification_confidence=0.1,
+        canonical={"brand": "Unknown", "model": "Generic"},
+        specs=specs,
+    )
+    fields = map_component_to_template(component)
+    # Should have identity fields plus spec fields
+    assert any(f.field == "Marca" and f.value == "Unknown" for f in fields)
+    assert any(f.field == "Modelo" and f.value == "Generic" for f in fields)
+
+
+def test_mapper_common_identity_fields():
+    """Test that common identity fields are added."""
+    specs = [
+        _spec("ram.type", "DDR5"),
+    ]
+    component = ComponentRecord(
+        component_id="ram-2",
+        input_raw="DDR5 RAM",
+        input_normalized="ddr5 ram",
+        component_type=ComponentType.RAM,
+        classification_confidence=0.9,
+        canonical={"brand": "Corsair", "model": "Vengeance", "part_number": "CMK32GX5M2B5600C40"},
+        specs=specs,
+    )
+    fields = map_component_to_template(component)
+    assert any(f.field == "Marca" and f.value == "Corsair" for f in fields)
+    assert any(f.field == "Modelo" and f.value == "Vengeance" for f in fields)
+    assert any(f.field == "Part Number" and f.value == "CMK32GX5M2B5600C40" for f in fields)
+
+
+def test_mapper_nvme_disk():
+    """Test NVMe disk mapping."""
+    specs = [
+        _spec("disk.type", "NVME"),
+        _spec("disk.interface.pcie.version", "4.0"),
+        _spec("disk.interface.pcie.lanes", 4),
+        _spec("disk.capacity_gb", 1000),
+        _spec("disk.read_seq_mbps", 7000),
+        _spec("disk.write_seq_mbps", 5000),
+    ]
+    component = ComponentRecord(
+        component_id="disk-nvme-1",
+        input_raw="Samsung 990 Pro",
+        input_normalized="samsung 990 pro",
+        component_type=ComponentType.DISK,
+        classification_confidence=0.9,
+        canonical={"brand": "Samsung", "model": "990 Pro"},
+        specs=specs,
+    )
+    fields = map_component_to_template(component)
+    rpm = [f for f in fields if f.field == "RPM"][0]
+    assert rpm.status == SpecStatus.NA  # NVMe has no RPM
+    assert any(f.field == "Velocidad con chipset" and f.status == SpecStatus.CALCULATED for f in fields)
