@@ -35,11 +35,24 @@ _PATTERNS = {
         r"^f[45]-[0-9]{4}[a-z]",  # G.Skill F5-6000J... (al inicio)
         r"\bf[45]-[0-9]{4}[a-z]",  # G.Skill en cualquier parte
         r"\bct[0-9]+g[0-9]",  # Crucial CT16G48...
-        r"\bbl[0-9]+g",  # Crucial Ballistix BL16G...
+        r"\bbl[0-9]+[gk]",  # Crucial Ballistix BL16G..., BL2K16G...
+        # Crucial Kit (CT2K = 2-kit) - CT2K32G52C42S5
+        r"\bct[0-9]*k[0-9]+g",  # Crucial Kit CT2K32G...
+        # ADATA RAM - AD5U480032G-DT, AD4U...
+        r"\bad[45]u[0-9]+",  # ADATA DDR4/DDR5 UDIMM
+        r"\bad[45]s[0-9]+",  # ADATA DDR4/DDR5 SODIMM
+        # Patriot - PVS532G480C8K
+        r"\bpv[a-z][0-9]+g",  # Patriot Viper PVS, PVE, etc.
+        # TeamGroup - TF13D432G3200HC16FDC01
+        r"\btf[0-9]+[a-z]*[0-9]+g",  # TeamGroup T-Force TF13D...
+        r"\btf[0-9]+d[0-9]+",  # TeamGroup T-Force
+        # G.Skill Flare - FLARE5-6000C32-32GX
+        r"\bflare[0-9]*-[0-9]+",  # G.Skill Flare X5
         # Líneas de producto
         r"\bvengeance\b", r"\bdominator\b", r"\bfury\b",
         r"\btrident\b", r"\bripjaws\b", r"\bballistix\b",
         r"\bhyperx\b", r"\bpredator\b", r"\bbeast\b",
+        r"\bviper\b", r"\bflare\b",  # Patriot Viper, G.Skill Flare
     ],
     ComponentType.GPU: [
         # Marcas principales
@@ -83,16 +96,42 @@ _PATTERNS = {
         # Marcas principales
         r"\bsamsung\b", r"\bseagate\b", r"\bwd\b", r"\bwestern\s*digital\b",
         r"\bcrucial\b", r"\bkingston\b", r"\bkioxia\b", r"\bsk\s*hynix\b",
-        r"\bsandisk\b", r"\btoshiba\b", r"\bphison\b",
+        r"\bsandisk\b", r"\btoshiba\b", r"\bphison\b", r"\bsabrent\b",
+        r"\bgigabyte\b", r"\bcorsair\b", r"\badata\b",
         # Part numbers Samsung SSD (MZ-V9P2T0B, MZ-V8P1T0B, etc.)
         r"^mz-v[0-9]", r"\bmz-v[0-9]",  # Samsung NVMe MZ-V9P...
         r"^mz-7[0-9]", r"\bmz-7[0-9]",  # Samsung SATA MZ-77...
+        # Seagate FireCuda - SFYRD4TK, SFYRS2T
+        r"\bsfy[a-z]+[0-9]",  # Seagate FireCuda SFYRD, SFYRS
+        # Kingston FURY/KC - KSF51280G4X, KC3000
+        r"\bksf[0-9]+",  # Kingston FURY SSD
+        r"\bkc[0-9]{4}\b",  # Kingston KC3000
+        # ADATA Legend - ALEG-920-2TCS
+        r"\baleg-[0-9]+",  # ADATA Legend
+        r"\basu[0-9]+",  # ADATA SU series
+        # Gigabyte AORUS - GP-AG70S2TB
+        r"\bgp-ag[0-9]+",  # Gigabyte AORUS GP-AG70S
+        r"\bgp-gst",  # Gigabyte GP-GSTFS
+        # Corsair MP series - CSSD-F2000GBMP600
+        r"\bcssd-[a-z]*[0-9]+",  # Corsair SSD CSSD-F2000GB...
+        r"\bmp[0-9]{3}\b",  # Corsair MP600
+        # SK Hynix - 7KPNG2TB (Platinum P41)
+        r"\b[0-9]kpn[a-z]",  # SK Hynix Platinum
+        r"\bshpp[0-9]+",  # SK Hynix SHPP
+        # Sabrent Rocket - DRAM1B2TAV770S
+        r"\bdram[0-9]+[a-z]",  # Sabrent with DRAM
+        r"\bsb-rocket",  # Sabrent Rocket
+        # Crucial P series
+        r"\bct[0-9]+p[0-9]",  # Crucial CT2000P5...
         # Líneas de producto Samsung
         r"\bevo\b", r"\bqvo\b", r"\b9[789]0\s*pro\b", r"\b8[678]0\b",
         # Líneas WD
+        r"\bwds[0-9]+",  # WD SSD part numbers WDS400T3X0E
         r"\bsn[0-9]{3}\b", r"\bblack\b", r"\bblue\b", r"\bred\b", r"\bgold\b",
         # Líneas Seagate
         r"\bbarracuda\b", r"\bironwolf\b", r"\bfirecuda\b", r"\bexos\b",
+        # Líneas genéricas
+        r"\brocket\b", r"\blegend\b", r"\bplatinum\b",
         # Capacidades
         r"\b[0-9]+\s*[gt]b\b", r"\b[0-9]+\s*tb\b",
         # Interfaces
