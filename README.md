@@ -131,17 +131,23 @@ Muestra el menú interactivo:
   ██║  ██║██╔╝ ██╗   ██║   ██║  ██║██║  ██║╚██████╗   ██║   ╚██████╔╝██║  ██║
   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
 
-                           v0.1.0 - Hardware Specs Extractor
+                           v0.2.0 - Hardware Specs Extractor
                               © 2026 NAZCAMEDIA
 
   Instalación: pip install hardwarextractor
   PyPI: https://pypi.org/project/hardwarextractor/
   GitHub: https://github.com/NAZCAMEDIA/hardwarextractor
 
+  ┌─────────────────────────────────────────────────────────┐
+  │  VERSIÓN BETA - Tu feedback es importante              │
+  │  Reporta problemas: Menú > Enviar feedback             │
+  └─────────────────────────────────────────────────────────┘
+
   1) Analizar componente
   2) Exportar ficha
   3) Reset ficha
-  4) Salir
+  4) Enviar feedback
+  5) Salir
 ```
 
 ### GUI (interfaz gráfica)
@@ -243,7 +249,7 @@ Archivo `~/.config/hardwarextractor/config.yaml`:
 
 ```yaml
 enable_tier2: true          # Permitir fuentes REFERENCE
-user_agent: "HardwareXtractor/0.1"
+user_agent: "HardwareXtractor/0.2"
 retries: 2
 throttle_seconds_by_domain:
   crucial.com: 1.0
@@ -290,6 +296,15 @@ MIT License - Copyright (c) 2026 [NAZCAMEDIA](https://www.nazcamedia.net)
 Ver `LICENSE` para más detalles.
 
 ## Changelog
+
+### v0.2.0 (Beta)
+- Sistema de feedback integrado para reportar problemas
+- Banner de beta al inicio con recordatorio cada 5 búsquedas
+- Pregunta post-búsqueda "¿Funcionó correctamente?"
+- Envío automático de reportes a GitHub Issues
+- Nueva opción de menú "Enviar feedback" (CLI y GUI)
+- Mensaje de agradecimiento tras enviar feedback
+- 49 nuevos tests con 82% de cobertura
 
 ### v0.1.0 (Beta)
 - Primera release pública en PyPI
