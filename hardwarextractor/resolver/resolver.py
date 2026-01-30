@@ -51,7 +51,7 @@ def _looks_like_part_number(text: str) -> bool:
     """
     import re
     # Eliminar espacios y verificar si es mayormente alfanumérico con guiones
-    clean = text.replace(" ", "").replace("-", "")
+    clean = text.replace(" ", "").replace("-", "").replace("/", "")
     if len(clean) < 8:
         return False
     # Debe tener mezcla de letras y números
@@ -60,6 +60,40 @@ def _looks_like_part_number(text: str) -> bool:
     # No debe tener muchas palabras separadas (eso sería un nombre de producto)
     word_count = len(text.split())
     return has_letters and has_numbers and word_count <= 2
+
+
+def _normalize_part_number(pn: str) -> str:
+    """Normaliza un part number eliminando sufijos regionales/variantes comunes.
+
+    Ejemplos:
+        MZ-V9P2T0B/AM -> mz-v9p2t0b
+        MZ-V9P2T0BW -> mz-v9p2t0b
+        F5-6000J3038F16GX2-TZ5RK -> f5-6000j3038f16gx2
+        F5-6000J3038F16GX2-RS5K -> f5-6000j3038f16gx2
+    """
+    import re
+    pn = pn.lower().strip()
+    # Eliminar sufijos regionales comunes (después de /)
+    pn = re.sub(r'/[a-z]{2,4}$', '', pn)
+    # G.Skill pattern: eliminar sufijo de color/variante después del último guión
+    # Ej: F5-6000J3038F16GX2-TZ5RK -> F5-6000J3038F16GX2
+    #     F5-6000J3038F16GX2-RS5K -> F5-6000J3038F16GX2
+    # Solo si el sufijo parece ser un código de variante (letra+número+letras)
+    pn = re.sub(r'-[a-z][a-z0-9]{2,5}$', '', pn)
+    # Eliminar sufijos cortos de variante (BW, W, AM)
+    pn = re.sub(r'[a-z]{1,2}$', '', pn)
+    return pn
+
+
+def _get_pn_base_prefix(pn: str, min_len: int = 10) -> str:
+    """Extrae el prefijo base de un part number para matching.
+
+    Ej: MZ-V9P2T0B/AM -> mz-v9p2t0b (primeros ~70% del PN)
+    """
+    pn = pn.lower().replace("/", "").replace(" ", "")
+    # Tomar ~70% del part number como base
+    prefix_len = max(min_len, int(len(pn) * 0.7))
+    return pn[:prefix_len]
 
 
 def _extract_processor_family(text: str) -> Optional[str]:
@@ -147,10 +181,30 @@ def resolve_component(input_raw: str, component_type: ComponentType) -> ResolveR
                 candidates.append(candidate)
                 continue
 
-        # Para búsquedas de part_number, usar fuzzy matching más estricto
+        # Para búsquedas de part_number, usar matching por prefijo base + fuzzy
         if is_part_number_search and pn:
+            # Estrategia 1: Matching por prefijo base normalizado
+            input_base = _normalize_part_number(normalized)
+            pn_base = _normalize_part_number(pn)
+            if input_base and pn_base:
+                # Match por prefijo base (ignora sufijos de variante)
+                base_similarity = fuzzy_match_score(input_base, pn_base)
+                if base_similarity > 0.95:
+                    candidate.score = 0.92  # Alta confianza para match de base
+                    candidates.append(candidate)
+                    continue
+
+            # Estrategia 2: Matching por prefijo común
+            input_prefix = _get_pn_base_prefix(normalized)
+            pn_prefix = _get_pn_base_prefix(pn)
+            if input_prefix == pn_prefix:
+                candidate.score = 0.90  # Match por prefijo exacto
+                candidates.append(candidate)
+                continue
+
+            # Estrategia 3: Fuzzy match directo con umbral más tolerante
             similarity = fuzzy_match_score(pn, normalized)
-            if similarity > 0.90:  # Más estricto para part numbers
+            if similarity > 0.80:  # Umbral reducido de 0.90 a 0.80
                 candidate.score = similarity * 0.94
                 candidates.append(candidate)
                 continue
