@@ -29,11 +29,13 @@ _PATTERNS = {
         r"\bcorsair\b", r"\bkingston\b", r"\bgskill\b", r"\bg\.skill\b",
         r"\bcrucial\b", r"\bteamgroup\b", r"\bteam\s*group\b",
         r"\bpatriot\b", r"\blexar\b", r"\badata\b",
-        # Part numbers típicos
-        r"\bcmk[0-9]+[a-z0-9]*\b", r"\bcmw[0-9]+[a-z0-9]*\b", r"\bcmt[0-9]+[a-z0-9]*\b",  # Corsair
-        r"\bkf[45][0-9]{2}\b", r"\bkf[45]-\b",  # Kingston Fury
-        r"\bf[45]-[0-9]+\b",  # G.Skill
-        r"\bct[0-9]+\b",  # Crucial
+        # Part numbers típicos - ESPECÍFICOS primero
+        r"\bcmk[0-9]+gx[0-9]", r"\bcmw[0-9]+gx[0-9]", r"\bcmt[0-9]+gx[0-9]",  # Corsair CMK32GX5...
+        r"\bkf[45][0-9]{2}[a-z]", r"\bkf[a-z]*[0-9]+",  # Kingston Fury KF556C40...
+        r"^f[45]-[0-9]{4}[a-z]",  # G.Skill F5-6000J... (al inicio)
+        r"\bf[45]-[0-9]{4}[a-z]",  # G.Skill en cualquier parte
+        r"\bct[0-9]+g[0-9]",  # Crucial CT16G48...
+        r"\bbl[0-9]+g",  # Crucial Ballistix BL16G...
         # Líneas de producto
         r"\bvengeance\b", r"\bdominator\b", r"\bfury\b",
         r"\btrident\b", r"\bripjaws\b", r"\bballistix\b",
@@ -82,6 +84,9 @@ _PATTERNS = {
         r"\bsamsung\b", r"\bseagate\b", r"\bwd\b", r"\bwestern\s*digital\b",
         r"\bcrucial\b", r"\bkingston\b", r"\bkioxia\b", r"\bsk\s*hynix\b",
         r"\bsandisk\b", r"\btoshiba\b", r"\bphison\b",
+        # Part numbers Samsung SSD (MZ-V9P2T0B, MZ-V8P1T0B, etc.)
+        r"^mz-v[0-9]", r"\bmz-v[0-9]",  # Samsung NVMe MZ-V9P...
+        r"^mz-7[0-9]", r"\bmz-7[0-9]",  # Samsung SATA MZ-77...
         # Líneas de producto Samsung
         r"\bevo\b", r"\bqvo\b", r"\b9[789]0\s*pro\b", r"\b8[678]0\b",
         # Líneas WD
