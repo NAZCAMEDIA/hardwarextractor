@@ -459,7 +459,60 @@ class Orchestrator:
                 if match := re.search(r'(Ti|XT|Super|SUPER)', model, re.IGNORECASE):
                     specs.append(make_spec("gpu.variant", "Variante", match.group(1)))
 
-        # Retornar si tenemos al menos brand, model y part_number
+        # === Parsear informacion adicional para DISK ===
+        if component_type == ComponentType.DISK:
+            # Parsear del modelo: "990 PRO 2TB"
+            if model:
+                if match := re.search(r'(\d+)\s*TB', model, re.IGNORECASE):
+                    specs.append(make_spec("disk.capacity_tb", "Capacidad", int(match.group(1)), "TB"))
+                elif match := re.search(r'(\d+)\s*GB', model, re.IGNORECASE):
+                    specs.append(make_spec("disk.capacity_gb", "Capacidad", int(match.group(1)), "GB"))
+                # Detectar tipo de disco
+                if 'PRO' in model.upper():
+                    specs.append(make_spec("disk.line", "Linea", "PRO"))
+                elif 'EVO' in model.upper():
+                    specs.append(make_spec("disk.line", "Linea", "EVO"))
+
+            # Parsear del part_number para Samsung: MZ-V9P2T0BW
+            if part_number:
+                pn_upper = part_number.upper()
+
+                # Samsung NVMe: MZ-V = NVMe, MZ-7 = SATA
+                if pn_upper.startswith('MZ-V'):
+                    specs.append(make_spec("disk.interface", "Interfaz", "NVMe PCIe"))
+                    specs.append(make_spec("disk.form_factor", "Factor de forma", "M.2 2280"))
+                    # V9P = 990 PRO, V8P = 980 PRO, V7S = 970 EVO
+                    if 'V9P' in pn_upper:
+                        specs.append(make_spec("disk.series", "Serie", "990 PRO"))
+                        specs.append(make_spec("disk.pcie_gen", "Generacion PCIe", "4.0"))
+                    elif 'V8P' in pn_upper:
+                        specs.append(make_spec("disk.series", "Serie", "980 PRO"))
+                        specs.append(make_spec("disk.pcie_gen", "Generacion PCIe", "4.0"))
+                    elif 'V7S' in pn_upper:
+                        specs.append(make_spec("disk.series", "Serie", "970 EVO Plus"))
+                        specs.append(make_spec("disk.pcie_gen", "Generacion PCIe", "3.0"))
+
+                elif pn_upper.startswith('MZ-7'):
+                    specs.append(make_spec("disk.interface", "Interfaz", "SATA III"))
+                    specs.append(make_spec("disk.form_factor", "Factor de forma", "2.5\""))
+
+                # Capacidad: 2T0 = 2TB, 1T0 = 1TB, 500 = 500GB
+                if match := re.search(r'(\d)T0', pn_upper):
+                    specs.append(make_spec("disk.capacity_tb", "Capacidad", int(match.group(1)), "TB"))
+                elif match := re.search(r'(\d{3})G', pn_upper):
+                    specs.append(make_spec("disk.capacity_gb", "Capacidad", int(match.group(1)), "GB"))
+
+                # WD Black SN850X: WDS200T2X0E
+                if pn_upper.startswith('WDS'):
+                    if match := re.search(r'WDS(\d)00T', pn_upper):
+                        specs.append(make_spec("disk.capacity_tb", "Capacidad", int(match.group(1)), "TB"))
+                    if '2X0E' in pn_upper:
+                        specs.append(make_spec("disk.series", "Serie", "Black SN850X"))
+                        specs.append(make_spec("disk.interface", "Interfaz", "NVMe PCIe 4.0"))
+
+            return specs if len(specs) >= 3 else []
+
+        # Retornar para otros tipos si tenemos al menos brand, model y part_number
         if component_type != ComponentType.RAM:
             return specs if len(specs) >= 3 else []
 
@@ -474,10 +527,11 @@ class Orchestrator:
             if match := re.search(r'(DDR[45])', model, re.IGNORECASE):
                 specs.append(make_spec("ram.type", "Tipo", match.group(1).upper()))
 
-        # Parsear informacion adicional del part_number para RAM Corsair
+        # Parsear informacion adicional del part_number para RAM
         if part_number:
             pn_upper = part_number.upper()
 
+            # === Corsair patterns (CMK32GX5M2B6000C36) ===
             if (match := re.search(r'CMK(\d+)G', pn_upper)) and not has_spec("ram.capacity_gb"):
                 specs.append(make_spec("ram.capacity_gb", "Capacidad", match.group(1), "GB"))
 
@@ -495,6 +549,54 @@ class Orchestrator:
 
             if match := re.search(r'C(\d{2})', pn_upper):
                 specs.append(make_spec("ram.latency_cl", "Latencia", int(match.group(1))))
+
+            # === G.Skill patterns (F5-6000J3038F16GX2-RS5K) ===
+            # F5 = DDR5, F4 = DDR4
+            if not has_spec("ram.type"):
+                if pn_upper.startswith('F5'):
+                    specs.append(make_spec("ram.type", "Tipo", "DDR5"))
+                elif pn_upper.startswith('F4'):
+                    specs.append(make_spec("ram.type", "Tipo", "DDR4"))
+
+            # F5-6000 = 6000 MHz
+            if (match := re.search(r'F[45]-(\d{4})', pn_upper)) and not has_spec("ram.speed_effective_mt_s"):
+                specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", int(match.group(1)), "MT/s"))
+
+            # J3038 = CL30-38-38
+            if match := re.search(r'J(\d{2})(\d{2})', pn_upper):
+                if not has_spec("ram.latency_cl"):
+                    specs.append(make_spec("ram.latency_cl", "Latencia CL", int(match.group(1))))
+                if not has_spec("ram.latency_trcd"):
+                    specs.append(make_spec("ram.latency_trcd", "Latencia tRCD", int(match.group(2))))
+
+            # F16GX2 = 16GB x 2 modules
+            if match := re.search(r'F(\d+)GX(\d)', pn_upper):
+                if not has_spec("ram.capacity_gb"):
+                    total_gb = int(match.group(1)) * int(match.group(2))
+                    specs.append(make_spec("ram.capacity_gb", "Capacidad", total_gb, "GB"))
+                if not has_spec("ram.modules"):
+                    specs.append(make_spec("ram.modules", "Modulos", match.group(2)))
+                if not has_spec("ram.capacity_per_module"):
+                    specs.append(make_spec("ram.capacity_per_module", "Capacidad por modulo", match.group(1), "GB"))
+
+            # === Kingston Fury patterns (KF556C40BBK2-32) ===
+            if (match := re.search(r'KF[45](\d{2})C(\d{2})', pn_upper)):
+                if not has_spec("ram.speed_effective_mt_s"):
+                    speed = int(match.group(1)) * 100  # 56 -> 5600
+                    specs.append(make_spec("ram.speed_effective_mt_s", "Velocidad efectiva", speed, "MT/s"))
+                if not has_spec("ram.latency_cl"):
+                    specs.append(make_spec("ram.latency_cl", "Latencia CL", int(match.group(2))))
+                if not has_spec("ram.type"):
+                    if 'KF5' in pn_upper:
+                        specs.append(make_spec("ram.type", "Tipo", "DDR5"))
+                    elif 'KF4' in pn_upper:
+                        specs.append(make_spec("ram.type", "Tipo", "DDR4"))
+
+            # Kingston capacity: -32 = 32GB, K2 = 2 modules
+            if (match := re.search(r'-(\d{2,3})$', pn_upper)) and not has_spec("ram.capacity_gb"):
+                specs.append(make_spec("ram.capacity_gb", "Capacidad", int(match.group(1)), "GB"))
+            if (match := re.search(r'K(\d)', pn_upper)) and not has_spec("ram.modules"):
+                specs.append(make_spec("ram.modules", "Modulos", match.group(1)))
 
         # Aplicar estandares JEDEC segun tipo DDR detectado
         ddr_type = get_spec_value("ram.type")
