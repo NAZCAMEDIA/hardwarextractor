@@ -23,7 +23,7 @@ class InteractiveCLI:
     5) Salir
     """
 
-    VERSION = "0.2.0"
+    VERSION = "0.2.1"
 
     def __init__(self):
         """Initialize the CLI."""

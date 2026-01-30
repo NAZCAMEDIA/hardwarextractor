@@ -40,7 +40,7 @@ class SplashScreen:
 
     # App branding
     APP_NAME = "HardwareXtractor"
-    APP_VERSION = "0.2.0"
+    APP_VERSION = "0.2.1"
     APP_TAGLINE = "Fichas técnicas con trazabilidad"
     COPYRIGHT = "© 2026 NAZCAMEDIA"
 

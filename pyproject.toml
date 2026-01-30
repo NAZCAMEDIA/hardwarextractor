@@ -1,6 +1,6 @@
 [project]
 name = "hardwarextractor"
-version = "0.2.0"
+version = "0.2.1"
 description = "HardwareXtractor - Extraccion de specs de hardware con trazabilidad"
 requires-python = ">=3.11"
 readme = "README.md"

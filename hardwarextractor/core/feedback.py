@@ -32,7 +32,7 @@ class FeedbackCollector:
     mostrar recordatorios periódicos.
     """
 
-    VERSION = "0.2.0"
+    VERSION = "0.2.1"
     REMINDER_INTERVAL = 5  # Recordatorio cada N búsquedas
 
     def __init__(self):

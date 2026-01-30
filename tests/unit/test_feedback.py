@@ -65,7 +65,7 @@ class TestFeedbackCollector:
         collector = FeedbackCollector()
         assert collector.search_count == 0
         assert collector.last_search is None
-        assert collector.VERSION == "0.2.0"
+        assert collector.VERSION == "0.2.1"
         assert collector.REMINDER_INTERVAL == 5
 
     def test_capture_search(self):
