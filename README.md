@@ -134,10 +134,6 @@ Muestra el menú interactivo:
                            v0.2.0 - Hardware Specs Extractor
                               © 2026 NAZCAMEDIA
 
-  Instalación: pip install hardwarextractor
-  PyPI: https://pypi.org/project/hardwarextractor/
-  GitHub: https://github.com/NAZCAMEDIA/hardwarextractor
-
   ┌─────────────────────────────────────────────────────────┐
   │  VERSIÓN BETA - Tu feedback es importante              │
   │  Reporta problemas: Menú > Enviar feedback             │

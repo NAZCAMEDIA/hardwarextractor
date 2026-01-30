@@ -62,10 +62,6 @@ class InteractiveCLI:
         print(self._renderer._c(f"                           v{self.VERSION} - Hardware Specs Extractor", Colors.DIM))
         print(self._renderer._c("                              © 2026 NAZCAMEDIA", Colors.DIM))
         print()
-        print(self._renderer._c("  Instalación: pip install hardwarextractor", Colors.DIM))
-        print(self._renderer._c("  PyPI: https://pypi.org/project/hardwarextractor/", Colors.DIM))
-        print(self._renderer._c("  GitHub: https://github.com/NAZCAMEDIA/hardwarextractor", Colors.DIM))
-        print()
         # Beta banner
         print(self._renderer.beta_banner())
 
