@@ -468,3 +468,88 @@ class CLIRenderer:
             lines.append("")
 
         return "\n".join(lines)
+
+    def beta_banner(self) -> str:
+        """Render the beta version banner.
+
+        Returns:
+            Formatted beta warning banner
+        """
+        lines = []
+        lines.append("")
+        lines.append(f"  {self._c('╔' + '═' * 66 + '╗', Colors.YELLOW)}")
+        lines.append(f"  {self._c('║', Colors.YELLOW)} {self._c('⚠️  VERSIÓN BETA', Colors.BOLD, Colors.YELLOW)} - Necesitamos tu feedback{' ' * 26}{self._c('║', Colors.YELLOW)}")
+        lines.append(f"  {self._c('║', Colors.YELLOW)} Si algo no funciona, te preguntaremos al final de cada búsqueda. {self._c('║', Colors.YELLOW)}")
+        lines.append(f"  {self._c('║', Colors.YELLOW)} Tus reportes nos ayudan a mejorar. ¡Gracias por probar!{' ' * 9}{self._c('║', Colors.YELLOW)}")
+        lines.append(f"  {self._c('╚' + '═' * 66 + '╝', Colors.YELLOW)}")
+        lines.append("")
+        return "\n".join(lines)
+
+    def beta_reminder(self, search_count: int) -> str:
+        """Render periodic beta reminder.
+
+        Args:
+            search_count: Number of searches performed
+
+        Returns:
+            Formatted reminder message
+        """
+        lines = []
+        lines.append("")
+        lines.append(f"  {self._c('📊', Colors.CYAN)} Llevas {self._c(str(search_count), Colors.BOLD)} búsquedas. ¿Todo bien hasta ahora?")
+        lines.append(f"     {self._c('Recuerda: estamos en beta, tu feedback es valioso.', Colors.DIM)}")
+        lines.append("")
+        return "\n".join(lines)
+
+    def feedback_prompt_worked(self) -> str:
+        """Render the 'did it work?' prompt.
+
+        Returns:
+            Formatted prompt string
+        """
+        return f"\n  {self._c('¿Funcionó correctamente?', Colors.BOLD)} (S/n): "
+
+    def feedback_prompt_problem(self) -> str:
+        """Render the 'what went wrong?' prompt.
+
+        Returns:
+            Formatted prompt string
+        """
+        return f"  {self._c('¿Qué salió mal?', Colors.BOLD)} (opcional, Enter para omitir): "
+
+    def feedback_sending(self) -> str:
+        """Render sending feedback message.
+
+        Returns:
+            Formatted sending message
+        """
+        return f"  {self._c('Enviando reporte...', Colors.CYAN)}"
+
+    def feedback_thanks(self, issue_url: str = "", issue_number: int = 0) -> str:
+        """Render thank you message after feedback.
+
+        Args:
+            issue_url: URL of created issue
+            issue_number: Number of created issue
+
+        Returns:
+            Formatted thank you message
+        """
+        lines = []
+        lines.append("")
+        lines.append(f"  {self._c('¡Gracias por tu feedback!', Colors.GREEN, Colors.BOLD)} Tu reporte nos ayuda a mejorar.")
+        if issue_url and issue_number:
+            lines.append(f"  Issue #{issue_number} creado: {self._c(issue_url, Colors.DIM)}")
+        lines.append("")
+        return "\n".join(lines)
+
+    def feedback_error(self, message: str) -> str:
+        """Render feedback error message.
+
+        Args:
+            message: Error message to display
+
+        Returns:
+            Formatted error message
+        """
+        return f"\n  {self._c('No se pudo enviar el reporte:', Colors.YELLOW)} {message}\n"

@@ -26,6 +26,8 @@ from hardwarextractor.app.orchestrator import Orchestrator
 from hardwarextractor.app.paths import cache_db_path
 from hardwarextractor.cache.sqlite_cache import SQLiteCache
 from hardwarextractor.core.events import Event, EventType
+from hardwarextractor.core.feedback import get_feedback_collector
+from hardwarextractor.core.github_reporter import send_feedback_report
 from hardwarextractor.engine.ficha_manager import FichaManager
 from hardwarextractor.export.factory import ExporterFactory
 from hardwarextractor.models.schemas import (
@@ -39,7 +41,7 @@ from hardwarextractor.models.schemas import (
 
 
 # Version info
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __build__ = "2026.01.30"
 __copyright__ = "© 2026 NAZCAMEDIA. MIT License. | pip install hardwarextractor"
 
@@ -206,13 +208,20 @@ class HardwareXtractorApp(tk.Tk):
         self.ficha_manager = FichaManager()
         _debug_log("[APP] FichaManager OK")
 
+        # Feedback collector for beta
+        self.feedback = get_feedback_collector()
+        _debug_log("[APP] FeedbackCollector OK")
+
         # UI state variables
         self.input_var = tk.StringVar()
         self.status_var = tk.StringVar(value="Listo")
         self.progress_var = tk.IntVar(value=0)
         self.banner_var = tk.StringVar(value="")
+        self.beta_banner_var = tk.StringVar(value="⚠️ VERSIÓN BETA - Tu feedback nos ayuda a mejorar")
         self.expanded_view_var = tk.BooleanVar(value=False)  # Toggle ficha ampliada
         self._source_urls = {}  # Store URLs for source links
+        self._last_input = ""  # Store last search input
+        self._last_component_type = ""  # Store last component type
         _debug_log("[APP] UI state vars OK")
 
         _debug_log("[APP] Building UI...")
@@ -242,7 +251,20 @@ class HardwareXtractorApp(tk.Tk):
         # Header
         header = ttk.Frame(container)
         header.pack(fill=tk.X)
-        ttk.Label(header, text="HardwareXtractor", style="Header.TLabel").pack(anchor=tk.W, pady=(0, 12))
+        ttk.Label(header, text="HardwareXtractor", style="Header.TLabel").pack(anchor=tk.W, pady=(0, 6))
+
+        # Beta banner
+        beta_frame = tk.Frame(container, bg="#fef3c7", highlightbackground="#f59e0b", highlightthickness=1)
+        beta_frame.pack(fill=tk.X, pady=(0, 12))
+        tk.Label(
+            beta_frame,
+            textvariable=self.beta_banner_var,
+            bg="#fef3c7",
+            fg="#92400e",
+            font=("Helvetica Neue", 11),
+            pady=6,
+            padx=10,
+        ).pack(fill=tk.X)
 
         # Input card
         input_card = ttk.Frame(container)
@@ -411,6 +433,7 @@ class HardwareXtractorApp(tk.Tk):
         footer.pack(fill=tk.X, pady=(10, 0))
 
         ttk.Button(footer, text="Reset", command=self._reset).pack(side=tk.LEFT)
+        ttk.Button(footer, text="Feedback", command=self._show_manual_feedback_dialog).pack(side=tk.LEFT, padx=(8, 0))
 
         export_frame = ttk.Frame(footer)
         export_frame.pack(side=tk.RIGHT)
@@ -695,6 +718,9 @@ class HardwareXtractorApp(tk.Tk):
         if not input_value:
             return
 
+        # Store for feedback
+        self._last_input = input_value
+
         # Clear previous state
         self._clear_log()
         self.progress_var.set(0)
@@ -729,14 +755,19 @@ class HardwareXtractorApp(tk.Tk):
                 r = event.component_result
                 if hasattr(r, 'component_type'):
                     self._update_sources_panel(r.component_type.value)
+                    self._last_component_type = r.component_type.value
                 # Log resultado
                 self._log_legacy_event(
                     "RESULTADO",
                     f"Match: {r.exact_match}, Tier: {r.source_tier.value}, Confianza: {r.source_confidence:.0%}"
                 )
+                # Ask for feedback after successful search
+                self.after(500, lambda: self._ask_feedback_gui("success"))
 
             if event.status.startswith("ERROR"):
                 self._log_event(Event.error_recoverable(event.log))
+                # Ask for feedback on error
+                self.after(500, lambda: self._ask_feedback_gui("error", event.log))
 
     def _select_candidate(self) -> None:
         """Select a candidate from the list."""
@@ -824,6 +855,282 @@ class HardwareXtractorApp(tk.Tk):
         self._clear_log()
         self._update_output()
         self._log_event(Event.ficha_reset())
+
+    def _ask_feedback_gui(self, result: str, error_msg: str = "") -> None:
+        """Show feedback dialog after a search.
+
+        Args:
+            result: Search result ("success", "no_results", "error")
+            error_msg: Error message if applicable
+        """
+        # Capture search context
+        self.feedback.capture_search(
+            input_text=self._last_input,
+            component_type=self._last_component_type,
+            result=result,
+            error_message=error_msg,
+        )
+
+        # Show reminder every N searches
+        if self.feedback.should_show_reminder():
+            self.beta_banner_var.set(
+                f"📊 Llevas {self.feedback.search_count} búsquedas - ¿Todo bien? Tu feedback es valioso"
+            )
+
+        # Ask if it worked
+        response = messagebox.askyesno(
+            "Feedback Beta",
+            "¿La búsqueda funcionó correctamente?\n\n"
+            "Tu feedback nos ayuda a mejorar HardwareXtractor.",
+            icon="question",
+        )
+
+        if not response:
+            # Show dialog to ask what went wrong
+            self._show_feedback_dialog()
+
+    def _show_feedback_dialog(self) -> None:
+        """Show dialog to collect feedback details."""
+        dialog = tk.Toplevel(self)
+        dialog.title("Reportar problema")
+        dialog.geometry("450x250")
+        dialog.resizable(False, False)
+        dialog.configure(bg=COLORS["bg"])
+        dialog.transient(self)
+        dialog.grab_set()
+
+        # Center the dialog
+        dialog.update_idletasks()
+        x = self.winfo_x() + (self.winfo_width() - 450) // 2
+        y = self.winfo_y() + (self.winfo_height() - 250) // 2
+        dialog.geometry(f"+{x}+{y}")
+
+        # Content
+        tk.Label(
+            dialog,
+            text="¿Qué salió mal?",
+            font=("Helvetica Neue", 14, "bold"),
+            bg=COLORS["bg"],
+            fg=COLORS["text"],
+        ).pack(pady=(20, 10))
+
+        tk.Label(
+            dialog,
+            text="(opcional - puedes dejarlo vacío)",
+            font=("Helvetica Neue", 10),
+            bg=COLORS["bg"],
+            fg=COLORS["text_muted"],
+        ).pack()
+
+        # Text input
+        text_frame = tk.Frame(dialog, bg=COLORS["bg"])
+        text_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+        problem_text = tk.Text(
+            text_frame,
+            height=4,
+            font=("Helvetica Neue", 11),
+            bg=COLORS["card"],
+            fg=COLORS["text"],
+            relief=tk.FLAT,
+            highlightthickness=1,
+            highlightcolor=COLORS["accent"],
+            highlightbackground="#d1d5db",
+        )
+        problem_text.pack(fill=tk.BOTH, expand=True)
+
+        # Buttons
+        btn_frame = tk.Frame(dialog, bg=COLORS["bg"])
+        btn_frame.pack(fill=tk.X, padx=20, pady=(0, 20))
+
+        def send_report():
+            comment = problem_text.get("1.0", tk.END).strip()
+            dialog.destroy()
+
+            # Generate and send report
+            report = self.feedback.generate_report(user_comment=comment)
+            if report:
+                self.status_var.set("Enviando reporte...")
+                self.update_idletasks()
+
+                result = send_feedback_report(
+                    title=report["title"],
+                    body=report["body"],
+                    labels=report["labels"],
+                )
+
+                if result.get("status") == "success":
+                    messagebox.showinfo(
+                        "¡Gracias!",
+                        f"¡Gracias por tu feedback!\n"
+                        f"Tu reporte nos ayuda a mejorar.\n\n"
+                        f"Issue #{result.get('issue_number', '')} creado.",
+                    )
+                else:
+                    messagebox.showwarning(
+                        "Error",
+                        f"No se pudo enviar el reporte:\n{result.get('message', 'Error desconocido')}",
+                    )
+
+                self.status_var.set("Listo")
+
+        def cancel():
+            dialog.destroy()
+
+        ttk.Button(btn_frame, text="Cancelar", command=cancel).pack(side=tk.LEFT)
+        ttk.Button(btn_frame, text="Enviar reporte", style="Primary.TButton", command=send_report).pack(side=tk.RIGHT)
+
+        # Focus on text
+        problem_text.focus_set()
+
+    def _show_manual_feedback_dialog(self) -> None:
+        """Show dialog to send manual feedback (not tied to a search)."""
+        dialog = tk.Toplevel(self)
+        dialog.title("Enviar Feedback")
+        dialog.geometry("500x350")
+        dialog.resizable(False, False)
+        dialog.configure(bg=COLORS["bg"])
+        dialog.transient(self)
+        dialog.grab_set()
+
+        # Center the dialog
+        dialog.update_idletasks()
+        x = self.winfo_x() + (self.winfo_width() - 500) // 2
+        y = self.winfo_y() + (self.winfo_height() - 350) // 2
+        dialog.geometry(f"+{x}+{y}")
+
+        # Title
+        tk.Label(
+            dialog,
+            text="Enviar Feedback",
+            font=("Helvetica Neue", 16, "bold"),
+            bg=COLORS["bg"],
+            fg=COLORS["text"],
+        ).pack(pady=(20, 5))
+
+        tk.Label(
+            dialog,
+            text="Tu feedback nos ayuda a mejorar HardwareXtractor",
+            font=("Helvetica Neue", 10),
+            bg=COLORS["bg"],
+            fg=COLORS["text_muted"],
+        ).pack()
+
+        # Feedback type selector
+        type_frame = tk.Frame(dialog, bg=COLORS["bg"])
+        type_frame.pack(fill=tk.X, padx=20, pady=(15, 5))
+
+        tk.Label(
+            type_frame,
+            text="Tipo:",
+            font=("Helvetica Neue", 11),
+            bg=COLORS["bg"],
+            fg=COLORS["text"],
+        ).pack(side=tk.LEFT)
+
+        feedback_type_var = tk.StringVar(value="Bug o error")
+        type_combo = ttk.Combobox(
+            type_frame,
+            textvariable=feedback_type_var,
+            values=["Bug o error", "Sugerencia de mejora", "Componente no soportado", "Otro"],
+            state="readonly",
+            width=25,
+        )
+        type_combo.pack(side=tk.LEFT, padx=(10, 0))
+
+        # Comment area
+        tk.Label(
+            dialog,
+            text="Comentario:",
+            font=("Helvetica Neue", 11),
+            bg=COLORS["bg"],
+            fg=COLORS["text"],
+            anchor=tk.W,
+        ).pack(fill=tk.X, padx=20, pady=(10, 5))
+
+        comment_frame = tk.Frame(dialog, bg=COLORS["bg"])
+        comment_frame.pack(fill=tk.BOTH, expand=True, padx=20)
+
+        comment_text = tk.Text(
+            comment_frame,
+            height=6,
+            font=("Helvetica Neue", 11),
+            bg=COLORS["card"],
+            fg=COLORS["text"],
+            relief=tk.FLAT,
+            highlightthickness=1,
+            highlightcolor=COLORS["accent"],
+            highlightbackground="#d1d5db",
+        )
+        comment_text.pack(fill=tk.BOTH, expand=True)
+
+        # Buttons
+        btn_frame = tk.Frame(dialog, bg=COLORS["bg"])
+        btn_frame.pack(fill=tk.X, padx=20, pady=(10, 20))
+
+        def send_feedback():
+            comment = comment_text.get("1.0", tk.END).strip()
+            if not comment:
+                messagebox.showwarning("Feedback", "Por favor escribe un comentario")
+                return
+
+            type_label = feedback_type_var.get()
+            dialog.destroy()
+
+            # Create manual feedback report
+            import platform
+            import sys
+            from datetime import datetime
+
+            title = f"[Feedback Beta] {type_label}"
+            body = f"""## Tipo de feedback
+{type_label}
+
+## Comentario del usuario
+> {comment}
+
+## Información del sistema
+- **Versión:** {__version__}
+- **OS:** {platform.system()} {platform.release()}
+- **Python:** {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}
+- **Timestamp:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+
+---
+*Feedback manual de HardwareXtractor Beta v{__version__}*
+"""
+
+            self.status_var.set("Enviando feedback...")
+            self.update_idletasks()
+
+            result = send_feedback_report(
+                title=title,
+                body=body,
+                labels=["beta-feedback", "manual-feedback"],
+            )
+
+            if result.get("status") == "success":
+                messagebox.showinfo(
+                    "¡Gracias!",
+                    f"¡Gracias por tu feedback!\n"
+                    f"Tu comentario nos ayuda a mejorar.\n\n"
+                    f"Issue #{result.get('issue_number', '')} creado.",
+                )
+            else:
+                messagebox.showwarning(
+                    "Error",
+                    f"No se pudo enviar el feedback:\n{result.get('message', 'Error desconocido')}",
+                )
+
+            self.status_var.set("Listo")
+
+        def cancel():
+            dialog.destroy()
+
+        ttk.Button(btn_frame, text="Cancelar", command=cancel).pack(side=tk.LEFT)
+        ttk.Button(btn_frame, text="Enviar", style="Primary.TButton", command=send_feedback).pack(side=tk.RIGHT)
+
+        # Focus on text
+        comment_text.focus_set()
 
 
 if __name__ == "__main__":
