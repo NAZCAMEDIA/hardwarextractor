@@ -21,7 +21,7 @@ class InteractiveCLI:
     5) Salir
     """
 
-    VERSION = "1.0.0"
+    VERSION = "0.1.0"
 
     def __init__(self):
         """Initialize the CLI."""
@@ -57,7 +57,11 @@ class InteractiveCLI:
         from hardwarextractor.cli.renderer import Colors
         print(self._renderer._c(ascii_logo, Colors.CYAN))
         print(self._renderer._c(f"                           v{self.VERSION} - Hardware Specs Extractor", Colors.DIM))
-        print(self._renderer._c("                              © 2025 NAZCAMEDIA", Colors.DIM))
+        print(self._renderer._c("                              © 2026 NAZCAMEDIA", Colors.DIM))
+        print()
+        print(self._renderer._c("  Instalación: pip install hardwarextractor", Colors.DIM))
+        print(self._renderer._c("  PyPI: https://pypi.org/project/hardwarextractor/", Colors.DIM))
+        print(self._renderer._c("  GitHub: https://github.com/NAZCAMEDIA/hardwarextractor", Colors.DIM))
         print()
 
     def _show_main_menu(self) -> None:

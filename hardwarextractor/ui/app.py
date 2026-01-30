@@ -39,9 +39,9 @@ from hardwarextractor.models.schemas import (
 
 
 # Version info
-__version__ = "0.2.0"
-__build__ = "2026.01.29"
-__copyright__ = "© 2026 NAZCAMEDIA. MIT License."
+__version__ = "0.1.0"
+__build__ = "2026.01.30"
+__copyright__ = "© 2026 NAZCAMEDIA. MIT License. | pip install hardwarextractor"
 
 
 # Color scheme
