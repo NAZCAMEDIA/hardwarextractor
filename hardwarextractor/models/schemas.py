@@ -168,6 +168,7 @@ class ResolveCandidate:
     source_name: str
     spider_name: str
     source_tier: SourceTier = SourceTier.NONE
+    web_search_specs: Optional[List["SpecField"]] = None  # Specs from web search
 
 
 @dataclass

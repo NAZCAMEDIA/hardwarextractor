@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-01-30T15:09:03.879195",
+  "elapsed_seconds": 94,
+  "components_processed": 422,
+  "summary": {
+    "with_specs": 166,
+    "persisted": 110,
+    "errors": 0,
+    "avg_specs": 3.440758293838863
+  },
+  "by_type": {
+    "CPU": {
+      "count": 142,
+      "with_specs": 138,
+      "persisted": 82,
+      "avg_specs": 7.5
+    },
+    "RAM": {
+      "count": 81,
+      "with_specs": 0,
+      "persisted": 0,
+      "avg_specs": 0.0
+    },
+    "GPU": {
+      "count": 40,
+      "with_specs": 28,
+      "persisted": 28,
+      "avg_specs": 9.675
+    },
+    "MAINBOARD": {
+      "count": 70,
+      "with_specs": 0,
+      "persisted": 0,
+      "avg_specs": 0.0
+    },
+    "DISK": {
+      "count": 89,
+      "with_specs": 0,
+      "persisted": 0,
+      "avg_specs": 0.0
+    }
+  }
+}

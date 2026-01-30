@@ -1,0 +1,292 @@
+{
+  "timestamp": "2026-01-30T11:58:27.844334",
+  "summary": {
+    "total_tests": 50,
+    "success": 30,
+    "partial": 20,
+    "fail": 0,
+    "success_rate": 60.0,
+    "partial_or_better_rate": 100.0,
+    "classification_accuracy": 100.0
+  },
+  "by_type": {
+    "CPU": {
+      "total": 10,
+      "success": 7,
+      "partial": 3,
+      "fail": 0,
+      "classification_accuracy": 100.0
+    },
+    "RAM": {
+      "total": 10,
+      "success": 5,
+      "partial": 5,
+      "fail": 0,
+      "classification_accuracy": 100.0
+    },
+    "GPU": {
+      "total": 10,
+      "success": 9,
+      "partial": 1,
+      "fail": 0,
+      "classification_accuracy": 100.0
+    },
+    "MAINBOARD": {
+      "total": 10,
+      "success": 6,
+      "partial": 4,
+      "fail": 0,
+      "classification_accuracy": 100.0
+    },
+    "DISK": {
+      "total": 10,
+      "success": 3,
+      "partial": 7,
+      "fail": 0,
+      "classification_accuracy": 100.0
+    }
+  },
+  "failures": [],
+  "partial": [
+    {
+      "component": "Intel Core i5-14400F",
+      "expected_type": "CPU",
+      "classified_type": "CPU",
+      "classification_confidence": 0.6499999999999999,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "Core i5-12400F",
+      "best_score": 0.7035294117647058,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (70%)"
+    },
+    {
+      "component": "AMD Ryzen 9 9950X",
+      "expected_type": "CPU",
+      "classified_type": "CPU",
+      "classification_confidence": 0.6499999999999999,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "Ryzen 9 7950X",
+      "best_score": 0.7360000000000001,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (74%)"
+    },
+    {
+      "component": "Intel Core Ultra 9 285K",
+      "expected_type": "CPU",
+      "classified_type": "CPU",
+      "classification_confidence": 0.5,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "Core i9-14900K",
+      "best_score": 0.65,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (65%)"
+    },
+    {
+      "component": "CT2K32G52C42S5",
+      "expected_type": "RAM",
+      "classified_type": "RAM",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "AD5U480032G-DT",
+      "expected_type": "RAM",
+      "classified_type": "RAM",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "PVS532G480C8K",
+      "expected_type": "RAM",
+      "classified_type": "RAM",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "TF13D432G3200HC16FDC01",
+      "expected_type": "RAM",
+      "classified_type": "RAM",
+      "classification_confidence": 0.5,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "FLARE5-6000C32-32GX",
+      "expected_type": "RAM",
+      "classified_type": "RAM",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "RX 7600 XT",
+      "expected_type": "GPU",
+      "classified_type": "GPU",
+      "classification_confidence": 0.5,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "Gigabyte B650E AORUS Master",
+      "expected_type": "MAINBOARD",
+      "classified_type": "MAINBOARD",
+      "classification_confidence": 0.5,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "Z790 AORUS MASTER",
+      "best_score": 0.75,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (75%)"
+    },
+    {
+      "component": "MSI MPG B650 Carbon WiFi",
+      "expected_type": "MAINBOARD",
+      "classified_type": "MAINBOARD",
+      "classification_confidence": 0.6499999999999999,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "MAG B650 TOMAHAWK WIFI",
+      "best_score": 0.75,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (75%)"
+    },
+    {
+      "component": "ASRock B650 LiveMixer",
+      "expected_type": "MAINBOARD",
+      "classified_type": "MAINBOARD",
+      "classification_confidence": 0.5,
+      "resolved": true,
+      "candidates_count": 3,
+      "best_match": "B650 PG Lightning",
+      "best_score": 0.65,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (65%)"
+    },
+    {
+      "component": "ASUS ProArt Z790 Creator WiFi",
+      "expected_type": "MAINBOARD",
+      "classified_type": "MAINBOARD",
+      "classification_confidence": 0.5,
+      "resolved": true,
+      "candidates_count": 5,
+      "best_match": "ProArt Z790-CREATOR WIFI",
+      "best_score": 0.7984905660377359,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, match bajo (80%)"
+    },
+    {
+      "component": "SFYRD4TK",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "KSF51280G4X",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "ALEG-920-2TCS",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "GP-AG70S2TB",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "CSSD-F2000GBMP600",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "7KPNG2TB",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    },
+    {
+      "component": "DRAM1B2TAV770S",
+      "expected_type": "DISK",
+      "classified_type": "DISK",
+      "classification_confidence": 0.35,
+      "resolved": false,
+      "candidates_count": 0,
+      "best_match": null,
+      "best_score": 0.0,
+      "status": "PARTIAL",
+      "notes": "Clasificaci\u00f3n correcta, sin candidatos en cat\u00e1logo"
+    }
+  ]
+}

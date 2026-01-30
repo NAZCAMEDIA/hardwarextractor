@@ -32,6 +32,9 @@ from hardwarextractor.scrape.service import scrape_specs, set_log_callback
 from hardwarextractor.scrape.engines.detector import AntiBotDetector
 from hardwarextractor.validate.validator import validate_specs
 from hardwarextractor.data.reference_urls import get_reference_url
+from hardwarextractor.data.spec_templates import apply_template_to_specs
+from hardwarextractor.core.cross_validator import CrossValidator, CrossValidationResult
+from hardwarextractor.data.catalog_writer import add_validated_component
 
 
 # Type for event callback
@@ -75,6 +78,12 @@ class Orchestrator:
         self._event_callback = event_callback
         self._source_chain_manager = SourceChainManager()
         self._antibot_detector = AntiBotDetector()
+        self._cross_validator = CrossValidator(
+            scrape_fn=self.scrape_fn,
+            event_callback=self._emit,
+            min_sources_for_validation=2,
+            min_confidence_for_persist=0.6,
+        )
 
         # Configurar callback para logs del servicio de scrape
         set_log_callback(self._on_scrape_log)
@@ -129,9 +138,18 @@ class Orchestrator:
         # Resolve to candidates
         resolve_result = resolve_component(input_raw, component_type)
         if not resolve_result.candidates:
-            self._emit(Event.error_recoverable("No candidates found for input"))
-            events.append(OrchestratorEvent(status="ERROR_RECOVERABLE", progress=100, log="No candidates found"))
-            return events
+            # No candidates in catalog - try web search
+            self._emit(Event.log("info", "No catalog match, trying web search..."))
+            events.append(OrchestratorEvent(status="WEB_SEARCH", progress=30, log="Searching web sources..."))
+
+            web_candidate = self._search_web_sources(input_raw, component_type)
+            if web_candidate:
+                resolve_result.candidates = [web_candidate]
+                self._emit(Event.log("info", f"Found via web search: {web_candidate.source_name}"))
+            else:
+                self._emit(Event.error_recoverable("No candidates found in catalog or web"))
+                events.append(OrchestratorEvent(status="ERROR_RECOVERABLE", progress=100, log="No candidates found"))
+                return events
 
         self.last_candidates = resolve_result.candidates
 
@@ -203,31 +221,38 @@ class Orchestrator:
         actual_source_url = candidate.source_url
         actual_source_name = candidate.source_name
 
-        try:
-            specs = self.scrape_fn(
-                candidate.spider_name,
-                candidate.source_url,
-                cache=self.cache,
-                enable_tier2=self.config.enable_tier2,
-                user_agent=self.config.user_agent,
-                retries=self.config.retries,
-                throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
-                use_playwright_fallback=use_playwright,
-            )
-            validate_specs(specs)
-
-            # Emit success event
+        # Check if candidate already has specs from web search
+        if candidate.web_search_specs:
+            specs = candidate.web_search_specs
             self._emit(Event.source_success(source_name, len(specs)))
+            events.append(OrchestratorEvent(status="WEB_SEARCH_COMPLETE", progress=60, log=f"Web search specs ({len(specs)} fields)"))
+        else:
+            # Normal scraping flow
+            try:
+                specs = self.scrape_fn(
+                    candidate.spider_name,
+                    candidate.source_url,
+                    cache=self.cache,
+                    enable_tier2=self.config.enable_tier2,
+                    user_agent=self.config.user_agent,
+                    retries=self.config.retries,
+                    throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
+                    use_playwright_fallback=use_playwright,
+                )
+                validate_specs(specs)
 
-        except Exception as exc:  # noqa: BLE001
-            error_msg = str(exc)
+                # Emit success event
+                self._emit(Event.source_success(source_name, len(specs)))
 
-            # Check if it's an anti-bot error
-            if self._antibot_detector.is_antibot_error(error_msg):
-                self._emit(Event.source_antibot(source_name, "Detected anti-bot protection"))
-                self.mark_domain_blocked(candidate.source_url)
-            else:
-                self._emit(Event.source_failed(source_name, error_msg))
+            except Exception as exc:  # noqa: BLE001
+                error_msg = str(exc)
+
+                # Check if it's an anti-bot error
+                if self._antibot_detector.is_antibot_error(error_msg):
+                    self._emit(Event.source_antibot(source_name, "Detected anti-bot protection"))
+                    self.mark_domain_blocked(candidate.source_url)
+                else:
+                    self._emit(Event.source_failed(source_name, error_msg))
 
         # Si no se obtuvieron specs, intentar fallback a sitios de referencia
         if not specs:
@@ -286,6 +311,9 @@ class Orchestrator:
                 return events
 
         events.append(OrchestratorEvent(status="SCRAPE", progress=60, log=f"Scrape complete ({len(specs)} specs)"))
+
+        # NOTE: Templates are applied at export time, not during processing
+        # This allows internal calculations to work without "unknown" string values
 
         # Create component record
         # Confianza basada en el tier de la fuente real (puede ser fallback)
@@ -377,6 +405,235 @@ class Orchestrator:
             url: The URL whose domain should be blocked
         """
         self._source_chain_manager.mark_domain_blocked(url)
+
+    def _search_web_sources(
+        self,
+        input_raw: str,
+        component_type: ComponentType,
+    ) -> Optional[ResolveCandidate]:
+        """Search web sources when no catalog candidates found.
+
+        Uses cross-validation: queries 2+ sources and only validates
+        data that matches between sources. Validated data is automatically
+        added to the catalog.
+
+        Args:
+            input_raw: The raw user input
+            component_type: The classified component type
+
+        Returns:
+            ResolveCandidate if found, None otherwise
+        """
+        from urllib.parse import quote_plus
+
+        # Get reference sources for this component type
+        reference_sources = self._source_chain_manager.get_reference_sources(component_type)
+
+        if not reference_sources:
+            return None
+
+        # Collect sources for cross-validation
+        sources_to_validate: List[tuple] = []  # [(source_name, spider_name, url), ...]
+
+        for source in sorted(reference_sources, key=lambda s: s.priority)[:4]:  # Max 4 sources
+            if not source.url_template or not source.spider_name:
+                continue
+
+            search_query = quote_plus(input_raw)
+            search_url = source.url_template.format(query=search_query)
+            sources_to_validate.append((source.name, source.spider_name, search_url))
+
+        # If we have 2+ sources, use cross-validation
+        if len(sources_to_validate) >= 2:
+            self._emit(Event.log("info", f"Cross-validating {input_raw} from {len(sources_to_validate)} sources"))
+
+            cv_result = self._cross_validator.validate_from_sources(
+                component_input=input_raw,
+                component_type=component_type,
+                sources=sources_to_validate,
+                cache=self.cache,
+            )
+
+            # If we have validated specs from cross-validation
+            if cv_result.validated_specs:
+                specs = cv_result.to_spec_fields()
+
+                # Extract brand/model
+                brand = self._infer_brand_from_part_number(input_raw)
+                model = input_raw
+
+                # Try to get brand/model from successful sources
+                for sr in cv_result.all_source_results:
+                    if sr.success:
+                        for spec in sr.specs:
+                            if spec.key == "brand" and spec.value:
+                                brand = spec.value
+                            elif spec.key == "model" and spec.value:
+                                model = spec.value
+                        if brand and model != input_raw:
+                            break
+
+                # If should_persist, add to catalog
+                if cv_result.should_persist:
+                    added = add_validated_component(cv_result, brand, model, input_raw)
+                    if added:
+                        self._emit(Event.log("info", f"Added {brand} {model} to validated catalog"))
+
+                # Get the best source URL
+                best_source = next(
+                    (sr for sr in cv_result.all_source_results if sr.success),
+                    None
+                )
+                source_url = best_source.source_url if best_source else ""
+                source_name = best_source.source_name if best_source else "Cross-validated"
+
+                return ResolveCandidate(
+                    canonical={
+                        "brand": brand,
+                        "model": model,
+                        "part_number": input_raw,
+                    },
+                    source_url=source_url,
+                    source_name=source_name,
+                    source_tier=SourceTier.REFERENCE,
+                    spider_name="cross_validated",
+                    score=sum(vs.confidence for vs in cv_result.validated_specs) / len(cv_result.validated_specs),
+                    web_search_specs=specs,
+                )
+
+        # Fallback to single-source search if cross-validation didn't work
+        for source in sorted(reference_sources, key=lambda s: s.priority):
+            if not source.url_template or not source.spider_name:
+                continue
+
+            search_query = quote_plus(input_raw)
+            search_url = source.url_template.format(query=search_query)
+
+            self._emit(Event.source_trying(source.name, search_url))
+
+            try:
+                use_playwright = source.engine.value == "playwright"
+
+                specs = self.scrape_fn(
+                    source.spider_name,
+                    search_url,
+                    cache=self.cache,
+                    enable_tier2=True,
+                    user_agent=self.config.user_agent,
+                    retries=2,
+                    throttle_seconds_by_domain=self.config.throttle_seconds_by_domain,
+                    use_playwright_fallback=use_playwright,
+                )
+
+                if specs and len(specs) >= 3:
+                    self._emit(Event.source_success(source.name, len(specs)))
+
+                    brand = ""
+                    model = ""
+                    for spec in specs:
+                        if spec.key == "brand":
+                            brand = spec.value
+                        elif spec.key == "model":
+                            model = spec.value
+
+                    if not brand:
+                        brand = self._infer_brand_from_part_number(input_raw)
+                    if not model:
+                        model = input_raw
+
+                    return ResolveCandidate(
+                        canonical={
+                            "brand": brand,
+                            "model": model,
+                            "part_number": input_raw,
+                        },
+                        source_url=search_url,
+                        source_name=source.name,
+                        source_tier=source.tier,
+                        spider_name=source.spider_name,
+                        score=0.7,
+                        web_search_specs=specs,
+                    )
+
+            except Exception as e:
+                error_msg = str(e)
+                self._emit(Event.source_failed(source.name, error_msg))
+
+                if self._antibot_detector.is_antibot_error(error_msg):
+                    self._emit(Event.source_antibot(source.name, "Anti-bot detected"))
+                    self.mark_domain_blocked(search_url)
+
+                continue
+
+        return None
+
+    def _infer_brand_from_part_number(self, part_number: str) -> str:
+        """Infer brand from part number prefix patterns.
+
+        Args:
+            part_number: The raw part number input
+
+        Returns:
+            Brand name if recognized, empty string otherwise
+        """
+        pn_upper = part_number.upper()
+
+        # RAM brand prefixes
+        ram_prefixes = {
+            "CT": "Crucial",
+            "CMK": "Corsair",
+            "CMW": "Corsair",
+            "CMH": "Corsair",
+            "F5-": "G.Skill",
+            "F4-": "G.Skill",
+            "KF": "Kingston",
+            "KVR": "Kingston",
+            "AD5": "ADATA",
+            "AD4": "ADATA",
+            "PV": "Patriot",
+            "TL": "TeamGroup",
+            "TF": "TeamGroup",
+            "BL": "Crucial Ballistix",
+        }
+
+        # GPU brand patterns
+        if "GEFORCE" in pn_upper or "RTX" in pn_upper or "GTX" in pn_upper:
+            return "NVIDIA"
+        if "RADEON" in pn_upper or "RX " in pn_upper:
+            return "AMD"
+        if "ARC " in pn_upper:
+            return "Intel"
+
+        # CPU brand patterns
+        if "CORE" in pn_upper or "I5-" in pn_upper or "I7-" in pn_upper or "I9-" in pn_upper:
+            return "Intel"
+        if "RYZEN" in pn_upper:
+            return "AMD"
+
+        # Mainboard brand patterns
+        if "ROG " in pn_upper or "TUF " in pn_upper:
+            return "ASUS"
+        if "MEG " in pn_upper or "MAG " in pn_upper or "PRO " in pn_upper and "MSI" in pn_upper:
+            return "MSI"
+        if "AORUS" in pn_upper:
+            return "Gigabyte"
+        if "TAICHI" in pn_upper:
+            return "ASRock"
+
+        # Storage brand patterns
+        if "WD " in pn_upper or "WDS" in pn_upper:
+            return "Western Digital"
+        if "FIRECUDA" in pn_upper:
+            return "Seagate"
+        if "990 " in pn_upper or "980 " in pn_upper or "970 " in pn_upper:
+            return "Samsung"
+
+        # Check RAM prefixes
+        for prefix, brand in ram_prefixes.items():
+            if pn_upper.startswith(prefix):
+                return brand
+
+        return ""
 
     def _build_specs_from_catalog(
         self,

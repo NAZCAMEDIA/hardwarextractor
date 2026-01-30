@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-01-30T14:13:36.887547",
+  "elapsed_seconds": 0,
+  "components_processed": 50,
+  "summary": {
+    "validated": 28,
+    "persisted": 28,
+    "errors": 0,
+    "avg_completeness": 0.2733333333333333,
+    "avg_specs": 13.94
+  },
+  "by_type": {
+    "CPU": {
+      "count": 50,
+      "validated": 28,
+      "persisted": 28,
+      "avg_specs": 13.94,
+      "avg_completeness": 0.2733333333333333
+    }
+  }
+}

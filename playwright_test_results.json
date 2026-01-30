@@ -1,0 +1,116 @@
+{
+  "summary": {
+    "CPU": {
+      "tested": 3,
+      "working": 2,
+      "blocked": 1
+    },
+    "GPU": {
+      "tested": 3,
+      "working": 1,
+      "blocked": 2
+    },
+    "RAM": {
+      "tested": 2,
+      "working": 1,
+      "blocked": 1
+    },
+    "DISK": {
+      "tested": 2,
+      "working": 0,
+      "blocked": 2
+    }
+  },
+  "details": [
+    {
+      "url": "https://www.intel.com/content/www/us/en/products/details/processors/core/i9-14900k.html",
+      "status": 200,
+      "html_len": 800183,
+      "engine": "playwright",
+      "blocked": false,
+      "success": true,
+      "category": "CPU"
+    },
+    {
+      "url": "https://www.amd.com/en/product/11796",
+      "status": 200,
+      "html_len": 168815,
+      "engine": "requests",
+      "blocked": true,
+      "reason": "CAPTCHA detected",
+      "category": "CPU"
+    },
+    {
+      "url": "https://www.techpowerup.com/cpu-specs/amd-ryzen-9-7950x.c18887",
+      "status": 200,
+      "html_len": 35947,
+      "engine": "requests",
+      "blocked": false,
+      "success": true,
+      "category": "CPU"
+    },
+    {
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/4090/",
+      "status": 0,
+      "html_len": 0,
+      "engine": "playwright",
+      "blocked": true,
+      "reason": "HTTP 0, only 0 bytes",
+      "category": "GPU"
+    },
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/h100/",
+      "status": 200,
+      "html_len": 282800,
+      "engine": "requests",
+      "blocked": false,
+      "success": true,
+      "category": "GPU"
+    },
+    {
+      "url": "https://www.amd.com/en/graphics-cards/rx-7900-xtx",
+      "status": 0,
+      "html_len": 0,
+      "engine": "playwright",
+      "blocked": true,
+      "reason": "HTTP 0, only 0 bytes",
+      "category": "GPU"
+    },
+    {
+      "url": "https://www.corsair.com/us/en/vengeance-ddr5-memory",
+      "status": 200,
+      "html_len": 1900,
+      "engine": "requests",
+      "blocked": false,
+      "success": true,
+      "category": "RAM"
+    },
+    {
+      "url": "https://www.gskill.com/memory/1/Trident-Z5",
+      "status": 404,
+      "html_len": 55537,
+      "engine": "playwright",
+      "blocked": true,
+      "reason": "HTTP 404, only 55537 bytes",
+      "category": "RAM"
+    },
+    {
+      "url": "https://www.samsung.com/ssd/990-pro/",
+      "status": 404,
+      "html_len": 1086548,
+      "engine": "playwright",
+      "blocked": true,
+      "reason": "HTTP 404, only 1086548 bytes",
+      "category": "DISK"
+    },
+    {
+      "url": "https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-ssd",
+      "status": 0,
+      "html_len": 0,
+      "engine": "playwright",
+      "blocked": true,
+      "reason": "HTTP 0, only 0 bytes",
+      "category": "DISK"
+    }
+  ]
+}

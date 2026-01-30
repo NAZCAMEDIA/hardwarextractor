@@ -370,3 +370,141 @@ LABEL_MAP_NOTEBOOKCHECK = {
     "64 bit": "cpu.architecture_64bit",
     "announced": "cpu.announcement_date",
 }
+
+
+# Label maps for retailer sites (Newegg, PCPartPicker)
+LABEL_MAP_RETAIL_RAM = {
+    # RAM specs for retailer sites
+    "memory type": "ram.type",
+    "memory speed": "ram.speed_mhz",
+    "memory speed (xmp)": "ram.speed_mhz",
+    "memory speed (docp)": "ram.speed_mhz",
+    "capacity": "ram.capacity_gb",
+    "module capacity": "ram.capacity_gb",
+    "kit capacity": "ram.capacity_gb",
+    "kit type": "ram.type",
+    "latency": "ram.latency_cl",
+    "cas latency": "ram.latency_cl",
+    "voltage": "ram.voltage_v",
+    "timing": "ram.timing",
+    "heat spreader": "ram.heat_spreader",
+    "led lighting": "ram.led",
+    "color": "ram.color",
+    "form factor": "ram.form_factor",
+    "pins": "ram.pins",
+}
+
+LABEL_MAP_RETAIL_DISK = {
+    # Storage specs for retailer sites
+    "capacity": "disk.capacity_gb",
+    "storage capacity": "disk.capacity_gb",
+    "interface": "disk.interface",
+    "storage interface": "disk.interface",
+    "drive type": "disk.type",
+    "drive width": "disk.form_factor",
+    "form factor": "disk.form_factor",
+    "sequential read": "disk.read_speed_mb",
+    "sequential write": "disk.write_speed_mb",
+    "read speed": "disk.read_speed_mb",
+    "write speed": "disk.write_speed_mb",
+    "cache": "disk.cache_mb",
+    "nvmf": "disk.nvmf",
+    "tbw": "disk.tbw",
+    "dwpd": "disk.dwpd",
+    "mtbf": "disk.mtbf",
+    "warranty": "disk.warranty_years",
+}
+
+LABEL_MAP_RETAIL_MAINBOARD = {
+    # Motherboard specs for retailer sites
+    "socket": "mb.socket",
+    "cpu socket": "mb.socket",
+    "form factor": "mb.form_factor",
+    "form factor": "mb.form_factor",
+    "chipset": "mb.chipset",
+    "memory slots": "mb.memory_slots",
+    "memory type": "mb.memory_type",
+    "memory speed (oc)": "mb.memory_oc_speed",
+    "pcie x16 slots": "mb.pcie_x16_slots",
+    "pcie x8 slots": "mb.pcie_x8_slots",
+    "pcie x4 slots": "mb.pcie_x4_slots",
+    "pcie x1 slots": "mb.pcie_x1_slots",
+    "m.2 slots": "mb.m2_slots",
+    "sata 6gb/s": "mb.sata_ports",
+    "onboard ethernet": "mb.ethernet",
+    "onboard video": "mb.video_output",
+    "usb 3.2 gen 2": "mb.usb_10g",
+    "usb 3.2 gen 1": "mb.usb_5g",
+    "usb 2.0": "mb.usb_480m",
+    "audio codec": "mb.audio_codec",
+    " wireless": "mb.wifi",
+    "bluetooth": "mb.bluetooth",
+}
+
+LABEL_MAP_NEWEGG_RAM = {
+    # Newegg-specific RAM labels
+    "memory type": "ram.type",
+    "memory speed": "ram.speed_mhz",
+    "capacity": "ram.capacity_gb",
+    "module count": "ram.modules_count",
+    "voltage": "ram.voltage_v",
+    "latency": "ram.latency_cl",
+    "timing": "ram.timing",
+    "color": "ram.color",
+    "led": "ram.led",
+    "features": "ram.features",
+}
+
+LABEL_MAP_NEWEGG_DISK = {
+    # Newegg-specific storage labels
+    "capacity": "disk.capacity_gb",
+    "interface": "disk.interface",
+    "drive type": "disk.type",
+    "form factor": "disk.form_factor",
+    "sequential read": "disk.read_speed_mb",
+    "sequential write": "disk.write_speed_mb",
+    "cache": "disk.cache_mb",
+}
+
+LABEL_MAP_NEWEGG_MAINBOARD = {
+    # Newegg-specific motherboard labels
+    "cpu socket": "mb.socket",
+    "chipset": "mb.chipset",
+    "form factor": "mb.form_factor",
+    "memory slots": "mb.memory_slots",
+    "memory type": "mb.memory_type",
+    "m.2": "mb.m2_slots",
+    "sata": "mb.sata_ports",
+}
+
+LABEL_MAP_PCPARTPICKER_RAM = {
+    # PCPartPicker-specific RAM labels
+    "type": "ram.type",
+    "speed": "ram.speed_mhz",
+    "modules": "ram.capacity_gb",
+    "color": "ram.color",
+    "latency": "ram.latency_cl",
+    "voltage": "ram.voltage_v",
+    "timing": "ram.timing",
+    "heat spreader": "ram.heat_spreader",
+}
+
+LABEL_MAP_PCPARTPICKER_DISK = {
+    # PCPartPicker-specific storage labels
+    "capacity": "disk.capacity_gb",
+    "type": "disk.type",
+    "interface": "disk.interface",
+    "form factor": "disk.form_factor",
+    "sequential read": "disk.read_speed_mb",
+    "sequential write": "disk.write_speed_mb",
+}
+
+LABEL_MAP_PCPARTPICKER_MAINBOARD = {
+    # PCPartPicker-specific motherboard labels
+    "socket": "mb.socket",
+    "form factor": "mb.form_factor",
+    "memory slots": "mb.memory_slots",
+    "memory type": "mb.memory_type",
+    "m.2 slots": "mb.m2_slots",
+    "sata ports": "mb.sata_ports",
+}

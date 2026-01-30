@@ -197,6 +197,70 @@ hxtractor-gui
 - **Motherboard**: ASUS, MSI, Gigabyte, ASRock
 - **Storage**: Samsung, WD, Seagate, Crucial, Kingston
 
+## Catálogo de componentes
+
+HardwareXtractor incluye un catálogo pre-validado con **224 componentes** y **3,296 specs** verificados:
+
+| Categoría | Componentes | Promedio specs | Fuentes |
+|-----------|-------------|----------------|---------|
+| **CPU** | 132 | 10.7 specs | Intel ARK, TechPowerUp, marvic2409/AllCPUs |
+| **GPU** | 92 | 20.5 specs | NVIDIA, TechPowerUp, gmasse/gpu-specs, reox007/RightNow-GPU-DB |
+
+### CPUs por marca y serie
+
+| Serie | Cantidad | Promedio specs |
+|-------|----------|----------------|
+| Intel Core i9 | 8 | 27 specs |
+| Intel Core i7 | 9 | 25 specs |
+| Intel Core i5 | 10 | 24 specs |
+| AMD Ryzen 9 | 13 | 7 specs |
+| AMD Ryzen 7 | 19 | 7 specs |
+| AMD Ryzen 5 | 17 | 7 specs |
+| AMD A-Series APU | 37 | 7 specs |
+
+### GPUs por arquitectura
+
+| Serie | Cantidad | Promedio specs |
+|-------|----------|----------------|
+| NVIDIA RTX 40 (Ada) | 5 | 23 specs |
+| NVIDIA RTX 30 (Ampere) | 8 | 22 specs |
+| NVIDIA Data Center (H100/A100) | 8 | 28 specs |
+| AMD RX 7000 (RDNA3) | 6 | 5 specs |
+| ATI (Históricas) | 37 | 24 specs |
+
+### Fuentes de datos públicas utilizadas
+
+| Fuente | Tipo | Componentes | Enlace |
+|--------|------|-------------|--------|
+| Intel ARK | Oficial | 28 CPUs | [intel.com](https://www.intel.com/content/www/us/en/arks.html) |
+| gmasse/gpu-specs | GitHub | 14 GPUs | [github.com/gmasse/gpu-specs](https://github.com/gmasse/gpu-specs) |
+| reox007/RightNow-GPU-DB | GitHub | 50 GPUs | [github.com/reox007/RightNow-GPU-Database](https://github.com/reox007/RightNow-GPU-Database) |
+| marvic2409/AllCPUs | GitHub | 50 CPUs | [github.com/marvic2409/AllCPUs](https://github.com/marvic2409/AllCPUs) |
+| RonnyMuthomi/GPUs-Specs | GitHub | 50 GPUs (históricas) | [github.com/RonnyMuthomi/GPUs-Specs](https://github.com/RonnyMuthomi/GPUs-Specs) |
+
+### Limitaciones identificadas
+
+| Categoría | Estado | Problema |
+|-----------|--------|----------|
+| **RAM** | ❌ 0 | Sin datasets públicos JSON/CSV disponibles |
+| **Motherboard** | ❌ 0 | Sin datasets públicos estructurados |
+| **Storage** | ❌ 0 | Sin datasets públicos con specs completos |
+| **AMD CPUs** | ⚠️ Parcial | Solo 7 specs vs 25 de Intel (bloqueo CAPTCHA en AMD.com) |
+| **AMD GPUs** | ⚠️ Parcial | Solo 5 specs vs 23 de NVIDIA |
+
+### Fuentes testeadas con Playwright
+
+| URL | Engine | Resultado |
+|-----|--------|-----------|
+| Intel ARK | Playwright | ✅ 781KB - Funciona perfecto |
+| AMD.com | Playwright | ❌ CAPTCHA bloqueado |
+| NVIDIA H100 | Requests | ✅ 276KB - Funciona |
+| TechPowerUp | Requests | ⚠️ Solo og:description (limitado) |
+| Corsair | Requests | ⚠️ Redirect, sin estructura |
+| Samsung SSD | - | ❌ 404 (URLs cambian) |
+
+**Conclusión**: Intel ARK y NVIDIA datacenter funcionan excelente. AMD bloquea con CAPTCHA. Fabricantes de RAM/SSD no tienen APIs ni URLs estables.
+
 ## Fuentes de consulta
 
 El CLI y GUI muestran enlaces a fuentes oficiales y de referencia para cada tipo de componente:
@@ -292,6 +356,24 @@ MIT License - Copyright (c) 2026 [NAZCAMEDIA](https://www.nazcamedia.net)
 Ver `LICENSE` para más detalles.
 
 ## Changelog
+
+### v0.3.0 (Beta) - Catálogo Enriquecido
+
+- **Catálogo expandido**: 124 → 224 componentes (+100)
+- **Nuevas fuentes de datos públicas**:
+  - gmasse/gpu-specs (NVIDIA datacenter H100, A100, V100)
+  - reox007/RightNow-GPU-Database (2824 GPUs históricas)
+  - marvic2409/AllCPUs (5210 CPUs)
+  - RonnyMuthomi/GPUs-Specs (3204 GPUs 1986-2026)
+- **Scripts de enrichment**:
+  - `scripts/enrich_from_public_sources.py` - Carga desde GitHub datasets
+  - `scripts/test_sources_with_playwright.py` - Test de fuentes con browser
+- **Test de fuentes con Playwright**:
+  - Intel ARK: ✅ Funciona perfectamente (27 specs/CPU)
+  - AMD.com: ❌ Bloqueado por CAPTCHA
+  - NVIDIA: ✅ datacenter funciona, consumer falla
+  - Fabricantes RAM/SSD: ❌ Sin APIs ni URLs estables
+- **960+ líneas de documentación** actualizadas
 
 ### v0.2.0 (Beta)
 - Sistema de feedback integrado para reportar problemas

@@ -12,6 +12,7 @@ from hardwarextractor.app.paths import cache_db_path
 from hardwarextractor.cache.sqlite_cache import SQLiteCache
 from hardwarextractor.export.csv_exporter import export_ficha_csv
 from hardwarextractor.models.schemas import ComponentRecord
+from hardwarextractor.data.spec_templates import apply_template_to_specs
 
 
 class EngineSession:
@@ -95,6 +96,11 @@ class EngineSession:
             raise RuntimeError("XLSX no disponible en MVP")
         emit({"type": "log", "value": f"Exportado: {path}"})
 
+    def get_complete_specs(self) -> None:
+        """Get specs for last component with ALL template fields (unknown for missing)."""
+        if self.last_component:
+            emit({"type": "complete_specs", "value": _component_to_dict(self.last_component, include_all_specs=True)})
+
 
 def export_ficha_md(ficha, path: str) -> None:
     lines: List[str] = []
@@ -120,7 +126,23 @@ def export_ficha_md(ficha, path: str) -> None:
     Path(path).write_text("\n".join(lines), encoding="utf-8")
 
 
-def _component_to_dict(component: ComponentRecord) -> Dict[str, Any]:
+def _component_to_dict(component: ComponentRecord, include_all_specs: bool = False) -> Dict[str, Any]:
+    """Convert component to dictionary format.
+
+    Args:
+        component: The component record
+        include_all_specs: If True, includes all template fields with 'unknown' for missing
+    """
+    specs = component.specs
+
+    # Apply template if requested (shows all possible fields)
+    if include_all_specs:
+        specs = apply_template_to_specs(
+            component.component_type,
+            component.specs,
+            component.canonical,
+        )
+
     return {
         "component_type": component.component_type.value,
         "canonical": component.canonical,
@@ -134,7 +156,7 @@ def _component_to_dict(component: ComponentRecord) -> Dict[str, Any]:
                 "source_tier": spec.source_tier.value,
                 "source_url": spec.source_url,
             }
-            for spec in component.specs
+            for spec in specs
         ],
     }
 
@@ -185,6 +207,8 @@ def main() -> None:
                 session.export_ficha(payload.get("format", "csv"), payload.get("path"))
             elif command == "reset_ficha":
                 session.reset_ficha()
+            elif command == "get_complete_specs":
+                session.get_complete_specs()
             else:
                 emit({"type": "error", "value": {"message": "Comando desconocido", "recoverable": True}})
         except Exception as exc:  # noqa: BLE001
