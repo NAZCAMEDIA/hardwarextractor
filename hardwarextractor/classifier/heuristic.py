@@ -13,10 +13,11 @@ _PATTERNS = {
         # Líneas de producto
         r"\bryzen\b", r"\bxeon\b", r"\bthreadripper\b", r"\bepyc\b",
         r"\bathlon\b", r"\bopteron\b", r"\bcore\b",
-        # Modelos Intel Core
-        r"\bi[3579]-", r"\bi[3579]\s+[0-9]{4,5}",
-        # Modelos numéricos (12700K, 5900X, 7950X)
-        r"\b[0-9]{4,5}[kfxu]?\b",
+        # Modelos Intel Core (i3/i5/i7/i9 + número)
+        r"\bi[3579]-[0-9]{4,5}", r"\bi[3579]\s+[0-9]{4,5}",
+        # Modelos con sufijos típicos de CPU (K, KF, X, etc.)
+        r"\b[0-9]{4,5}[kK][fF]?\b",  # 14900K, 12700KF
+        r"\b[0-9]{4,5}[xX]3?[dD]?\b",  # 5900X, 7800X3D
         # Términos genéricos
         r"\bprocessor\b", r"\bcpu\b",
     ],
@@ -40,17 +41,22 @@ _PATTERNS = {
     ],
     ComponentType.GPU: [
         # Marcas principales
-        r"\bnvidia\b", r"\bamd\b", r"\bintel\b",
-        # Líneas NVIDIA
-        r"\bgeforce\b", r"\brtx\b", r"\bgtx\b", r"\bquadro\b", r"\btitan\b",
+        r"\bnvidia\b", r"\bamd\b",
+        # Líneas NVIDIA - patrones específicos primero
+        r"\bgeforce\b", r"\bquadro\b", r"\btitan\b",
+        r"\brtx\s*[0-9]{4}\b",  # RTX 4090, RTX 3080
+        r"\bgtx\s*[0-9]{4}\b",  # GTX 1080
+        r"\brtx\b", r"\bgtx\b",  # Términos sueltos
         # Líneas AMD
-        r"\bradeon\b", r"\brx\s*[0-9]{4}\b", r"\bfirepro\b",
-        # Intel
-        r"\barc\b", r"\ba[0-9]{3}\b",
+        r"\bradeon\b", r"\bfirepro\b",
+        r"\brx\s*[0-9]{4}\b",  # RX 7900, RX 6800
+        # Intel Arc
+        r"\barc\s*a[0-9]{3}\b",  # Arc A770
+        r"\barc\b",
         # Sufijos de modelo
-        r"\b[0-9]{4}\s*ti\b", r"\b[0-9]{4}\s*super\b",
+        r"\b[0-9]{4}\s*ti\b", r"\b[0-9]{4}\s*super\b", r"\b[0-9]{4}\s*xt\b",
         # Término genérico
-        r"\bgpu\b", r"\bgfx\b", r"\bgraphics\b",
+        r"\bgpu\b", r"\bgfx\b", r"\bgraphics\b", r"\bvideo\s*card\b",
     ],
     ComponentType.MAINBOARD: [
         # Términos genéricos
