@@ -16,6 +16,8 @@ import tkinter as tk
 from pathlib import Path
 from typing import Callable, Optional, Type
 
+from hardwarextractor._version import __version__
+
 # Debug logging for PyInstaller troubleshooting
 _DEBUG_LOG = Path.home() / "Library" / "Logs" / "HardwareXtractor_debug.log"
 
@@ -40,7 +42,7 @@ class SplashScreen:
 
     # App branding
     APP_NAME = "HardwareXtractor"
-    APP_VERSION = "0.2.1"
+    APP_VERSION = __version__
     APP_TAGLINE = "Fichas técnicas con trazabilidad"
     COPYRIGHT = "© 2026 NAZCAMEDIA"
 

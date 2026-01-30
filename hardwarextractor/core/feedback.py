@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
 
+from hardwarextractor._version import __version__
 from hardwarextractor.core.logger import LOG_FILE
 
 
@@ -32,7 +33,7 @@ class FeedbackCollector:
     mostrar recordatorios periódicos.
     """
 
-    VERSION = "0.2.1"
+    VERSION = __version__
     REMINDER_INTERVAL = 5  # Recordatorio cada N búsquedas
 
     def __init__(self):

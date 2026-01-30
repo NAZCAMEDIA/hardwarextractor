@@ -21,6 +21,7 @@ def _debug_log(msg: str) -> None:
     except:
         pass
 
+from hardwarextractor._version import __version__
 from hardwarextractor.app.config import AppConfig
 from hardwarextractor.app.orchestrator import Orchestrator
 from hardwarextractor.app.paths import cache_db_path
@@ -40,8 +41,7 @@ from hardwarextractor.models.schemas import (
 )
 
 
-# Version info
-__version__ = "0.2.1"
+# Version info (imported from _version.py)
 __build__ = "2026.01.30"
 __copyright__ = "© 2026 NAZCAMEDIA. MIT License. | pip install hardwarextractor"
 

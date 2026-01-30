@@ -9,6 +9,7 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
+from hardwarextractor._version import __version__
 from hardwarextractor.core.feedback import (
     FeedbackCollector,
     SearchContext,
@@ -65,7 +66,7 @@ class TestFeedbackCollector:
         collector = FeedbackCollector()
         assert collector.search_count == 0
         assert collector.last_search is None
-        assert collector.VERSION == "0.2.1"
+        assert collector.VERSION == __version__
         assert collector.REMINDER_INTERVAL == 5
 
     def test_capture_search(self):

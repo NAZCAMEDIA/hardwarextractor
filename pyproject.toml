@@ -1,6 +1,6 @@
 [project]
 name = "hardwarextractor"
-version = "0.2.1"
+dynamic = ["version"]
 description = "HardwareXtractor - Extraccion de specs de hardware con trazabilidad"
 requires-python = ">=3.11"
 readme = "README.md"
@@ -57,6 +57,9 @@ omit = [
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.setuptools.dynamic]
+version = {attr = "hardwarextractor._version.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]

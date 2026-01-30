@@ -5,9 +5,11 @@ from __future__ import annotations
 import sys
 from typing import Optional
 
+from hardwarextractor._version import __version__
 from hardwarextractor.cli.renderer import CLIRenderer, Spinner, Colors
 from hardwarextractor.core.feedback import get_feedback_collector
 from hardwarextractor.core.github_reporter import send_feedback_report
+from hardwarextractor.core.updater import check_and_update
 from hardwarextractor.engine.commands import CommandHandler
 from hardwarextractor.engine.ficha_manager import FichaManager
 
@@ -23,7 +25,7 @@ class InteractiveCLI:
     5) Salir
     """
 
-    VERSION = "0.2.1"
+    VERSION = __version__
 
     def __init__(self):
         """Initialize the CLI."""
@@ -34,6 +36,9 @@ class InteractiveCLI:
 
     def run(self) -> None:
         """Run the interactive CLI loop."""
+        # Check for updates silently in background
+        check_and_update(silent=False)
+
         self._print_welcome()
 
         while self._running:
