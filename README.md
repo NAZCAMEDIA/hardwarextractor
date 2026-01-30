@@ -1,5 +1,9 @@
 # HardwareXtractor
 
+[![PyPI version](https://badge.fury.io/py/hardwarextractor.svg)](https://pypi.org/project/hardwarextractor/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Completa fichas técnicas de hardware en minutos. Introduce el modelo de cada componente y obtén especificaciones verificadas con trazabilidad completa.
 
 ## Características
@@ -13,9 +17,62 @@ Completa fichas técnicas de hardware en minutos. Introduce el modelo de cada co
 
 ## Instalación
 
-### Desde PyPI (recomendado)
+### macOS (Homebrew)
+
+En macOS moderno, Python está protegido contra instalaciones globales. Usa `pipx` (recomendado):
 
 ```bash
+# Instalar pipx si no lo tienes
+brew install pipx
+
+# Instalar hardwarextractor
+pipx install hardwarextractor
+
+# Actualizar a nueva versión
+pipx upgrade hardwarextractor
+```
+
+### Linux
+
+#### Opción 1: pipx (recomendado)
+
+```bash
+# Instalar pipx
+sudo apt install pipx  # Debian/Ubuntu
+# o
+sudo dnf install pipx  # Fedora
+
+# Instalar hardwarextractor
+pipx install hardwarextractor
+```
+
+#### Opción 2: pip directo
+
+```bash
+pip install hardwarextractor
+```
+
+#### Opción 3: Entorno virtual
+
+```bash
+python3 -m venv ~/.venvs/hxtractor
+source ~/.venvs/hxtractor/bin/activate
+pip install hardwarextractor
+```
+
+### Windows
+
+#### Opción 1: pip (recomendado)
+
+```powershell
+pip install hardwarextractor
+```
+
+#### Opción 2: Entorno virtual
+
+```powershell
+python -m venv %USERPROFILE%\venvs\hxtractor
+%USERPROFILE%\venvs\hxtractor\Scripts\activate
 pip install hardwarextractor
 ```
 
@@ -23,12 +80,12 @@ pip install hardwarextractor
 
 ```bash
 # Para sitios con protección anti-bot (Playwright)
-pip install hardwarextractor[browser]
+pipx inject hardwarextractor playwright  # o pip install hardwarextractor[browser]
 
 # Para exportación a Excel
-pip install hardwarextractor[excel]
+pipx inject hardwarextractor openpyxl    # o pip install hardwarextractor[excel]
 
-# Instalación completa
+# Instalación completa (pip)
 pip install hardwarextractor[full]
 ```
 
@@ -37,7 +94,23 @@ pip install hardwarextractor[full]
 ```bash
 git clone https://github.com/NAZCAMEDIA/hardwarextractor.git
 cd hardwarextractor
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+# o .venv\Scripts\activate en Windows
 pip install -e ".[full]"
+```
+
+### Actualización
+
+```bash
+# Con pipx
+pipx upgrade hardwarextractor
+
+# Con pip
+pip install --upgrade hardwarextractor
+
+# Forzar reinstalación
+pipx uninstall hardwarextractor && pipx install hardwarextractor
 ```
 
 ## Uso
@@ -48,7 +121,7 @@ pip install -e ".[full]"
 hxtractor
 ```
 
-Muestra el menú interactivo con arte ASCII:
+Muestra el menú interactivo:
 
 ```
   ██╗  ██╗██╗  ██╗████████╗██████╗  █████╗  ██████╗████████╗ ██████╗ ██████╗
@@ -58,8 +131,12 @@ Muestra el menú interactivo con arte ASCII:
   ██║  ██║██╔╝ ██╗   ██║   ██║  ██║██║  ██║╚██████╗   ██║   ╚██████╔╝██║  ██║
   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
 
-                           v1.0.0 - Hardware Specs Extractor
-                              © 2025 NAZCAMEDIA
+                           v0.1.0 - Hardware Specs Extractor
+                              © 2026 NAZCAMEDIA
+
+  Instalación: pip install hardwarextractor
+  PyPI: https://pypi.org/project/hardwarextractor/
+  GitHub: https://github.com/NAZCAMEDIA/hardwarextractor
 
   1) Analizar componente
   2) Exportar ficha
@@ -78,6 +155,7 @@ hxtractor-gui
 - **Spinner animado** con tiempo transcurrido durante el análisis
 - **Mensajes de estado** descriptivos: "Normalizando...", "Clasificando...", "Extrayendo..."
 - **Información completa** de cada componente con fuentes y URLs
+- **Fuentes de consulta manual** para verificar datos
 - **Leyenda de colores** para identificar el origen de cada dato
 - **Auto-agregado** a la ficha técnica
 
@@ -88,9 +166,10 @@ hxtractor-gui
 3. El sistema clasifica el tipo (RAM, CPU, GPU, etc.)
 4. Busca en fuentes oficiales primero, luego referencias
 5. Muestra especificaciones con indicador de tier y fuente
-6. Agrega automáticamente a la ficha
-7. Repite con más componentes
-8. Exporta a CSV/XLSX/MD
+6. Muestra fuentes de consulta manual para verificar
+7. Agrega automáticamente a la ficha
+8. Repite con más componentes
+9. Exporta a CSV/XLSX/MD
 
 ### Búsquedas soportadas
 
@@ -116,6 +195,18 @@ hxtractor-gui
 - **Motherboard**: ASUS, MSI, Gigabyte, ASRock
 - **Storage**: Samsung, WD, Seagate, Crucial, Kingston
 
+## Fuentes de consulta
+
+El CLI y GUI muestran enlaces a fuentes oficiales y de referencia para cada tipo de componente:
+
+| Tipo | Fuentes oficiales | Referencias |
+|------|-------------------|-------------|
+| CPU | Intel ARK, AMD | TechPowerUp, WikiChip, CPU-World, PassMark |
+| GPU | NVIDIA, AMD, Intel Arc | TechPowerUp, GPU-Specs, PassMark |
+| RAM | Corsair, Kingston, G.Skill, Crucial | PassMark, UserBenchmark |
+| Motherboard | ASUS, MSI, Gigabyte, ASRock | PCPartPicker |
+| Storage | Samsung, WD, Seagate | PassMark, UserBenchmark |
+
 ## Arquitectura
 
 ```
@@ -134,7 +225,7 @@ hardwarextractor/
 
 ### CSV
 ```bash
-# Desde CLI: opción 3 > csv > ruta
+# Desde CLI: opción 2 > csv > ruta
 ```
 
 ### Excel (XLSX)
@@ -152,7 +243,7 @@ Archivo `~/.config/hardwarextractor/config.yaml`:
 
 ```yaml
 enable_tier2: true          # Permitir fuentes REFERENCE
-user_agent: "HardwareXtractor/0.2"
+user_agent: "HardwareXtractor/0.1"
 retries: 2
 throttle_seconds_by_domain:
   crucial.com: 1.0
@@ -162,6 +253,14 @@ throttle_seconds_by_domain:
 ## Desarrollo
 
 ```bash
+# Clonar repositorio
+git clone https://github.com/NAZCAMEDIA/hardwarextractor.git
+cd hardwarextractor
+
+# Crear entorno virtual
+python3 -m venv .venv
+source .venv/bin/activate
+
 # Instalar dependencias de desarrollo
 pip install -e ".[dev]"
 
@@ -174,9 +273,15 @@ pytest --cov=hardwarextractor --cov-report=term-missing
 
 ## Descargas (macOS)
 
-Binarios precompilados disponibles en:
-- `downloads/HardwareXtractor.dmg`
-- `downloads/HardwareXtractor.app`
+Binarios precompilados disponibles en [Releases](https://github.com/NAZCAMEDIA/hardwarextractor/releases):
+- `HardwareXtractor.dmg` - Imagen de disco para macOS
+- `HardwareXtractor.app` - Aplicación standalone
+
+## Links
+
+- **PyPI**: https://pypi.org/project/hardwarextractor/
+- **GitHub**: https://github.com/NAZCAMEDIA/hardwarextractor
+- **Issues**: https://github.com/NAZCAMEDIA/hardwarextractor/issues
 
 ## Licencia
 
@@ -186,31 +291,16 @@ Ver `LICENSE` para más detalles.
 
 ## Changelog
 
-### v1.1.0
-- **Intel ARK Extractor**: Soporte completo para scraping de Intel ARK (29+ specs por CPU)
-- **Búsqueda por familia**: Soporta búsquedas genéricas como "intel i7" o "ryzen 9"
-- **Nuevos mappings**: 25+ labels de Intel ARK (P-cores, E-cores, Turbo Boost 3.0, TDP, etc.)
-- **macOS App**: Build actualizado con PyInstaller y DMG para distribución
-- Fix: Extracción de datos de Intel ARK que antes retornaba 0 specs
-
-### v1.0.0 (CLI)
-- Header ASCII art con branding NAZCAMEDIA
-- Spinner animado con tiempo transcurrido
-- Mensajes de estado descriptivos por fase
-- Información completa: specs, fuentes, URLs y leyenda de tiers
-- Auto-agregado de componentes a la ficha
-- Menú simplificado de 4 opciones
-- Filtrado de mensajes de debug
-
-### v0.2.0
+### v0.1.0 (Beta)
+- Primera release pública en PyPI
 - CLI interactivo con menú y colores ANSI
+- GUI con Tkinter
+- Panel de fuentes de consulta manual
+- Intel ARK Extractor con 29+ specs por CPU
+- Búsqueda por familia de procesador (intel i7, ryzen 9, etc.)
 - Sistema SourceChain con fallback automático
 - Detección de anti-bot (Cloudflare, CAPTCHA)
-- Exportación a XLSX y Markdown
-- Eventos detallados para logging en tiempo real
+- Exportación a CSV, XLSX y Markdown
 - Soporte para Playwright en sitios protegidos
-
-### v0.1.0
-- Release inicial con GUI Tkinter
-- Exportación CSV
-- Soporte básico para CPU, RAM, GPU, Motherboard, Storage
+- macOS App bundle con DMG
+- GitHub Actions para publicación automática en PyPI
